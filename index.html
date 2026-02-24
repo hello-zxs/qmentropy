@@ -76,7 +76,7 @@
     <div class="content">
         <h1>Hello, I am zxs</h1>
         <div class="birthday-text">Happy Birthday! 🎂</div>
-        <p class="hint">按住鼠标画出轨迹... 松开引爆！</p>
+        <p class="hint">按住鼠标积攒能量光环... 松开引爆！</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -86,38 +86,25 @@
         let timer;
         let power = 0;
         let isPressed = false;
-        
-        // 【关键修复】定义两个变量，专门实时存储鼠标最新位置
         let currentX = 0.5;
         let currentY = 0.5;
 
-        // 1. 实时更新坐标的函数
+        // 1. 实时更新坐标
         function updateCoordinates(clientX, clientY) {
             currentX = clientX / window.innerWidth;
             currentY = clientY / window.innerHeight;
         }
 
-        // 2. 监听鼠标/手指移动，时刻更新上面的坐标变量
-        document.addEventListener('mousemove', (e) => {
-            updateCoordinates(e.clientX, e.clientY);
-        });
-        document.addEventListener('touchmove', (e) => {
-            if(e.touches.length > 0) {
-                updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        });
+        document.addEventListener('mousemove', (e) => { updateCoordinates(e.clientX, e.clientY); });
+        document.addEventListener('touchmove', (e) => { if(e.touches.length > 0) updateCoordinates(e.touches[0].clientX, e.touches[0].clientY); });
 
-        // 3. 开始蓄力（发射轨迹）
+        // 2. 开始蓄力（光环环绕效果）
         function startCharging(e) {
             isPressed = true;
-            power = 10; 
+            power = 20; // 初始能量增加一点
             
-            // 立即更新一次坐标，防止瞬移
-            if(e.type === 'touchstart') {
-                updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
-            } else {
-                updateCoordinates(e.clientX, e.clientY);
-            }
+            if(e.type === 'touchstart') { updateCoordinates(e.touches[0].clientX, e.touches[0].clientY); } 
+            else { updateCoordinates(e.clientX, e.clientY); }
 
             clearInterval(timer);
 
@@ -126,24 +113,24 @@
                 if (!isPressed) return;
 
                 // 能量增加
-                if (power < 200) power += 4;
+                if (power < 300) power += 5;
 
-                // 【修复点】这里直接使用全局最新的 currentX 和 currentY
+                // 【修改点】环绕鼠标的光环效果
                 confetti({
-                    particleCount: 3, 
-                    startVelocity: 30,
-                    spread: 20,
-                    origin: { x: currentX, y: currentY }, // 使用实时坐标
-                    colors: ['#FFD700', '#FFA500', '#FFFFFF'], 
-                    gravity: -1.2, // 反重力，向上飞
-                    scalar: 0.6,
+                    particleCount: 6, // 稍微多几个粒子让光环更密
+                    startVelocity: 15, // 速度慢，别飞太远
+                    spread: 360, // 向四面八方发射
+                    origin: { x: currentX, y: currentY }, 
+                    colors: ['#FFD700', '#FFA500', '#FFFFFF', '#ff4d00'], // 加点红橙色更像火焰
+                    gravity: 0, // 零重力，悬浮在鼠标周围
+                    scalar: 0.5, // 小火花
                     drift: 0,
-                    ticks: 35
+                    ticks: 25 // 消失得快一点，形成闪烁感
                 });
-            }, 30); // 每30毫秒发射一次，非常流畅
+            }, 30);
         }
 
-        // 4. 松开爆炸
+        // 3. 松开爆炸
         function releaseExplosion() {
             if (!isPressed) return;
             isPressed = false;
@@ -151,26 +138,22 @@
 
             // 在最后鼠标停留的位置爆炸
             confetti({
-                particleCount: Math.min(power * 1.5, 500), // 威力越大，粒子越多
+                particleCount: Math.min(power * 1.2, 400), // 调整一下最大数量
                 startVelocity: 45,
                 spread: 120,
-                origin: { x: currentX, y: currentY }, // 使用实时坐标
-                gravity: 1, // 恢复正常重力
+                origin: { x: currentX, y: currentY },
+                gravity: 1, 
                 scalar: 1.1,
                 ticks: 400,
                 zIndex: 999
             });
             
-            power = 0; // 重置能量
+            power = 0;
         }
 
         // --- 绑定事件 ---
-        
-        // 电脑鼠标
         document.addEventListener('mousedown', startCharging);
         document.addEventListener('mouseup', releaseExplosion);
-        
-        // 手机触摸 (防止长按弹出菜单)
         document.addEventListener('touchstart', startCharging, {passive: false});
         document.addEventListener('touchend', releaseExplosion);
         document.addEventListener('contextmenu', event => event.preventDefault());
