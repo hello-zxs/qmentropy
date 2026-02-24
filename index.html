@@ -5,32 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday</title>
     <style>
-        /* 基础样式设置 */
+        /* 1. 基础样式：纯黑背景，确保沉浸感 */
         body {
             margin: 0;
-            overflow: hidden; /* 防止滚动条出现 */
-            background-color: #050505; /* 极深色背景 */
+            overflow: hidden;
+            background-color: #020205; /* 接近纯黑的夜空色 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            cursor: crosshair; /* 鼠标变成十字准星，更有发射的感觉 */
+            cursor: crosshair; /* 鼠标变成准星 */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            user-select: none; /* 防止按住时选中文字 */
         }
-        /* 文字容器 */
+
+        /* 2. 文字样式 */
         .content {
             position: relative;
             z-index: 10;
             text-align: center;
-            pointer-events: none; /* 让鼠标点击穿透文字 */
-            user-select: none; /* 防止文字被选中 */
+            pointer-events: none; /* 让鼠标事件穿透文字 */
         }
         h1 {
             color: #fff;
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
         .birthday-text {
             font-size: 4rem;
@@ -40,24 +41,28 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: glowing 20s linear infinite;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.5));
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.6));
         }
         @keyframes glowing {
             0% { background-position: 0 0; }
             50% { background-position: 400% 0; }
             100% { background-position: 0 0; }
         }
-        /* 提示语 */
+
+        /* 3. 提示语样式 */
         .hint {
-            color: #666;
-            margin-top: 20px;
+            color: #888;
+            margin-top: 30px;
             font-size: 0.9rem;
-            animation: blink 2s infinite;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
         }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
+
         canvas {
             position: absolute;
             top: 0;
@@ -72,63 +77,109 @@
     <div class="content">
         <h1>Hello, I am zxs</h1>
         <div class="birthday-text">Happy Birthday! 🎂</div>
-        <p class="hint">( 移动鼠标有魔法，点击屏幕放烟花 )</p>
+        <p class="hint">按住鼠标积攒能量... 松开引爆！</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <script>
-        // 1. 定义一个放烟花的函数，方便调用
-        function fire(x, y) {
-            var count = 200;
-            var defaults = {
-                origin: { x: x, y: y } // 这里的 x, y 是这一炮的发射坐标
-            };
+        // 定义变量
+        let timer; // 计时器
+        let power = 0; // 能量值
+        let isPressed = false; // 鼠标是否按下的状态
 
-            function fireParticle(particleRatio, opts) {
-                confetti(Object.assign({}, defaults, opts, {
-                    particleCount: Math.floor(count * particleRatio)
-                }));
+        // 1. 获取鼠标在屏幕上的比例坐标 (0-1之间)
+        function getCoordinates(e) {
+            // 如果是手机触摸事件
+            if(e.touches && e.touches.length > 0) {
+                return {
+                    x: e.touches[0].clientX / window.innerWidth,
+                    y: e.touches[0].clientY / window.innerHeight,
+                    clientX: e.touches[0].clientX,
+                    clientY: e.touches[0].clientY
+                };
             }
-
-            fireParticle(0.25, { spread: 26, startVelocity: 55 });
-            fireParticle(0.2, { spread: 60 });
-            fireParticle(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-            fireParticle(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-            fireParticle(0.1, { spread: 120, startVelocity: 45 });
+            // 如果是鼠标事件
+            return {
+                x: e.clientX / window.innerWidth,
+                y: e.clientY / window.innerHeight,
+                clientX: e.clientX,
+                clientY: e.clientY
+            };
         }
 
-        // 2. 监听点击事件：在哪里点，就在哪里炸
-        document.addEventListener('click', function(e) {
-            // 把屏幕像素坐标转换成 0-1 之间的比例坐标
-            var x = e.clientX / window.innerWidth;
-            var y = e.clientY / window.innerHeight;
-            fire(x, y);
-        });
+        // 2. 按住鼠标：发射“上升轨迹”火花
+        function startCharging(e) {
+            isPressed = true;
+            power = 20; // 初始威力
 
-        // 3. 监听鼠标移动事件：拖尾效果
-        document.addEventListener('mousemove', function(e) {
-            // 为了不让浏览器太卡，我们设置一个概率，不是每像素都炸
-            if (Math.random() < 0.15) { 
-                var x = e.clientX / window.innerWidth;
-                var y = e.clientY / window.innerHeight;
+            // 清除可能存在的旧定时器
+            clearInterval(timer);
+
+            timer = setInterval(() => {
+                let coords = getCoordinates(e);
                 
+                // 能量随着时间增加，最大不超过 200
+                if (power < 300) power += 5;
+
+                // 发射金色的“尾焰”粒子
                 confetti({
-                    particleCount: 1, // 每次只掉一个小星星
-                    startVelocity: 15, // 速度慢一点
-                    spread: 360,
-                    origin: { x: x, y: y },
-                    colors: ['#ffffff', '#FFD700'], // 金色和白色的小星星
-                    disableForReducedMotion: true,
-                    scalar: 0.5 // 粒子小一点
+                    particleCount: 3, // 每次少发一点，形成连贯线条
+                    startVelocity: 30, // 初始速度
+                    spread: 20, // 范围窄一点，像喷射
+                    origin: { x: coords.x, y: coords.y },
+                    colors: ['#FFD700', '#FFA500', '#FFFFFF'], // 金色、橙色、白色
+                    gravity: -1, // 【关键】反向重力，让粒子向上飞！
+                    scalar: 0.6, // 粒子小一点
+                    drift: 0,
+                    ticks: 30 // 消失得快一点
                 });
+
+            }, 50); // 每50毫秒发射一次
+        }
+
+        // 3. 松开鼠标：引爆大烟花
+        function releaseExplosion(e) {
+            if (!isPressed) return;
+            isPressed = false;
+            clearInterval(timer); // 停止发射轨迹
+
+            let coords = getCoordinates(e);
+
+            // 只有按了一会儿才炸大的，防止误触
+            // 威力越大，扩散范围越广
+            confetti({
+                particleCount: power, // 粒子数量 = 积攒的能量
+                startVelocity: 45 + (power / 10), // 能量越大，炸得越高
+                spread: 100 + (power / 5), // 能量越大，炸得越宽
+                origin: { x: coords.x, y: coords.y },
+                gravity: 1, // 恢复正常重力
+                scalar: 1.2, // 爆炸的粒子大一点
+                ticks: 300 // 留存时间长一点
+            });
+            
+            // 重置能量
+            power = 0;
+        }
+
+        // --- 绑定事件 (同时支持电脑鼠标和手机触摸) ---
+        
+        // 电脑端
+        document.addEventListener('mousedown', startCharging);
+        document.addEventListener('mouseup', releaseExplosion);
+        
+        // 手机端 (防止按住出现右键菜单)
+        document.addEventListener('touchstart', startCharging, {passive: false});
+        document.addEventListener('touchend', releaseExplosion);
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 鼠标移动时，如果按住，也要更新轨迹位置（可选优化）
+        document.addEventListener('mousemove', (e) => {
+            if(isPressed) {
+                // 可以在这里更新发射源位置，但为了简单，这里让它像烟花棒一样断断续续也很好看
             }
         });
 
-        // 4. 开局自动庆祝一下（从屏幕中间）
-        setTimeout(() => {
-            fire(0.5, 0.5);
-        }, 500);
     </script>
 </body>
 </html>
