@@ -5,41 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday</title>
     <style>
+        /* 基础样式设置 */
         body {
+            margin: 0;
+            overflow: hidden; /* 防止滚动条出现 */
+            background-color: #000; /* 背景改成黑色，晚上放烟花才好看 */
             display: flex;
-            flex-direction: column; /* 让文字上下排列 */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #fdf2f5; /* 背景改成淡淡的粉色 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        /* 文字容器，确保文字浮在烟花上面 */
+        .content {
+            position: relative;
+            z-index: 10; /* 层级高一点 */
+            text-align: center;
+            pointer-events: none; /* 让鼠标点击能穿透文字点到画布上 */
         }
         h1 {
-            color: #333;
+            color: #fff; /* 白色文字 */
             font-size: 2.5rem;
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5); /* 加点发光效果 */
         }
-        /* 生日快乐的特效样式 */
         .birthday-text {
             font-size: 4rem;
             font-weight: bold;
-            /* 搞个彩虹渐变色 */
             background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
             background-size: 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glowing 20s linear infinite; /* 让颜色慢慢流动 */
+            animation: glowing 20s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.8)); /* 让彩色文字也发光 */
         }
         @keyframes glowing {
             0% { background-position: 0 0; }
             50% { background-position: 400% 0; }
             100% { background-position: 0 0; }
         }
+        /* 烟花画布的样式 */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* 放在最底层 */
+        }
     </style>
 </head>
 <body>
-    <h1>Hello, I am zxs</h1>
-    <div class="birthday-text">Happy Birthday! 🎂</div>
+    <canvas id="canvas"></canvas>
+
+    <div class="content">
+        <h1>Hello, I am zxs</h1>
+        <div class="birthday-text">Happy Birthday! 🎂</div>
+        <p style="color: #aaa; margin-top: 20px;">(点击屏幕试试看！)</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        // 1. 自动放烟花：页面加载后，每隔两秒放两炮
+        var duration = 15 * 1000; // 自动放15秒
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        var interval = setInterval(function() {
+          var timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          var particleCount = 50 * (timeLeft / duration);
+          // 从屏幕左右两边发射
+          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+
+        // 2. 手动放烟花：点击屏幕任何地方都会发射
+        document.addEventListener('click', function(e) {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }, // 从屏幕中下方发射
+                zIndex: 999,
+            });
+        });
+    </script>
 </body>
 </html>
