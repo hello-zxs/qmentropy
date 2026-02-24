@@ -1,14 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0f2f5; font-family: sans-serif; }
-        h1 { font-size: 3rem; color: #333; }
+        body {
+            display: flex;
+            flex-direction: column; /* 让文字上下排列 */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fdf2f5; /* 背景改成淡淡的粉色 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        /* 生日快乐的特效样式 */
+        .birthday-text {
+            font-size: 4rem;
+            font-weight: bold;
+            /* 搞个彩虹渐变色 */
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glowing 20s linear infinite; /* 让颜色慢慢流动 */
+        }
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
     </style>
 </head>
 <body>
     <h1>Hello, I am zxs</h1>
+    <div class="birthday-text">Happy Birthday! 🎂</div>
 </body>
 </html>
