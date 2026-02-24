@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday</title>
     <style>
-        /* 1. 基础样式：纯黑背景，确保沉浸感 */
+        /* 1. 基础样式 */
         body {
             margin: 0;
             overflow: hidden;
-            background-color: #020205; /* 接近纯黑的夜空色 */
+            background-color: #020205; /* 深夜色 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            cursor: crosshair; /* 鼠标变成准星 */
+            cursor: crosshair; /* 准星光标 */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            user-select: none; /* 防止按住时选中文字 */
+            user-select: none; /* 禁止选中文字 */
+            -webkit-user-select: none;
         }
 
         /* 2. 文字样式 */
@@ -25,7 +26,7 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            pointer-events: none; /* 让鼠标事件穿透文字 */
+            pointer-events: none; /* 穿透点击 */
         }
         h1 {
             color: #fff;
@@ -48,8 +49,6 @@
             50% { background-position: 400% 0; }
             100% { background-position: 0 0; }
         }
-
-        /* 3. 提示语样式 */
         .hint {
             color: #888;
             margin-top: 30px;
@@ -77,108 +76,104 @@
     <div class="content">
         <h1>Hello, I am zxs</h1>
         <div class="birthday-text">Happy Birthday! 🎂</div>
-        <p class="hint">按住鼠标积攒能量... 松开引爆！</p>
+        <p class="hint">按住鼠标画出轨迹... 松开引爆！</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <script>
-        // 定义变量
-        let timer; // 计时器
-        let power = 0; // 能量值
-        let isPressed = false; // 鼠标是否按下的状态
+        // 定义全局变量
+        let timer;
+        let power = 0;
+        let isPressed = false;
+        
+        // 【关键修复】定义两个变量，专门实时存储鼠标最新位置
+        let currentX = 0.5;
+        let currentY = 0.5;
 
-        // 1. 获取鼠标在屏幕上的比例坐标 (0-1之间)
-        function getCoordinates(e) {
-            // 如果是手机触摸事件
-            if(e.touches && e.touches.length > 0) {
-                return {
-                    x: e.touches[0].clientX / window.innerWidth,
-                    y: e.touches[0].clientY / window.innerHeight,
-                    clientX: e.touches[0].clientX,
-                    clientY: e.touches[0].clientY
-                };
-            }
-            // 如果是鼠标事件
-            return {
-                x: e.clientX / window.innerWidth,
-                y: e.clientY / window.innerHeight,
-                clientX: e.clientX,
-                clientY: e.clientY
-            };
+        // 1. 实时更新坐标的函数
+        function updateCoordinates(clientX, clientY) {
+            currentX = clientX / window.innerWidth;
+            currentY = clientY / window.innerHeight;
         }
 
-        // 2. 按住鼠标：发射“上升轨迹”火花
+        // 2. 监听鼠标/手指移动，时刻更新上面的坐标变量
+        document.addEventListener('mousemove', (e) => {
+            updateCoordinates(e.clientX, e.clientY);
+        });
+        document.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        // 3. 开始蓄力（发射轨迹）
         function startCharging(e) {
             isPressed = true;
-            power = 20; // 初始威力
+            power = 10; 
+            
+            // 立即更新一次坐标，防止瞬移
+            if(e.type === 'touchstart') {
+                updateCoordinates(e.touches[0].clientX, e.touches[0].clientY);
+            } else {
+                updateCoordinates(e.clientX, e.clientY);
+            }
 
-            // 清除可能存在的旧定时器
             clearInterval(timer);
 
+            // 开启连发模式
             timer = setInterval(() => {
-                let coords = getCoordinates(e);
-                
-                // 能量随着时间增加，最大不超过 200
-                if (power < 300) power += 5;
+                if (!isPressed) return;
 
-                // 发射金色的“尾焰”粒子
+                // 能量增加
+                if (power < 200) power += 4;
+
+                // 【修复点】这里直接使用全局最新的 currentX 和 currentY
                 confetti({
-                    particleCount: 3, // 每次少发一点，形成连贯线条
-                    startVelocity: 30, // 初始速度
-                    spread: 20, // 范围窄一点，像喷射
-                    origin: { x: coords.x, y: coords.y },
-                    colors: ['#FFD700', '#FFA500', '#FFFFFF'], // 金色、橙色、白色
-                    gravity: -1, // 【关键】反向重力，让粒子向上飞！
-                    scalar: 0.6, // 粒子小一点
+                    particleCount: 3, 
+                    startVelocity: 30,
+                    spread: 20,
+                    origin: { x: currentX, y: currentY }, // 使用实时坐标
+                    colors: ['#FFD700', '#FFA500', '#FFFFFF'], 
+                    gravity: -1.2, // 反重力，向上飞
+                    scalar: 0.6,
                     drift: 0,
-                    ticks: 30 // 消失得快一点
+                    ticks: 35
                 });
-
-            }, 50); // 每50毫秒发射一次
+            }, 30); // 每30毫秒发射一次，非常流畅
         }
 
-        // 3. 松开鼠标：引爆大烟花
-        function releaseExplosion(e) {
+        // 4. 松开爆炸
+        function releaseExplosion() {
             if (!isPressed) return;
             isPressed = false;
-            clearInterval(timer); // 停止发射轨迹
+            clearInterval(timer);
 
-            let coords = getCoordinates(e);
-
-            // 只有按了一会儿才炸大的，防止误触
-            // 威力越大，扩散范围越广
+            // 在最后鼠标停留的位置爆炸
             confetti({
-                particleCount: power, // 粒子数量 = 积攒的能量
-                startVelocity: 45 + (power / 10), // 能量越大，炸得越高
-                spread: 100 + (power / 5), // 能量越大，炸得越宽
-                origin: { x: coords.x, y: coords.y },
+                particleCount: Math.min(power * 1.5, 500), // 威力越大，粒子越多
+                startVelocity: 45,
+                spread: 120,
+                origin: { x: currentX, y: currentY }, // 使用实时坐标
                 gravity: 1, // 恢复正常重力
-                scalar: 1.2, // 爆炸的粒子大一点
-                ticks: 300 // 留存时间长一点
+                scalar: 1.1,
+                ticks: 400,
+                zIndex: 999
             });
             
-            // 重置能量
-            power = 0;
+            power = 0; // 重置能量
         }
 
-        // --- 绑定事件 (同时支持电脑鼠标和手机触摸) ---
+        // --- 绑定事件 ---
         
-        // 电脑端
+        // 电脑鼠标
         document.addEventListener('mousedown', startCharging);
         document.addEventListener('mouseup', releaseExplosion);
         
-        // 手机端 (防止按住出现右键菜单)
+        // 手机触摸 (防止长按弹出菜单)
         document.addEventListener('touchstart', startCharging, {passive: false});
         document.addEventListener('touchend', releaseExplosion);
         document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // 鼠标移动时，如果按住，也要更新轨迹位置（可选优化）
-        document.addEventListener('mousemove', (e) => {
-            if(isPressed) {
-                // 可以在这里更新发射源位置，但为了简单，这里让它像烟花棒一样断断续续也很好看
-            }
-        });
 
     </script>
 </body>
