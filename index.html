@@ -9,26 +9,28 @@
         body {
             margin: 0;
             overflow: hidden; /* 防止滚动条出现 */
-            background-color: #000; /* 背景改成黑色，晚上放烟花才好看 */
+            background-color: #050505; /* 极深色背景 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            cursor: crosshair; /* 鼠标变成十字准星，更有发射的感觉 */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        /* 文字容器，确保文字浮在烟花上面 */
+        /* 文字容器 */
         .content {
             position: relative;
-            z-index: 10; /* 层级高一点 */
+            z-index: 10;
             text-align: center;
-            pointer-events: none; /* 让鼠标点击能穿透文字点到画布上 */
+            pointer-events: none; /* 让鼠标点击穿透文字 */
+            user-select: none; /* 防止文字被选中 */
         }
         h1 {
-            color: #fff; /* 白色文字 */
+            color: #fff;
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5); /* 加点发光效果 */
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
         .birthday-text {
             font-size: 4rem;
@@ -38,67 +40,95 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: glowing 20s linear infinite;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.8)); /* 让彩色文字也发光 */
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.5));
         }
         @keyframes glowing {
             0% { background-position: 0 0; }
             50% { background-position: 400% 0; }
             100% { background-position: 0 0; }
         }
-        /* 烟花画布的样式 */
+        /* 提示语 */
+        .hint {
+            color: #666;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
         canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* 放在最底层 */
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-
     <div class="content">
         <h1>Hello, I am zxs</h1>
         <div class="birthday-text">Happy Birthday! 🎂</div>
-        <p style="color: #aaa; margin-top: 20px;">(点击屏幕试试看！)</p>
+        <p class="hint">( 移动鼠标有魔法，点击屏幕放烟花 )</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <script>
-        // 1. 自动放烟花：页面加载后，每隔两秒放两炮
-        var duration = 15 * 1000; // 自动放15秒
-        var animationEnd = Date.now() + duration;
-        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        // 1. 定义一个放烟花的函数，方便调用
+        function fire(x, y) {
+            var count = 200;
+            var defaults = {
+                origin: { x: x, y: y } // 这里的 x, y 是这一炮的发射坐标
+            };
 
-        function randomInRange(min, max) {
-          return Math.random() * (max - min) + min;
+            function fireParticle(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fireParticle(0.25, { spread: 26, startVelocity: 55 });
+            fireParticle(0.2, { spread: 60 });
+            fireParticle(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fireParticle(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fireParticle(0.1, { spread: 120, startVelocity: 45 });
         }
 
-        var interval = setInterval(function() {
-          var timeLeft = animationEnd - Date.now();
-
-          if (timeLeft <= 0) {
-            return clearInterval(interval);
-          }
-
-          var particleCount = 50 * (timeLeft / duration);
-          // 从屏幕左右两边发射
-          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-        }, 250);
-
-        // 2. 手动放烟花：点击屏幕任何地方都会发射
+        // 2. 监听点击事件：在哪里点，就在哪里炸
         document.addEventListener('click', function(e) {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }, // 从屏幕中下方发射
-                zIndex: 999,
-            });
+            // 把屏幕像素坐标转换成 0-1 之间的比例坐标
+            var x = e.clientX / window.innerWidth;
+            var y = e.clientY / window.innerHeight;
+            fire(x, y);
         });
+
+        // 3. 监听鼠标移动事件：拖尾效果
+        document.addEventListener('mousemove', function(e) {
+            // 为了不让浏览器太卡，我们设置一个概率，不是每像素都炸
+            if (Math.random() < 0.15) { 
+                var x = e.clientX / window.innerWidth;
+                var y = e.clientY / window.innerHeight;
+                
+                confetti({
+                    particleCount: 1, // 每次只掉一个小星星
+                    startVelocity: 15, // 速度慢一点
+                    spread: 360,
+                    origin: { x: x, y: y },
+                    colors: ['#ffffff', '#FFD700'], // 金色和白色的小星星
+                    disableForReducedMotion: true,
+                    scalar: 0.5 // 粒子小一点
+                });
+            }
+        });
+
+        // 4. 开局自动庆祝一下（从屏幕中间）
+        setTimeout(() => {
+            fire(0.5, 0.5);
+        }, 500);
     </script>
 </body>
 </html>
