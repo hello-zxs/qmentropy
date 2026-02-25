@@ -1,0 +1,47 @@
+# -----------------------
+# 站点基本信息
+# -----------------------
+title: "Physics Lab Notes"        # 您的网站标题
+name: "Your Name"                 # 您的名字
+description: "Undergraduate Physics @ XMUM | Quantum & Optics"
+url: "https://您的域名.com"       # ★ 这里一定要填您的自定义域名
+baseurl: ""                       # 留空
+
+# -----------------------
+# 主题设置 (学术风格)
+# -----------------------
+remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin: "default"  # 皮肤可选: "air", "contrast", "dark"
+locale: "zh-CN"
+search: true                      # 开启搜索
+
+# -----------------------
+# 学术功能 (MathJax + 分页)
+# -----------------------
+paginate: 5                       # 每页显示5篇文章
+paginate_path: /page:num/
+mathjax: true                     # 开启数学公式
+head_scripts:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-include-cache
+
+# -----------------------
+# 侧边栏 (个人资料 + 邮箱)
+# -----------------------
+author:
+  name: "Your Name"
+  avatar: "/assets/images/avatar.jpg" # 如果没有头像图，先把这行删掉
+  bio: "Physics Undergraduate @ XMUM<br>Researching Transformation Optics"
+  location: "Sepang, Malaysia"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      # ★ 这里填您刚才设置的域名邮箱
+      url: "mailto:contact@您的域名.com"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/您的GitHub用户名"
