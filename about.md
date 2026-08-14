@@ -10,7 +10,7 @@ toc: true
 
 <!-- 【★填写】在这里写一段你的自我介绍，例如： -->
 
-我是物理系本科生，就读于厦门大学马来西亚分校（XMUM），研究方向是变换光学（Transformation Optics）与量子光学。
+我是 **Zheng Xiangsheng（郑祥胜）**，物理系本科生，就读于厦门大学马来西亚分校（XMUM），研究方向是变换光学（Transformation Optics）与量子光学。
 
 这个网站是我的**学术笔记仓库**：记录课程笔记、论文阅读心得、实验数据与代码。所有内容遵循"学习即记录"的原则——每天学到的，都沉淀成可检索的笔记。
 
@@ -21,7 +21,7 @@ toc: true
 
 ## 联系方式
 
-- Email: [contact@qmentropy.com](mailto:contact@qmentropy.com)
+- Email: [helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com)
 - GitHub: [hello-zxs](https://github.com/hello-zxs)
 
 ## 关于本站

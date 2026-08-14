@@ -5,7 +5,7 @@
 
 # ---------- 站点基本信息 ----------
 title: "Physics Lab Notes"
-name: "Your Name"                    # 【★填写】你的名字（显示在页头）
+name: "Zheng Xiangsheng"
 description: "Undergraduate Physics @ XMUM | Quantum & Optics"
 url: "https://qmentropy.com"         # 已修正：你的自定义域名（来自 CNAME）
 baseurl: ""
@@ -60,17 +60,17 @@ plugins:
 
 # ---------- 侧边栏 (个人资料) ----------
 author:
-  name: "Your Name"                  # 【★填写】你的名字
+  name: "Zheng Xiangsheng"
   avatar: "/assets/images/avatar.svg" # 已改为 SVG 头像（占位图，可自行替换）
   bio: "Physics Undergraduate @ XMUM<br>Researching Transformation Optics"
   location: "Sepang, Malaysia"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
-      url: "mailto:contact@qmentropy.com"   # 【★填写】你的联系邮箱
+      url: "mailto:helloworld.3a@gmail.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/hello-zxs"   # 【★填写】你的 GitHub 主页
+      url: "https://github.com/hello-zxs"
     - label: "CV"
       icon: "fas fa-fw fa-file-alt"
       url: "/about/"                        # 指向关于页
