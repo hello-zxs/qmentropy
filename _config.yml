@@ -1,0 +1,101 @@
+# ============================================
+# qmentropy.com — 站点配置
+# ★ 需要你手动填写的地方都标注了 【★填写】
+# ============================================
+
+# ---------- 站点基本信息 ----------
+title: "Physics Lab Notes"
+name: "Your Name"                    # 【★填写】你的名字（显示在页头）
+description: "Undergraduate Physics @ XMUM | Quantum & Optics"
+url: "https://qmentropy.com"         # 已修正：你的自定义域名（来自 CNAME）
+baseurl: ""
+timezone: "Asia/Kuala_Lumpur"        # 你的时区（XMU Malaysia）
+
+# ---------- 主题设置 ----------
+remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin: "default"     # 可选: air / contrast / dark / mint / neon / plum / sunrise
+locale: "zh-CN"
+search: true
+words_per_minute: 200
+
+# ---------- 学术功能 (MathJax + 分页) ----------
+paginate: 5
+paginate_path: /page:num/
+mathjax: true
+head_scripts:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# ---------- 默认布局 ----------
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: false
+      related: true
+      toc: true
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+# ---------- 集合 ----------
+collections:
+  posts:
+    output: true
+
+# ---------- 插件 ----------
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-include-cache
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# ---------- 侧边栏 (个人资料) ----------
+author:
+  name: "Your Name"                  # 【★填写】你的名字
+  avatar: "/assets/images/avatar.svg" # 已改为 SVG 头像（占位图，可自行替换）
+  bio: "Physics Undergraduate @ XMUM<br>Researching Transformation Optics"
+  location: "Sepang, Malaysia"
+  links:
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:contact@qmentropy.com"   # 【★填写】你的联系邮箱
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/hello-zxs"   # 【★填写】你的 GitHub 主页
+    - label: "CV"
+      icon: "fas fa-fw fa-file-alt"
+      url: "/about/"                        # 指向关于页
+
+# ---------- 页脚 ----------
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/hello-zxs"
+    - label: "Atom Feed"
+      icon: "fas fa-fw fa-rss-square"
+      url: "/feed.xml"
+
+# ---------- SEO ----------
+twitter:
+  username:
+facebook:
+  username:
+og_image: /assets/images/avatar.svg
+
+# ---------- 归档页面 ----------
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
