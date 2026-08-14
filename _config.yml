@@ -6,7 +6,7 @@
 # ---------- 站点基本信息 ----------
 title: "Physics Lab Notes"
 name: "Zheng Xiangsheng"
-description: "Undergraduate Physics @ XMUM | Quantum & Optics"
+description: "Physics @ XMUM → MSc @ Western University | Transformation Optics & Quantum Optics"
 url: "https://qmentropy.com"         # 已修正：你的自定义域名（来自 CNAME）
 baseurl: ""
 timezone: "Asia/Kuala_Lumpur"        # 你的时区（XMU Malaysia）
@@ -82,19 +82,19 @@ plugins:
 # ---------- 侧边栏 (个人资料) ----------
 author:
   name: "Zheng Xiangsheng"
-  avatar: "/assets/images/avatar.svg" # 已改为 SVG 头像（占位图，可自行替换）
-  bio: "Physics Undergraduate @ XMUM<br>Researching Transformation Optics"
-  location: "Sepang, Malaysia"
+  avatar: "/assets/images/avatar.svg"
+  bio: "Physics BSc @ XMUM → MSc @ Western University (2026)<br>Research: Transformation Optics & Quantum Optics<br>Email: helloworld.3a@gmail.com"
+  location: "London, Ontario, Canada"
   links:
-    - label: "Email"
+    - label: "Email: helloworld.3a@gmail.com"
       icon: "fas fa-fw fa-envelope"
       url: "mailto:helloworld.3a@gmail.com"
-    - label: "GitHub"
+    - label: "GitHub: hello-zxs"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/hello-zxs"
     - label: "CV"
       icon: "fas fa-fw fa-file-alt"
-      url: "/about/"                        # 指向关于页
+      url: "/cv/"
 
 # ---------- 页脚 ----------
 footer:

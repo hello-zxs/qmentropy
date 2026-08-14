@@ -8,21 +8,20 @@ toc: true
 
 ## 关于我
 
-<!-- 【★填写】在这里写一段你的自我介绍，例如： -->
+我是 **Zheng Xiangsheng（郑祥胜）**，物理系本科生，毕业于厦门大学马来西亚分校（XMUM）。
 
-我是 **Zheng Xiangsheng（郑祥胜）**，物理系本科生，就读于厦门大学马来西亚分校（XMUM），研究方向是变换光学（Transformation Optics）与量子光学。
-
-这个网站是我的**学术笔记仓库**：记录课程笔记、论文阅读心得、实验数据与代码。所有内容遵循"学习即记录"的原则——每天学到的，都沉淀成可检索的笔记。
+**2026 年秋季，我将前往加拿大西安大略大学（Western University, London, Ontario）攻读研究生**，继续我在变换光学与量子光学方向的研究。
 
 ## 研究方向
 
-- **变换光学**：Geodesic Lens、光学隐形、超表面设计
-- **量子光学**：量子纠缠、量子测量、光子学实验
+- **变换光学**：Geodesic Lens、Morse 透镜、共形映射、超表面设计
+- **量子光学**：单光子干涉、量子擦除、量子测量
 
 ## 联系方式
 
-- Email: [helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com)
-- GitHub: [hello-zxs](https://github.com/hello-zxs)
+- **Email**: helloworld.3a@gmail.com
+- **GitHub**: [github.com/hello-zxs](https://github.com/hello-zxs)
+- **CV**: [查看我的简历](/cv/)
 
 ## 关于本站
 
