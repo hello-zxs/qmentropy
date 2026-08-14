@@ -83,7 +83,7 @@ plugins:
 author:
   name: "Zheng Xiangsheng"
   avatar: "/assets/images/avatar.svg"
-  bio: "Physics BSc @ XMUM → MSc @ Western University (2026)<br>Research: Transformation Optics & Quantum Optics<br>Email: helloworld.3a@gmail.com"
+  bio: "Physics BSc @ XMUM → MSc @ Western University (2026)<br>Transformation Optics & Quantum Optics"
   location: "London, Ontario, Canada"
   links:
     - label: "Email: helloworld.3a@gmail.com"

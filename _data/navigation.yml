@@ -4,8 +4,6 @@ main:
   - title: "Physics Notes"
     url: /tags/#physics
   - title: "Research"
-    url: /tags/#research
-  - title: "Publications"
     url: /publications/
   - title: "CV"
     url: /cv/
