@@ -1,0 +1,48 @@
+/* qmentropy.com 自定义样式 */
+
+/* ===== 阅读进度条 ===== */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #4fc3f7, #26c6da);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
+
+/* ===== 返回顶部按钮 ===== */
+#back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #1a237e;
+  color: #e3f2fd;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 9998;
+}
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+#back-to-top:hover {
+  background: #0d47a1;
+}
+
+/* ===== 暗色主题下代码块微调 ===== */
+html[data-skin="dark"] pre,
+html[data-skin="dark"] code {
+  background: #1a1a2e;
+}

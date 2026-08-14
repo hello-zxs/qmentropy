@@ -1,0 +1,34 @@
+name: Build Jekyll Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: |
+          gem install bundler
+          bundle install || true
+
+      - name: Build Site
+        run: |
+          bundle exec jekyll build --future || jekyll build --future
+
+      - name: Check Output
+        run: |
+          test -d _site && echo "✅ 构建成功，输出目录 _site 存在"
+          test -f _site/index.html && echo "✅ index.html 已生成"

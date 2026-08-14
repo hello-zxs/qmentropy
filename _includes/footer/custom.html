@@ -1,0 +1,42 @@
+<!-- 自定义 footer：访问统计、阅读进度条、返回顶部 -->
+{% if site.goatcounter_code %}
+<!-- GoatCounter 访问统计（隐私友好，无 Cookie） -->
+<script data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+{% endif %}
+
+<!-- 阅读进度条 -->
+<div id="reading-progress" aria-hidden="true"></div>
+
+<!-- 返回顶部按钮 -->
+<button id="back-to-top" aria-label="Back to top" title="返回顶部">↑</button>
+
+<script>
+(function () {
+  // ---- 阅读进度条 ----
+  var bar = document.getElementById('reading-progress');
+  function updateProgress() {
+    var h = document.documentElement;
+    var scrollable = h.scrollHeight - h.clientHeight;
+    var pct = scrollable > 0 ? (h.scrollTop / scrollable) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  // ---- 返回顶部 ----
+  var btn = document.getElementById('back-to-top');
+  function toggleBtn() {
+    if (document.documentElement.scrollTop > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('scroll', function () {
+    updateProgress();
+    toggleBtn();
+  }, { passive: true });
+  updateProgress();
+})();
+</script>

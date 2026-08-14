@@ -13,17 +13,38 @@ timezone: "Asia/Kuala_Lumpur"        # 你的时区（XMU Malaysia）
 
 # ---------- 主题设置 ----------
 remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin: "default"     # 可选: air / contrast / dark / mint / neon / plum / sunrise
+minimal_mistakes_skin: "dark"         # 已切换暗色主题: air / contrast / dark / mint / neon / plum / sunrise
 locale: "zh-CN"
 search: true
 words_per_minute: 200
+repository: "hello-zxs/qmentropy"    # 仓库地址（giscus 评论需要）
 
-# ---------- 学术功能 (MathJax + 分页) ----------
+# ---------- 学术功能 (MathJax + 分页 + Mermaid) ----------
 paginate: 5
 paginate_path: /page:num/
 mathjax: true
 head_scripts:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+
+# ---------- 评论系统 (giscus) ----------
+# 【★启用评论前必做】见 README「启用评论」章节:
+#   1. GitHub 仓库 -> Settings -> 勾选 Discussions
+#   2. 安装 giscus app: https://github.com/apps/giscus
+#   3. 打开 https://giscus.app 配置后填入下面的 repo_id / category_id
+comments:
+  provider: "giscus"
+  giscus:
+    repo_id: ""             # 【★填写】giscus.app 生成的 repo_id
+    category_name: "Announcements"  # 可用 Discussions 分类名
+    category_id: ""         # 【★填写】giscus.app 生成的 category_id
+    description: "Comments for qmentropy.com"
+    # language: "zh-CN"     # 取消注释启用中文界面
+
+# ---------- 访问统计 (GoatCounter) ----------
+# 【★启用统计必做】免费注册: https://www.goatcounter.com/signup
+# 注册后获得站点代码，填入下方 YOURCODE
+goatcounter_code: ""        # 【★填写】形如 "qmentropy"，留空则统计不加载
 
 # ---------- 默认布局 ----------
 defaults:

@@ -1,3 +1,13 @@
-<!-- 自定义 head：favicon 与元信息 -->
+<!-- 自定义 head：favicon、主题色、Mermaid 初始化 -->
 <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
 <meta name="theme-color" content="#1a237e">
+
+<!-- 自定义样式（进度条、返回顶部） -->
+<link rel="stylesheet" href="/assets/css/custom.css">
+
+<!-- Mermaid 图表初始化 -->
+<script>
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+  }
+</script>

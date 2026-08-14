@@ -5,6 +5,8 @@ main:
     url: /tags/#physics
   - title: "Research"
     url: /tags/#research
+  - title: "Publications"
+    url: /publications/
   - title: "Timeline"
     url: /year-archive/
   - title: "About"
