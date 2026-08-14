@@ -2,7 +2,7 @@ main:
   - title: "Home"
     url: /
   - title: "Physics Notes"
-    url: /tags/#physics
+    url: /categories/#physics
   - title: "Research"
     url: /publications/
   - title: "CV"
