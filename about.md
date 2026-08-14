@@ -8,7 +8,7 @@ toc: true
 
 ## 关于我
 
-我是 **Zheng Xiangsheng（郑祥胜）**，物理系本科生，毕业于厦门大学马来西亚分校（XMUM）。
+我是 **Zheng Xiangsheng（郑翔升）**，物理系本科生，毕业于厦门大学马来西亚分校（XMUM）。
 
 **2026 年秋季，我将前往加拿大西安大略大学（Western University, London, Ontario）攻读研究生**，继续我在变换光学与量子光学方向的研究。
 

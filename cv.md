@@ -8,7 +8,7 @@ toc: true
 
 > 最近更新：2026-08-14 · 【★填写】标注处请按实际情况补充
 
-## Zheng Xiangsheng（郑祥胜）
+## Zheng Xiangsheng（郑翔升）
 
 - **Email**: helloworld.3a@gmail.com
 - **GitHub**: [github.com/hello-zxs](https://github.com/hello-zxs)
