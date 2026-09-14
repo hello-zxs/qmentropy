@@ -17,6 +17,7 @@ minimal_mistakes_skin: "dark"         # 已切换暗色主题: air / contrast / 
 locale: "zh-CN"
 search: true
 words_per_minute: 200
+future: true                          # 允许"未来日期"的文章立即发布（否则构建时会被跳过）
 repository: "hello-zxs/qmentropy"    # 仓库地址（giscus 评论需要）
 
 # ---------- 学术功能 (MathJax + 分页 + Mermaid) ----------
@@ -54,7 +55,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      read_time: true
+      read_time: false
       comments: false
       share: false
       related: true
