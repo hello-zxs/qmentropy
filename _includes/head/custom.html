@@ -1,11 +1,11 @@
-<!-- 站点图标 -->
+<!-- Site icons -->
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
 <meta name="theme-color" content="#0b1220">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
-<!-- 自定义样式（首页、卡片、打印版 CV） -->
+<!-- Custom styles (homepage, cards, print CV) -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}?v=4">
 
 {% if page.ref and site.data.i18n.refs[page.ref] %}
@@ -16,8 +16,9 @@
 {% endif %}
 
 {%- comment -%}
-  公式与图表按需加载。只有 front matter 里 mathjax: true / mermaid: true
-  的页面才会付出这几个 MB 的代价；文章默认开启公式（_config.yml defaults）。
+  Math and diagrams load on demand: only pages with mathjax: true or
+  mermaid: true pay the multi-megabyte cost. Posts enable math by default
+  in the _config.yml defaults.
 {%- endcomment -%}
 {% if page.mathjax %}
 <script>

@@ -1,18 +1,21 @@
 {%- comment -%}
-  访问统计：只有填了 goatcounter_code 才注入脚本。
-  注意 Liquid 把空字符串视为真值，必须显式比较。
+  Analytics: inject the script only when goatcounter_code is set.
+  Liquid treats the empty string as truthy, so compare explicitly.
 {%- endcomment -%}
 {% if site.goatcounter_code and site.goatcounter_code != "" %}
 <script data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count"
         async src="https://gc.zgo.at/count.js"></script>
 {% endif %}
 
-{%- comment -%} 阅读进度条只在文章页出现 {%- endcomment -%}
+{%- comment -%} Reading progress bar: posts only {%- endcomment -%}
 {% if page.collection == "posts" or page.collection == "zh_posts" %}
 <div id="reading-progress" aria-hidden="true"></div>
 {% endif %}
 
-<button id="back-to-top" type="button" aria-label="Back to top" title="返回顶部">↑</button>
+{% assign back_label = 'Back to top' %}
+{% if page.lang == 'zh' %}{% assign back_label = '返回顶部' %}{% endif %}
+
+<button id="back-to-top" type="button" aria-label="{{ back_label }}" title="{{ back_label }}">↑</button>
 
 <script>
 (function () {
