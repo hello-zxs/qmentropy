@@ -21,12 +21,10 @@ words_per_minute: 200
 future: true                          # 允许"未来日期"的文章立即发布（否则构建时会被跳过）
 repository: "hello-zxs/qmentropy"    # 仓库地址（giscus 评论需要）
 
-# ---------- 学术功能 (MathJax + 分页 + Mermaid) ----------
+# ---------- 学术功能 (MathJax + Mermaid) ----------
 # MathJax / Mermaid 不再全站加载：由 _includes/head/custom.html 按页面
 # 的 mathjax / mermaid 开关按需注入（见 defaults），首页与归档页因此
 # 少加载约 4 MB 脚本。
-paginate: 5
-paginate_path: /page:num/
 
 # ---------- 评论系统 (giscus) ----------
 # 【★启用评论前必做】见 README「启用评论」章节:
@@ -100,6 +98,7 @@ exclude:
   - node_modules/
   - vendor/
   - README.md
+  - EDITING.md
   - tools/
   - package.json
   - package-lock.json
@@ -107,7 +106,6 @@ exclude:
 # ---------- 插件 ----------
 plugins:
   - jekyll-remote-theme
-  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-include-cache
   - jekyll-seo-tag

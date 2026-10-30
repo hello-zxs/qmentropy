@@ -1,0 +1,20 @@
+<section class="band">
+  <div class="wrap reveal">
+    <div class="feature">
+      <div class="feature__text">
+        <p class="kicker">{{ include.thesis.kicker }}</p>
+        <h2>
+          {%- for line in include.thesis.title_lines -%}
+            {{ line }}{% unless forloop.last %}<br>{% endunless %}
+          {%- endfor -%}
+        </h2>
+        <p>{{ include.thesis.text }}</p>
+        <a class="link" href="{{ include.thesis.url | relative_url }}">{{ include.thesis.link_label }} <span>›</span></a>
+      </div>
+
+      <div class="feature__media">
+        <img src="{{ include.thesis.image | relative_url }}" alt="{{ include.thesis.alt }}" width="800" height="450" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>

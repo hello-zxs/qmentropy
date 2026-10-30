@@ -1,0 +1,96 @@
+---
+---
+<!doctype html>
+{%- assign copy = site.data.home -%}
+{%- assign nav = site.data.navigation.main -%}
+{%- assign alt_url = site.data.i18n.refs.home.zh -%}
+{%- if page.lang == 'zh' -%}
+  {%- assign copy = site.data.home_zh -%}
+  {%- assign nav = site.data.navigation_zh.main -%}
+  {%- assign alt_url = site.data.i18n.refs.home.en -%}
+{%- endif -%}
+{%- assign html_lang = 'en' -%}
+{%- if page.lang == 'zh' -%}{%- assign html_lang = 'zh-CN' -%}{%- endif -%}
+<html lang="{{ html_lang }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f5f5f7">
+
+    {%- assign page_title = page.title | default: site.title -%}
+    {%- assign page_description = page.description | default: site.description -%}
+    {%- assign og_locale = 'en_US' -%}
+    {%- if page.lang == 'zh' -%}{%- assign og_locale = 'zh_CN' -%}{%- endif -%}
+    <script>document.documentElement.classList.add('js');</script>
+    <title>{% if page.lang == 'zh' %}物理笔记 — 郑翔升{% else %}Physics Lab Notes — Zheng Xiangsheng{% endif %}</title>
+    <meta name="description" content="{{ page_description | escape }}">
+    <meta name="author" content="Zheng Xiangsheng">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    <meta property="og:description" content="{{ page_description | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/images/og.png' | absolute_url }}">
+    <meta property="og:image:alt" content="Zheng Xiangsheng — Physics Lab Notes">
+    <meta property="og:locale" content="{{ og_locale }}">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | escape }}">
+    <meta name="twitter:description" content="{{ page_description | escape }}">
+    <meta name="twitter:image" content="{{ '/assets/images/og.png' | absolute_url }}">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Zheng Xiangsheng",
+      "url": "https://qmentropy.com/",
+      "jobTitle": "Physics MSc student",
+      "affiliation": { "@type": "Organization", "name": "Western University" },
+      "sameAs": ["https://github.com/hello-zxs"]
+    }
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
+    <link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
+
+    <link rel="preload" href="{{ '/assets/fonts/inter-tight-600.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ '/assets/images/hero-light.png' | relative_url }}" as="image">
+    <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+
+    {% if page.ref %}
+    <link rel="alternate" hreflang="en" href="{{ site.data.i18n.refs.home.en | absolute_url }}">
+    <link rel="alternate" hreflang="zh-Hans" href="{{ site.data.i18n.refs.home.zh | absolute_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ site.data.i18n.refs.home.en | absolute_url }}">
+    {% endif %}
+  </head>
+
+  <body class="theme-a home-apple">
+    <noscript>
+      <style>
+        .nav__links { display: flex !important; flex-wrap: wrap; gap: 14px; }
+        .menu-toggle { display: none !important; }
+      </style>
+    </noscript>
+
+    <a class="skip" href="#main">{% if page.lang == 'zh' %}跳到正文{% else %}Skip to content{% endif %}</a>
+
+    {% include home/nav.html nav=nav alt_url=alt_url %}
+    {% include home/menu.html nav=nav alt_url=alt_url %}
+
+    <main id="main">
+      {% include home/hero.html hero=copy.hero %}
+      {% include home/research.html research=copy.research %}
+      {% include home/thesis.html thesis=copy.thesis %}
+      {% include home/notes.html notes=copy.notes %}
+    </main>
+
+    {% include home/footer.html footer=copy.footer %}
+
+    <script defer src="{{ '/assets/js/home.js' | relative_url }}"></script>
+  </body>
+</html>

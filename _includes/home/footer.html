@@ -1,0 +1,11 @@
+<footer class="footer">
+  <div class="footer__inner">
+    <span>{{ include.footer.tagline }} <span class="footer__year">© {{ 'now' | date: '%Y' }}</span></span>
+
+    <span class="footer__links">
+      {%- for link in include.footer.links -%}
+        <a href="{{ link.url }}">{{ link.label }}</a>
+      {%- endfor -%}
+    </span>
+  </div>
+</footer>

@@ -1,0 +1,64 @@
+# 首页文案（中文）。英文对应文件：_data/home.yml
+
+hero:
+  eyebrow: "郑翔升 · Western University 物理硕士"
+  title_lines:
+    - "用几何，"
+    - "设计光。"
+  lead: "变换光学、测地线透镜，以及单光子层面的量子光学。"
+  primary_label: "浏览研究"
+  primary_url: "/zh/research/"
+  secondary_label: "阅读笔记"
+  secondary_url: "/zh/notes/"
+  status: "MSc @ Western University · London, Ontario · 2026–"
+
+research:
+  kicker: "研究"
+  title: "三条线索，一个问题。"
+  sub: "几何如何决定光的路径？这是我反复回到的三个方向。"
+  tiles:
+    - title: "变换光学"
+      text: "把坐标变换翻译成材料参数——从 Fermat 原理到隐形衣。"
+      image: "/assets/images/feature-to.png"
+      alt: "坐标网格在中心区域弯曲，形成一块被隐身的圆形区域"
+      link_label: "研究笔记"
+      url: "/zh/research/#transformation-optics"
+    - title: "测地线透镜"
+      text: "Morse、Luneburg、Eaton 透镜作为等效测地线曲面，逐条射线追踪。"
+      image: "/assets/images/feature-lens.png"
+      alt: "平行光线通过平凸透镜后会聚到焦点"
+      link_label: "论文主线"
+      url: "/zh/research/#geodesic-lenses"
+    - title: "量子光学"
+      text: "单光子干涉与波粒二象性，从教学实验室开始记录。"
+      image: "/assets/images/feature-quantum.png"
+      alt: "双缝后两列球面波叠加形成的干涉图样"
+      link_label: "实验笔记"
+      url: "/zh/research/#quantum-optics"
+
+thesis:
+  kicker: "毕业论文"
+  title_lines:
+    - "Morse 透镜，"
+    - "射线追踪。"
+  text: "证明共形 Morse 透镜属于 Cornbleet 一般族，并用射线追踪验证等效曲面。"
+  link_label: "阅读论文主线"
+  url: "/zh/research/2026/08/15/morse-lens-thesis.html"
+  image: "/assets/images/feature-lens.png"
+  alt: "通过透镜并在曲面上会聚的射线追踪"
+
+notes:
+  title: "最新文章"
+  all_label: "全部笔记"
+  all_url: "/zh/notes/"
+  date_format: "%Y 年 %-m 月 %-d 日"
+
+footer:
+  tagline: "Physics Lab Notes · 郑翔升"
+  links:
+    - label: "GitHub"
+      url: "https://github.com/hello-zxs"
+    - label: "邮件"
+      url: "mailto:helloworld.3a@gmail.com"
+    - label: "RSS"
+      url: "/feed.xml"

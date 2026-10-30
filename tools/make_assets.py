@@ -232,6 +232,65 @@ def make_hero() -> None:
     finish(img, OUT / "hero.png", (w, h))
 
 
+def make_hero_light() -> None:
+    """Light editorial hero for the Apple-style homepage (1600x900)."""
+    w, h = 1600, 900
+    top = np.array((246, 246, 248), dtype=np.float32)
+    bottom = np.array((233, 233, 239), dtype=np.float32)
+    t = np.linspace(0, 1, h * S)[:, None]
+    arr = np.repeat((top + (bottom - top) * t)[:, None, :], w * S, axis=1)
+
+    yy, xx = np.mgrid[0:h * S, 0:w * S]
+    cx, cy = 0.72 * w * S, 0.46 * h * S
+
+    d = np.sqrt(((xx - cx) / (420 * S)) ** 2 + ((yy - cy) / (420 * S)) ** 2)
+    glow = np.exp(-d * 2.0) * 0.9
+    for i, channel in enumerate((0, 113, 227)):
+        arr[..., i] = np.clip(arr[..., i] + glow * channel * 0.10, 0, 255)
+
+    img = to_image(arr)
+
+    grid = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    gd = ImageDraw.Draw(grid)
+    for x in range(-64, w + 65, 64):
+        gd.line([(x * S, 0), (x * S, h * S)], fill=(120, 120, 135, 26), width=1)
+    for y in range(-64, h + 65, 64):
+        gd.line([(0, y * S), (w * S, y * S)], fill=(120, 120, 135, 26), width=1)
+    img.alpha_composite(grid)
+
+    def ring(radius: float, colour: tuple[int, int, int], alpha: int,
+             width: int, blur: float) -> None:
+        layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        box = [(cx - radius * S), (cy - radius * S), (cx + radius * S), (cy + radius * S)]
+        ImageDraw.Draw(layer).ellipse(box, outline=colour + (alpha,), width=width * S)
+        if blur:
+            layer = layer.filter(ImageFilter.GaussianBlur(blur * S))
+        img.alpha_composite(layer)
+
+    ring(228, (0, 113, 227), 85, 5, 14)
+    ring(228, (0, 113, 227), 235, 2, 0)
+    ring(150, (100, 210, 255), 150, 1, 2)
+    ring(300, (0, 113, 227), 30, 1, 0)
+
+    dot = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    r = 4 * S
+    px = cx + 228 * S * math.cos(math.radians(-38))
+    py = cy + 228 * S * math.sin(math.radians(-38))
+    ImageDraw.Draw(dot).ellipse([px - r, py - r, px + r, py + r], fill=(0, 113, 227, 240))
+    img.alpha_composite(dot.filter(ImageFilter.GaussianBlur(1.2 * S)))
+
+    wash = Image.new("L", img.size, 0)
+    wd = ImageDraw.Draw(wash)
+    wd.ellipse([-0.25 * w * S, -0.35 * h * S, 0.55 * w * S, 1.35 * h * S], fill=110)
+    img = Image.composite(
+        Image.new("RGBA", img.size, (255, 255, 255, 255)),
+        img,
+        wash.filter(ImageFilter.GaussianBlur(80 * S)),
+    )
+
+    finish(img, OUT / "hero-light.png", (w, h))
+
+
 def make_feature_to() -> None:
     w, h = 800, 450
     arr = background(w, h)
@@ -433,6 +492,7 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     print("Generating artwork …")
     make_hero()
+    make_hero_light()
     make_feature_to()
     make_feature_lens()
     make_feature_quantum()

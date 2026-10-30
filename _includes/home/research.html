@@ -1,0 +1,22 @@
+<section class="section" id="research">
+  <div class="wrap reveal">
+    <p class="kicker">{{ include.research.kicker }}</p>
+    <h2>{{ include.research.title }}</h2>
+    <p class="section__sub">{{ include.research.sub }}</p>
+
+    <div class="tiles">
+      {%- for tile in include.research.tiles -%}
+      <a class="tile" href="{{ tile.url | relative_url }}">
+        <div class="tile__media">
+          <img src="{{ tile.image | relative_url }}" alt="{{ tile.alt }}" width="800" height="450" loading="lazy">
+        </div>
+        <div class="tile__body">
+          <h3>{{ tile.title }}</h3>
+          <p>{{ tile.text }}</p>
+          <span class="tile__more">{{ tile.link_label }} <span>›</span></span>
+        </div>
+      </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

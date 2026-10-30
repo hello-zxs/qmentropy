@@ -1,0 +1,65 @@
+# Homepage copy (English). Every string on / comes from this file.
+# Chinese counterpart: _data/home_zh.yml
+
+hero:
+  eyebrow: "Zheng Xiangsheng · Physics MSc, Western University"
+  title_lines:
+    - "Notes on the"
+    - "geometry of light."
+  lead: "Transformation optics, geodesic lenses, and quantum optics at the single-photon level."
+  primary_label: "Explore the research"
+  primary_url: "/research/"
+  secondary_label: "Read the notes"
+  secondary_url: "/tags/"
+  status: "MSc @ Western University · London, Ontario · 2026–"
+
+research:
+  kicker: "Research"
+  title: "Three threads, one question."
+  sub: "How does geometry decide the path of light? These are the three directions I keep returning to."
+  tiles:
+    - title: "Transformation optics"
+      text: "Coordinate transformations rewritten as material parameters — from Fermat’s principle to the cloak."
+      image: "/assets/images/feature-to.png"
+      alt: "A coordinate grid bent around a cloaked circular region"
+      link_label: "Research notes"
+      url: "/research/#transformation-optics"
+    - title: "Geodesic lenses"
+      text: "Morse, Luneburg and Eaton lenses as equivalent geodesic surfaces, traced ray by ray."
+      image: "/assets/images/feature-lens.png"
+      alt: "Parallel rays focused by a plano-convex lens"
+      link_label: "Thesis thread"
+      url: "/research/#geodesic-lenses"
+    - title: "Quantum optics"
+      text: "Single-photon interference and wave–particle duality, documented from the teaching lab outward."
+      image: "/assets/images/feature-quantum.png"
+      alt: "Interference fringes behind a double slit"
+      link_label: "Lab notes"
+      url: "/research/#quantum-optics"
+
+thesis:
+  kicker: "Thesis"
+  title_lines:
+    - "Morse lens,"
+    - "ray-traced."
+  text: "A proof that conformal Morse lenses sit inside Cornbleet’s general family — and a ray tracer that shows the equivalent surfaces agree."
+  link_label: "Read the thesis thread"
+  url: "/research/2026/08/15/morse-lens-thesis.html"
+  image: "/assets/images/feature-lens.png"
+  alt: "Ray tracing through a lens onto a curved surface"
+
+notes:
+  title: "Recent notes"
+  all_label: "All notes"
+  all_url: "/tags/"
+  date_format: "%b %-d, %Y"
+
+footer:
+  tagline: "Physics Lab Notes · Zheng Xiangsheng"
+  links:
+    - label: "GitHub"
+      url: "https://github.com/hello-zxs"
+    - label: "Email"
+      url: "mailto:helloworld.3a@gmail.com"
+    - label: "RSS"
+      url: "/feed.xml"

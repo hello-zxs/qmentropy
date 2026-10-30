@@ -22,8 +22,25 @@ ref: research     # 双语页面的对应键，见 _data/i18n.yml
 - `_data/i18n.yml` 维护 `ref` → 两种语言 URL 的映射。顶部语言切换器和 `<link rel="alternate" hreflang>` 都读它。
 - 中文页面额外写 `locale: zh-CN`，主题的界面文案（"最新文章"、"目录"、"关注"等）会自动切换。
 - 导航：英文 `_data/navigation.yml`，中文 `_data/navigation_zh.yml`。
-- `_includes/masthead.html` 与 `_layouts/default.html` 是本仓库覆盖主题的文件（主题锁定 4.28.1），语言切换器位于 masthead 中。
-- `_layouts/home-zh.html` 是中文首页布局，列出 `site.zh_posts`；英文首页仍使用主题的 `home` 布局与分页。
+- `_includes/masthead.html` 与 `_layouts/default.html` 是本仓库覆盖主题的文件（主题锁定 4.28.1），内页语言切换器位于 masthead 中。
+- 首页使用独立布局 `_layouts/home-apple.html`，不加载主题 CSS；内页仍使用主题布局。
+- 🔎 **改首页文案/样式，先看 [EDITING.md](EDITING.md)**——一张“想改什么 → 去哪里”的地图。
+
+## 首页（Apple 风格）
+
+首页是数据驱动的，改字不用碰 HTML：
+
+| 文件 | 作用 |
+|------|------|
+| `_data/home.yml` | 英文首页全部文案（hero、三张卡片、论文段、页脚） |
+| `_data/home_zh.yml` | 中文首页文案，字段与英文一一对应 |
+| `_layouts/home-apple.html` | 页面骨架、meta、字体预加载 |
+| `_includes/home/*.html` | nav / menu / hero / research / thesis / notes / footer 七个小片段 |
+| `assets/css/home.css` | 设计 token（颜色、字号、圆角、动效）与布局 |
+| `assets/js/home.js` | 导航滚动状态、滚动淡入、移动端菜单 |
+| `assets/fonts/*.woff2` | 自托管 Inter / Inter Tight，不依赖 Google Fonts |
+
+首页以外（Research、Publications、CV、About、文章）仍然沿用原来的深色主题；后续如果要把整套设计延伸过去，再改主题布局。
 
 ## 新增一篇双语文章
 
@@ -126,18 +143,25 @@ git push origin main
 
 ```
 ├── _config.yml                 # 站点配置、双语 defaults
+├── EDITING.md                  # “想改哪里 → 去哪个文件”
 ├── _data/navigation.yml        # 英文导航
 ├── _data/navigation_zh.yml     # 中文导航
 ├── _data/i18n.yml              # ref → 中英文 URL 映射
-├── _includes/masthead.html     # 覆盖主题：语言切换 + 双语导航
-├── _includes/lang-switch.html  # 语言切换按钮
-├── _layouts/default.html       # 覆盖主题：取消 masthead 缓存以支持逐页切换
-├── _layouts/home-zh.html       # 中文首页
+├── _data/home.yml              # 英文首页文案
+├── _data/home_zh.yml           # 中文首页文案
+├── _includes/masthead.html     # 覆盖主题：内页语言切换 + 双语导航
+├── _includes/lang-switch.html  # 内页语言切换按钮
+├── _includes/home/             # 首页片段（nav/menu/hero/research/thesis/notes/footer）
+├── _layouts/default.html       # 覆盖主题：取消 masthead 缓存
+├── _layouts/home-apple.html    # 首页独立布局
 ├── _posts/                     # 英文文章
 ├── _zh_posts/                  # 中文文章（collection）
 ├── zh/                         # 中文页面
-├── assets/css/custom.css       # 自定义样式层
+├── assets/css/custom.css       # 内页样式
+├── assets/css/home.css         # 首页样式（token 在顶部）
+├── assets/js/home.js           # 首页交互
+├── assets/fonts/               # 自托管 Inter / Inter Tight
 ├── assets/images/              # hero、卡片、OG 图、favicon
-├── tools/make_assets.py        # 图片生成脚本
+├── tools/make_assets.py        # 图片生成脚本（含 hero-light.png）
 └── Gemfile                     # 本地 / CI 依赖
 ```
