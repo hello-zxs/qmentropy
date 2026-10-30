@@ -8,7 +8,7 @@
 {% endif %}
 
 {%- comment -%} 阅读进度条只在文章页出现 {%- endcomment -%}
-{% if page.collection == "posts" %}
+{% if page.collection == "posts" or page.collection == "zh_posts" %}
 <div id="reading-progress" aria-hidden="true"></div>
 {% endif %}
 

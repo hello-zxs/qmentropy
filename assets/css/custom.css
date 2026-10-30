@@ -47,17 +47,20 @@ html {
   border-bottom: 1px solid var(--qm-border);
 }
 
-.layout--home .archive > p {
+.layout--home .archive > p,
+.layout--home-zh .archive > p {
   max-width: 40em;
 }
 
-.layout--home .entries-list {
+.layout--home .entries-list,
+.layout--home-zh .entries-list {
   max-width: 48em;
 }
 
 /* 首页不显示作者侧栏：让内容占满整行，而不是留出 200–300px 的空列 */
 @media (min-width: 64em) {
-  .layout--home .archive {
+  .layout--home .archive,
+  .layout--home-zh .archive {
     float: none;
     width: 100%;
     padding-inline: 0;
@@ -89,6 +92,41 @@ html {
 @media (max-width: 37.5em) {
   .layout--home .page__hero--overlay {
     padding: 3.5em 0 3em;
+  }
+}
+
+/* 语言切换：DOM 里排在最前（窄屏折叠时不会被隐藏），视觉上靠右 */
+.masthead__menu-item.qm-lang-item {
+  display: flex;
+  align-items: center;
+  order: 99;
+}
+
+.qm-lang-switch {
+  display: inline-block;
+  align-self: center;
+  margin-inline-start: 0.75rem;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid var(--qm-border);
+  border-radius: 999px;
+  color: var(--qm-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.qm-lang-switch:hover {
+  color: #fff;
+  border-color: rgba(79, 195, 247, 0.55);
+  text-decoration: none;
+}
+
+@media (max-width: 37.5em) {
+  .qm-lang-switch {
+    margin-inline-start: 0.35rem;
+    padding: 0.12rem 0.45rem;
+    font-size: 0.68rem;
   }
 }
 

@@ -1,60 +1,62 @@
 ---
-title: "隐形衣如何炼成：变换光学 60 年"
+title: "How the invisibility cloak was made: sixty years of transformation optics"
 date: 2026-08-16
 categories:
   - Physics
 tags:
   - Transformation Optics
 toc: true
+lang: en
+ref: transformation-optics-60-years
 ---
 
-> 读研期间我收集了 37 篇变换光学经典论文（1961–2022），这篇是梳理出的"60 年主线"。
-> 配套论文库索引见我的研究笔记。
+> While reading for my MSc I collected 37 classic transformation-optics papers (1961–2022); this post is the "sixty-year thread" I distilled from them.
+> The full paper index lives in my research notes.
 
-## 1. 一句话核心思想
+## 1. The idea in one sentence
 
-**坐标变换 ≡ 介质参数。** 麦克斯韦方程组在坐标变换下形式不变——只要把"弯曲的空间"翻译成"特殊的材料"，光就会以为空间真的被弯曲了。
+**Coordinate transformation ≡ material parameters.** Maxwell's equations are form-invariant under coordinate transformations — translate "curved space" into "special material", and light behaves as if space were really curved.
 
-数学上，坐标变换的 Jacobian $\Lambda$ 直接给出等效材料参数：
+Mathematically, the Jacobian $\Lambda$ of the transformation directly gives the effective material parameters:
 
 $$\varepsilon' = \frac{\Lambda \varepsilon \Lambda^T}{\det \Lambda}, \qquad \mu' = \frac{\Lambda \mu \Lambda^T}{\det \Lambda}$$
 
-## 2. 时间线：从数学游戏到实验奇迹
+## 2. Timeline: from mathematical game to experimental wonder
 
-| 年代 | 里程碑 |
-|------|--------|
-| **1961** | Dolin 提出变换光学雏形（数学构想） |
-| **2000** | 局域共振声学超材料（Liu et al., *Science*）——材料基础铺垫 |
-| **2006** | **Pendry 坐标变换法**（*Science* 312, 1780）+ **Leonhardt 共形映射法**双雄并立，学科创立 |
-| **2007** | 光频（632.8nm）隐形衣设计（Cai et al., *Nat. Photon.*） |
-| **2008** | **物质波隐形衣**（*PRL*）——推广到薛定谔方程；**反隐形衣**诞生（隐身与反隐身博弈） |
-| **2008-09** | 超散射体、隐形门/门户、幻像光学（illusion optics） |
-| **2015** | 共形变换光学综述（Xu & Chen, *Nat. Photon.*）——方法体系化 |
-| **2021** | **微波隐形门首次实验验证**（*PRL* 126, 227403） |
-| **2022** | 进化算法只用自然材料设计隐形器件（*PRE* 106） |
+| Year | Milestone |
+|------|-----------|
+| **1961** | Dolin proposes the precursor of transformation optics (a mathematical idea) |
+| **2000** | Locally resonant acoustic metamaterials (Liu et al., *Science*) — the material foundation |
+| **2006** | **Pendry's coordinate-transformation method** (*Science* 312, 1780) and **Leonhardt's conformal-mapping method** appear side by side; the field is born |
+| **2007** | Optical-frequency (632.8 nm) cloak design (Cai et al., *Nat. Photon.*) |
+| **2008** | **Matter-wave cloak** (*PRL*) — extended to the Schrödinger equation; the **anti-cloak** is born (cloak versus anti-cloak) |
+| **2008–09** | Superscatterers, cloaking doors and portals, illusion optics |
+| **2015** | Review of conformal transformation optics (Xu & Chen, *Nat. Photon.*) — the methodology is systematized |
+| **2021** | **First experimental demonstration of a microwave cloaking door** (*PRL* 126, 227403) |
+| **2022** | An evolutionary algorithm designs cloaking devices using natural materials only (*PRE* 106) |
 
-## 3. 两个 2006：两种"隐身哲学"
+## 3. Two 2006s: two philosophies of invisibility
 
-- **Pendry 路线（坐标变换）**：把空间区域"压缩"，用超材料实现各向异性 $\varepsilon'/\mu'$——隐身衣的经典方案
-- **Leonhardt 路线（共形映射）**：用保角映射只需求**各向同性**折射率 $n = n_0 \lvert dw/dz \rvert$——更容易实现，但只能二维工作
+- **Pendry's route (coordinate transformation)**: "compress" a region of space and realize anisotropic $\varepsilon'/\mu'$ with metamaterials — the classic cloak.
+- **Leonhardt's route (conformal mapping)**: conformal maps require only an **isotropic** index, $n = n_0 \lvert dw/dz \rvert$ — easier to realize, but two-dimensional.
 
-两条路线在 2010 年代合流于"共形变换光学"：例如两个相吻的 Maxwell 鱼眼镜组合即可构成隐形衣。
+The two routes merged in the 2010s into "conformal transformation optics": two kissing Maxwell fisheye lenses, for example, can form a cloak.
 
-## 4. 为什么需要超材料？
+## 4. Why metamaterials?
 
-自然界材料没有负折射率、没有各向异性磁性响应。**超材料**（亚波长人工结构）是让"弯曲空间"物理落地的前提——这也是为什么理论 1961 年就有，实验却等到 2006 年之后。
+Natural materials have no negative refractive index and no anisotropic magnetic response. **Metamaterials** — subwavelength artificial structures — are what let "curved space" land in the laboratory. That is why the theory existed in 1961 but experiments had to wait until after 2006.
 
-## 5. 新前沿（2021-2022）
+## 5. New frontiers (2021–2022)
 
-- **实验突破**：微波频段超散射隐形门首次实现（PRL 2021），获 Nature 亮点报道
-- **自然材料路线**：进化算法搜索正折射率材料组合实现隐形——避开超材料制备难题
-- **新介质**：二维材料双曲极化激元、引力透镜模拟
+- **Experimental breakthrough**: the first microwave superscatterer cloaking door (PRL 2021), highlighted by Nature
+- **Natural-material route**: evolutionary algorithms search positive-index material combinations for cloaking, sidestepping metamaterial fabrication
+- **New media**: hyperbolic polaritons in two-dimensional materials, analogue gravitational lenses
 
-## 6. 给我的启示
+## 6. What it taught me
 
-变换光学 60 年的故事是"**数学先行、材料随后**"的典范。Dolin 1961 年的数学游戏，要等 45 年后超材料技术成熟才变成现实。**好的物理思想值得长期等待。**
+The sixty-year story is a model of "**mathematics first, materials later**". Dolin's mathematical game from 1961 had to wait 45 years for metamaterial technology to mature. **Good physical ideas are worth waiting for.**
 
-## 延伸阅读
+## Further reading
 
-- 论文库全清单见 `papers-survey.md`
-- 我自己的研究：Morse 透镜等效测地线构造（[见本文](/tags/#geodesic-lens)）
+- The full paper list is in `papers-survey.md`
+- My own work: the Morse-lens equivalent geodesic construction ([see here](/tags/#geodesic-lens))

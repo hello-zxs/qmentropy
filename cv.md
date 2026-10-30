@@ -5,69 +5,68 @@ layout: single
 author_profile: true
 toc: true
 toc_sticky: true
-toc_label: "目录"
+toc_label: "On this page"
+lang: en
+ref: cv
 ---
 
-**郑翔升 · Zheng Xiangsheng**  
+**Zheng Xiangsheng**  
 Physics MSc student, Western University  
 London, Ontario, Canada  
 [helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com) · [github.com/hello-zxs](https://github.com/hello-zxs)
 
-*最近更新：2026 年 10 月 · 成绩单与推荐人信息可邮件索取*
+*Last updated: October 2026 · transcripts and referees available on request*
 
-## 教育背景
+## Education
 
 ### Western University — MSc in Physics
-**2026 – 至今** · London, Ontario, Canada
+**2026 – present** · London, Ontario, Canada
 
-- 2026 年秋季入学，研究方向为变换光学与量子光学。
+- Started in autumn 2026; research direction: transformation optics and quantum optics.
 
 ### Xiamen University Malaysia — BSc (Hons) Physics
 **2022 – 2026** · Sepang, Malaysia
 
-- 毕业论文：*Ray tracing and equivalent geodesic lenses for Morse lens*
-- 导师：Dr. Yap Seong Shan；副导师：Prof. Chen Huanyang（陈焕阳）
+- Thesis: *Ray tracing and equivalent geodesic lenses for Morse lens*
+- Advisor: Dr. Yap Seong Shan; co-advisor: Prof. Huanyang Chen
 
-## 研究方向
+## Research interests
 
-- **变换光学**：坐标变换与等效介质参数、共形映射、隐形衣与超表面设计
-- **测地线透镜**：Morse / Luneburg / Eaton 透镜的度规等价与射线追踪
-- **量子光学**：单光子干涉、路径信息与量子擦除
+- **Transformation optics**: coordinate transformations and effective media, conformal mapping, cloaks and metasurface design
+- **Geodesic lenses**: metric equivalence and ray tracing for Morse, Luneburg and Eaton lenses
+- **Quantum optics**: single-photon interference, path information and quantum erasure
 
-## 毕业论文
+## Thesis
 
 **Ray tracing and equivalent geodesic lenses for Morse lens** · 2026
 
-- 证明共形 Morse 透镜等价于 Cornbleet 一般族的 (A = B, C = 1) 子类，统一 Cornbleet–Rinous (1981) 与 Šarbort–Tyc (2012) 两条文献线索；
-- 构造 Luneburg、Eaton 与中间 Morse 剖面的等效测地线曲面，并完成射线追踪验证；
-- 建立了一套从 GRIN 剖面到曲面度规、再到数值光线路径的完整流程。
+- Proved that conformal Morse lenses are equivalent to the (A = B, C = 1) subclass of Cornbleet's general family, unifying the Cornbleet–Rinous (1981) and Šarbort–Tyc (2012) lines of work;
+- Constructed the equivalent geodesic surfaces for the Luneburg, Eaton and intermediate Morse profiles, and verified them by ray tracing;
+- Built an end-to-end pipeline from GRIN profile to surface metric to numerical ray paths.
 
-[论文主线笔记 →](/research/2026/08/15/morse-lens-thesis.html)
+[Read the thesis thread →](/research/2026/08/15/morse-lens-thesis.html)
 
-## 技能
+## Skills
 
-| 类别 | 内容 |
-|------|------|
-| 编程 | Python（NumPy / Matplotlib，射线追踪与数值模拟）、Mathematica（符号推导、NDSolve） |
-| 仿真 | COMSOL（电磁场仿真） |
-| 写作 | LaTeX、Markdown、Jekyll |
-| 语言 | 中文（母语）、英语（学术写作与报告） |
+| Category | Details |
+|----------|---------|
+| Programming | Python (NumPy / Matplotlib for ray tracing and numerics), Mathematica (symbolic derivations, NDSolve) |
+| Simulation | COMSOL (electromagnetic field simulation) |
+| Writing | LaTeX, Markdown, Jekyll |
+| Languages | Chinese (native), English (academic writing and presentations) |
 
-## 学术产出
+## Output
 
-- **学位论文**：*Ray tracing and equivalent geodesic lenses for Morse lens*，厦门大学马来西亚分校，2026
-- **研究笔记**：[变换光学 60 年](/physics/2026/08/16/transformation-optics-60-years.html)、[单光子干涉](/lab%20notes/2026/03/08/single-photon-interference.html)
-- **项目**：Morse 透镜射线追踪器、变换光学文献索引（详见[Publications](/publications/)）
+- **Thesis**: *Ray tracing and equivalent geodesic lenses for Morse lens*, Xiamen University Malaysia, 2026
+- **Notes**: [Sixty years of transformation optics](/physics/2026/08/16/transformation-optics-60-years.html), [single-photon interference](/lab%20notes/2026/03/08/single-photon-interference.html)
+- **Projects**: Morse lens ray tracer, transformation-optics literature index (see [Publications](/publications/))
 
 <!--
-【待补充，取消注释后填写】
-## 教学与实习经历
-- 2025 · 助教（TA），普通物理实验
-- 2025 · 实习，某实验室
-
-## 获奖与荣誉
-- 2025 · 奖学金 / 竞赛
-
-## 学术活动
-- 2026 · 会议报告 / poster
+To add later:
+## Teaching and internships
+- 2025 · Teaching assistant, introductory physics lab
+## Awards
+- 2025 · Scholarship / competition
+## Talks
+- 2026 · Conference poster
 -->

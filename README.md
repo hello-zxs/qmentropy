@@ -1,33 +1,59 @@
 # qmentropy.com
 
-> 郑翔升的物理学笔记站：变换光学、测地线透镜与量子光学。
-> Jekyll + [Minimal Mistakes](https://mmistakes.com/work/jekyll-themes/minimal-mistakes/)（remote theme），托管于 GitHub Pages。
+> 郑翔升的物理学笔记站，中英双语：英文在 `/`，中文在 `/zh/`。
+> Jekyll + [Minimal Mistakes](https://mademistakes.com/work/jekyll-themes/minimal-mistakes/) 4.28.1（remote theme，已锁定版本），托管于 GitHub Pages。
 
-## 站点结构
+## 语言结构
 
-| 路径 | 内容 |
-|------|------|
-| `/` | 首页：研究方向卡片 + 最新文章 |
-| `/research/` | 三条研究主线与在研问题 |
-| `/tags/` | 按标签浏览全部笔记 |
-| `/publications/` | 学位论文、论文与项目 |
-| `/cv/` | 简历（可直接打印为 PDF） |
-| `/year-archive/` | 按时间归档 |
-| `/about/` | 关于我 / 关于本站 |
+| 路径 | 语言 | 内容位置 |
+|------|------|----------|
+| `/` `/research/` `/publications/` `/cv/` `/about/` | English | `index.html`、`research.md`、`publications.md`、`cv.md`、`about.md` |
+| `/zh/` `/zh/research/` … | 中文 | `zh/index.html`、`zh/*.md` |
+| 博客文章 | English | `_posts/` |
+| 中文文章 | 中文 | `_zh_posts/`（collection `zh_posts`） |
 
-## 写一篇新笔记
+每个页面/文章在 front matter 里声明 `lang` 和 `ref`：
+
+```yaml
+lang: en          # en | zh
+ref: research     # 双语页面的对应键，见 _data/i18n.yml
+```
+
+- `_data/i18n.yml` 维护 `ref` → 两种语言 URL 的映射。顶部语言切换器和 `<link rel="alternate" hreflang>` 都读它。
+- 中文页面额外写 `locale: zh-CN`，主题的界面文案（"最新文章"、"目录"、"关注"等）会自动切换。
+- 导航：英文 `_data/navigation.yml`，中文 `_data/navigation_zh.yml`。
+- `_includes/masthead.html` 与 `_layouts/default.html` 是本仓库覆盖主题的文件（主题锁定 4.28.1），语言切换器位于 masthead 中。
+- `_layouts/home-zh.html` 是中文首页布局，列出 `site.zh_posts`；英文首页仍使用主题的 `home` 布局与分页。
+
+## 新增一篇双语文章
+
+1. 英文：`_posts/YYYY-MM-DD-slug.md`，front matter 加 `lang: en`、`ref: slug`；
+2. 中文：`_zh_posts/YYYY-MM-DD-slug.md`，front matter 加 `lang: zh`、`locale: zh-CN`、`ref: slug`，并写死 `permalink: /zh/<与英文相同的路径>`；
+3. 在 `_data/i18n.yml` 增加映射：
+
+```yaml
+  slug:
+    en: "/physics/2026/09/01/slug.html"
+    zh: "/zh/physics/2026/09/01/slug.html"
+```
+
+只写一种语言也可以：语言切换器只在 `ref` 有对应项时出现。
+
+## 写一篇新笔记（英文）
 
 在 `_posts/` 下新建 `YYYY-MM-DD-slug.md`：
 
 ```markdown
 ---
-title: "笔记标题"
+title: "Note title"
 date: 2026-03-15
 categories:
   - Physics
 tags:
   - Transformation Optics
 toc: true
+lang: en
+ref: my-note
 ---
 
 正文。公式用 $...$（行内）或 $$...$$（块级）。
@@ -36,14 +62,14 @@ toc: true
 也可以用生成器：
 
 ```powershell
-pwsh -File tools\new-post.ps1 -Title "笔记标题" -Tags "物理,光学"
+pwsh -File tools\new-post.ps1 -Title "Note title" -Tags "physics,optics"
 ```
 
 ## 公式与图表的按需加载
 
 首页、归档页、404 页面**不会**加载 MathJax / Mermaid；只有需要的页面才付这份流量。
 
-- 文章默认 `mathjax: true`（见 `_config.yml` 的 `defaults`）；
+- 文章默认 `mathjax: true`（见 `_config.yml` 的 `defaults`，`zh_posts` 同样开启）；
 - 其他页面需要公式时，在 front matter 加 `mathjax: true`；
 - 需要流程图时，在 front matter 加 `mermaid: true`。
 
@@ -54,7 +80,8 @@ pwsh -File tools\new-post.ps1 -Title "笔记标题" -Tags "物理,光学"
 ```bash
 bundle install
 bundle exec jekyll serve
-# http://127.0.0.1:4000
+# 英文 http://127.0.0.1:4000
+# 中文 http://127.0.0.1:4000/zh/
 ```
 
 ## 图片素材
@@ -65,7 +92,7 @@ bundle exec jekyll serve
 python tools/make_assets.py
 ```
 
-输出到 `assets/images/`，固定随机种子，可重复生成。修改配色或构图后重跑即可。
+输出到 `assets/images/`，固定随机种子，可重复生成。
 
 ## 部署
 
@@ -77,7 +104,7 @@ git commit -m "更新内容"
 git push origin main
 ```
 
-`.github/workflows/jekyll-build.yml` 会在每次 push / PR 时跑一次 `jekyll build` 并检查关键页面是否生成，构建失败会直接显示在 Actions 里。
+`.github/workflows/jekyll-build.yml` 会在每次 push / PR 时跑一次 `jekyll build` 并检查关键页面（含 `/zh/`）是否生成。
 
 ## 可选：评论与统计
 
@@ -98,14 +125,19 @@ git push origin main
 ## 目录
 
 ```
-├── _config.yml                 # 站点配置
-├── _data/navigation.yml        # 顶部导航
-├── _includes/head/custom.html  # 图标、按需加载的 MathJax/Mermaid
-├── _includes/footer/custom.html# 进度条、返回顶部、统计
-├── _posts/                     # 文章
+├── _config.yml                 # 站点配置、双语 defaults
+├── _data/navigation.yml        # 英文导航
+├── _data/navigation_zh.yml     # 中文导航
+├── _data/i18n.yml              # ref → 中英文 URL 映射
+├── _includes/masthead.html     # 覆盖主题：语言切换 + 双语导航
+├── _includes/lang-switch.html  # 语言切换按钮
+├── _layouts/default.html       # 覆盖主题：取消 masthead 缓存以支持逐页切换
+├── _layouts/home-zh.html       # 中文首页
+├── _posts/                     # 英文文章
+├── _zh_posts/                  # 中文文章（collection）
+├── zh/                         # 中文页面
 ├── assets/css/custom.css       # 自定义样式层
-├── assets/images/              # 头像、hero、卡片、OG 图、favicon
+├── assets/images/              # hero、卡片、OG 图、favicon
 ├── tools/make_assets.py        # 图片生成脚本
-├── research.md / publications.md / cv.md / about.md / 404.md
 └── Gemfile                     # 本地 / CI 依赖
 ```

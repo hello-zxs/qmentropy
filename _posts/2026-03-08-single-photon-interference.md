@@ -1,46 +1,48 @@
 ---
-title: "量子光学实验笔记：单光子干涉"
+title: "Lab notes: single-photon interference"
 date: 2026-03-08
 categories:
   - Lab Notes
 tags:
   - Quantum Optics
 toc: true
+lang: en
+ref: single-photon-interference
 ---
 
-本周实验：验证**单光子干涉**——即使用一次只发射一个光子，干涉条纹依然出现。这是量子力学"波粒二象性"最直接的实验证据。
+This week's experiment: verify **single-photon interference** — fringes persist even when photons pass through the apparatus one at a time. It is the most direct experimental evidence for wave–particle duality.
 
-## 1. 实验装置
+## 1. Setup
 
 ```
-单光子源 ──► 分束器BS1 ──► 路径A ─┐
-                    └──► 路径B ─┼──► 合束器BS2 ──► 探测器D1/D2
-                                  └───────────┘
+single-photon source ──► BS1 ──► path A ─┐
+                        └──► path B ─────┼──► BS2 ──► detectors D1/D2
+                                          └──────────┘
 ```
 
-关键点：单光子源（衰减激光或自发参量下转换 SPDC）保证任意时刻装置中至多一个光子。
+Key point: the source (an attenuated laser, or SPDC) guarantees at most one photon in the apparatus at any time.
 
-## 2. 理论预期
+## 2. Theory
 
-经过两个分束器后，光子到达探测器 $D_1$ 的概率为：
+After the two beam splitters, the probability of detecting the photon at $D_1$ is
 
 $$P_1 = \frac{1}{2}(1 + \cos\phi)$$
 
-其中 $\phi$ 是两路径间的相位差。当 $\phi = 0$ 时 $P_1 = 1$（相消干涉，$D_2$ 无计数）；$\phi = \pi$ 时反之。
+where $\phi$ is the phase difference between the two paths. At $\phi = 0$, $P_1 = 1$ (destructive interference, no counts at $D_2$); at $\phi = \pi$, the reverse.
 
-## 3. 实验现象与数据
+## 3. Observations
 
-- 单光子模式下，$D_1$ 计数率随相位 $\phi$ 呈余弦振荡 ✅
-- 关闭其中一个路径（遮挡），干涉消失，$P_1 = 1/2$ 恒定 ✅
-- 这证明：**干涉不是光子之间的相互作用，而是单个光子自身的概率幅叠加**
+- In single-photon mode, the $D_1$ count rate oscillates as a cosine in $\phi$ ✅
+- Blocking one path removes the interference; $P_1 = 1/2$ stays constant ✅
+- This shows that **interference is not an interaction between photons, but the superposition of a single photon's own probability amplitude**
 
-## 4. 思考题（留给自己）
+## 4. Questions for myself
 
-1. 如果在 BS2 前放置"路径探测器"（which-way detector），干涉还会出现吗？
-2. 答案是不再出现——**测量坍缩了概率幅**。这就是"量子擦除实验"的出发点。
+1. If a which-way detector is placed before BS2, do the fringes survive?
+2. No — **the measurement collapses the amplitude**. That is the starting point of the quantum eraser.
 
-## 5. 待办
+## 5. To do
 
-- [ ] 复现量子擦除实验（延迟选择版本）
-- [ ] 整理 SPDC 光源的符合计数数据
-- [ ] 写实验报告模板（Markdown → PDF）
+- [ ] Reproduce the quantum eraser (delayed-choice version)
+- [ ] Organize the coincidence data from the SPDC source
+- [ ] Write a lab-report template (Markdown → PDF)

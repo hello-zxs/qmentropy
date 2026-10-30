@@ -6,62 +6,64 @@ author_profile: true
 mathjax: true
 toc: true
 toc_sticky: true
-toc_label: "本页目录"
+toc_label: "On this page"
+lang: en
+ref: research
 ---
 
-我的研究可以用一句话概括：**用几何设计光**。给定一个空间度规，光沿测地线传播；反过来，想让光走一条指定的路径，就去设计那个度规——再把它翻译成可实现的折射率分布或曲面形状。
+My research can be summed up in one sentence: **designing light with geometry**. Given a metric, light travels along geodesics; conversely, to make light follow a chosen path, design the metric — then translate it into a realizable refractive-index profile or surface.
 
-这页按三条线索整理：变换光学（语言）、测地线透镜（我毕业论文的具体对象）、量子光学（单光子层面的实验）。
+This page follows three threads: transformation optics (the language), geodesic lenses (the object of my thesis), and quantum optics (experiments at the single-photon level).
 
 ## Transformation optics {#transformation-optics}
 
-变换光学（Transformation Optics）的核心事实是：**Maxwell 方程组在坐标变换下形式不变**。对一个虚拟空间做坐标变换，其 Jacobian $\Lambda$ 会原封不动地出现在等效介质参数里：
+The central fact of transformation optics is that **Maxwell's equations are form-invariant under coordinate transformations**. Transform a virtual space, and its Jacobian $\Lambda$ appears verbatim in the effective medium parameters:
 
 $$\varepsilon' = \frac{\Lambda\,\varepsilon\,\Lambda^{T}}{\det\Lambda}, \qquad
   \mu' = \frac{\Lambda\,\mu\,\Lambda^{T}}{\det\Lambda}$$
 
-于是"弯曲空间"变成"特殊材料"：设计光路的问题，变成设计 $\varepsilon(\mathbf{r})$、$\mu(\mathbf{r})$ 的问题。Pendry 等人在 2006 年用这个思路给出了隐形衣方案，同一时期 Leonhardt 从共形映射出发得到了二维版本。
+"Curved space" thus becomes "special material": the problem of designing a light path becomes the problem of designing $\varepsilon(\mathbf{r})$ and $\mu(\mathbf{r})$. Pendry and co-workers used this idea to propose the invisibility cloak in 2006; Leonhardt reached the two-dimensional version through conformal mapping at the same time.
 
-**相关笔记**
+**Notes**
 
-- [隐形衣如何炼成：变换光学 60 年](/physics/2026/08/16/transformation-optics-60-years.html) —— 37 篇经典论文梳理出的主线（1961–2022）
-- [变换光学基础：从 Fermat 原理到隐形衣](/physics/2026/03/01/transformation-optics-basics.html) —— 从光程变分到坐标变换的推导
+- [How the invisibility cloak was made: sixty years of transformation optics](/physics/2026/08/16/transformation-optics-60-years.html) — a main thread through 37 classic papers (1961–2022)
+- [Transformation optics: from Fermat's principle to the invisibility cloak](/physics/2026/03/01/transformation-optics-basics.html) — from the optical-path variation to the coordinate transformation
 
-**我关心的问题**：各向异性与色散参数如何在实际结构中实现；宽带化与损耗；以及变换介质与超表面设计之间的边界在哪里。
+**Open questions**: how to realize anisotropic and dispersive parameters in real structures; bandwidth and loss; where transformation media end and metasurface design begins.
 
 ## Geodesic lenses {#geodesic-lenses}
 
-旋转对称的渐变折射率（GRIN）介质，在满足度规等价条件时，可以严格等价为一块**旋转曲面上的测地线透镜**：
+A spherically symmetric gradient-index (GRIN) medium is, under the metric-equivalence condition, exactly equivalent to a **geodesic lens on a surface of revolution**:
 
 $$\rho = n(r)\,r, \qquad ds = n(r)\,dr, \qquad dz^{2} = ds^{2} - d\rho^{2}$$
 
-光在曲面上的测地线，与它在原 GRIN 介质中的光线路径完全一致。于是三维的折射率设计问题，被降维成二维曲面的构造问题。
+Geodesics on the surface coincide with the rays in the original GRIN medium. A three-dimensional index-design problem is thus reduced to a two-dimensional surface-construction problem.
 
-我的毕业论文研究 **Morse 透镜**这一族剖面。主要结果：
+My thesis studies the **Morse lens** family. Main results:
 
-- 证明共形 Morse 透镜恰好是 Cornbleet 一般族的 $(A=B,\;C=1)$ 子类，从而把 Cornbleet–Rinous (1981) 与 Šarbort–Tyc (2012) 两条文献线索统一起来；
-- 给出 Luneburg、Eaton 以及中间 Morse 透镜的等效曲面构造，并用射线追踪验证光线路径。
+- A proof that conformal Morse lenses are exactly the $(A=B,\;C=1)$ subclass of Cornbleet's general family, unifying the Cornbleet–Rinous (1981) and Šarbort–Tyc (2012) lines of work;
+- Equivalent surface constructions for the Luneburg, Eaton and intermediate Morse profiles, verified by ray tracing.
 
-**相关笔记**
+**Notes**
 
-- [从 Fermat 原理到 Morse 透镜：我的毕业论文主线](/research/2026/08/15/morse-lens-thesis.html)
+- [From Fermat's principle to the Morse lens: the thread of my thesis](/research/2026/08/15/morse-lens-thesis.html)
 
-导师：Dr. Yap Seong Shan；副导师：Prof. Chen Huanyang（陈焕阳，Morse 透镜原始论文作者）。工具以 Python/NumPy 的射线追踪为主，Mathematica 用于符号推导与数值对照。
+Advisors: Dr. Yap Seong Shan; co-advisor Prof. Huanyang Chen, author of the original Morse-lens paper. The workflow is mostly ray tracing in Python/NumPy, with Mathematica for symbolic derivations and numerical cross-checks.
 
 ## Quantum optics {#quantum-optics}
 
-在单光子层面，干涉不再能由"两束波叠加"直观解释：一次只有一个光子通过装置，条纹却依然逐点累积出来。这是波粒二象性最干净的实验表达，也是量子测量课程的起点。
+At the single-photon level, interference can no longer be read as two waves overlapping: one photon passes through the apparatus at a time, yet the fringes still build up point by point. It is the cleanest expression of wave–particle duality, and the starting point of quantum measurement.
 
-**相关笔记**
+**Notes**
 
-- [量子光学实验笔记：单光子干涉](/lab%20notes/2026/03/08/single-photon-interference.html)
+- [Lab notes: single-photon interference](/lab%20notes/2026/03/08/single-photon-interference.html)
 
-我关注的问题：单光子源与符合计数、路径信息与干涉可见度的取舍（量子擦除），以及探测器暗计数对结果的影响。
+Questions I am interested in: single-photon sources and coincidence counting; the trade-off between path information and interference visibility (quantum erasure); and the effect of detector dark counts on the result.
 
-## 接下来 {#next}
+## What's next {#next}
 
-- 把毕业论文的射线追踪代码整理成可复现的 notebook，附参数与收敛性检查；
-- 继续整理变换光学文献库（目前 37 篇经典论文），做成可检索的索引；
-- 在 Western 开展新的课题后，在这里更新研究方向。
+- Turn the thesis ray tracer into a reproducible notebook with parameters and convergence checks;
+- Keep building the transformation-optics literature index (37 classic papers so far) into a searchable resource;
+- Update this page once the project at Western takes shape.
 
-如果你对其中任何一条线索感兴趣，欢迎[写信](mailto:helloworld.3a@gmail.com)讨论。
+If any of these threads interests you, feel free to [write](mailto:helloworld.3a@gmail.com).

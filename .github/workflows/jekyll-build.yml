@@ -33,4 +33,7 @@ jobs:
           test -f _site/research/index.html
           test -f _site/publications/index.html
           test -f _site/assets/images/og.png
+          test -f _site/zh/index.html
+          test -f _site/zh/research/index.html
+          test -f _site/zh/cv/index.html
           echo "✅ build ok"

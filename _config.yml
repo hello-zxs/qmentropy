@@ -13,9 +13,9 @@ timezone: "America/Toronto"          # 现居 London, Ontario
 title_separator: "·"
 
 # ---------- 主题设置 ----------
-remote_theme: "mmistakes/minimal-mistakes"
+remote_theme: "mmistakes/minimal-mistakes@4.28.1"
 minimal_mistakes_skin: "dark"         # 已切换暗色主题: air / contrast / dark / mint / neon / plum / sunrise
-locale: "zh-CN"
+locale: "en"                          # 默认英文；中文页面在 front matter 里覆盖为 zh-CN
 search: true
 words_per_minute: 200
 future: true                          # 允许"未来日期"的文章立即发布（否则构建时会被跳过）
@@ -70,10 +70,25 @@ defaults:
       author_profile: true
       mathjax: false
       mermaid: false
+  - scope:
+      path: ""
+      type: zh_posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: false
+      comments: false
+      share: false
+      related: false         # 相关文章只从英文 posts 里取，中文页关闭
+      toc: true
+      mathjax: true
+      mermaid: false
 
 # ---------- 集合 ----------
 collections:
   posts:
+    output: true
+  zh_posts:
     output: true
 
 # ---------- 排除文件（不发布到站点） ----------

@@ -42,23 +42,25 @@ categories:
 tags:
 $tagsYaml
 toc: true
+lang: en
+ref: $safeSlug
 ---
 
-## 概述
+## Overview
 
-<!-- 用一两句话说明本篇笔记的核心内容 -->
+<!-- One or two sentences on the core idea -->
 
-## 正文
+## Body
 
-<!-- 开始写作 -->
+<!-- Start writing -->
 
-## 结论
+## Conclusion
 
-<!-- 总结要点 -->
+<!-- Takeaways -->
 
-## 参考
+## References
 
-<!-- 参考资料链接 -->
+<!-- Links -->
 "@
 
 # 以 UTF-8 带 BOM 写入（兼容 PowerShell 5.1）

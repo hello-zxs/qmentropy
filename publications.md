@@ -5,61 +5,63 @@ layout: single
 author_profile: true
 toc: true
 toc_sticky: true
-toc_label: "本页目录"
+toc_label: "On this page"
+lang: en
+ref: publications
 ---
 
-> 论文与项目清单，随进展更新。目前以毕业论文和研究项目为主；正式发表的论文会按年份列在最前面。
+> Papers and projects, updated as work progresses. For now the thesis and research projects come first; peer-reviewed papers will be listed at the top by year.
 
-## 学位论文 {#thesis}
+## Thesis {#thesis}
 
 ### Ray tracing and equivalent geodesic lenses for Morse lens
 
-**Zheng Xiangsheng** · 物理学荣誉学士毕业论文 · 厦门大学马来西亚分校 · 2026
+**Zheng Xiangsheng** · BSc (Hons) Physics thesis · Xiamen University Malaysia · 2026
 
-导师：Dr. Yap Seong Shan · 副导师：Prof. Chen Huanyang（陈焕阳）
+Advisors: Dr. Yap Seong Shan · Co-advisor: Prof. Huanyang Chen
 
-- 证明共形 Morse 透镜等价于 Cornbleet 一般族的 (A = B, C = 1) 子类，统一 Cornbleet–Rinous (1981) 与 Šarbort–Tyc (2012) 两条独立文献线索；
-- 构造 Luneburg、Eaton 与中间 Morse 剖面对应的等效测地线曲面；
-- 用射线追踪数值验证曲面测地线与原 GRIN 介质中的光线路径一致。
+- Proof that conformal Morse lenses are equivalent to the $(A=B,\;C=1)$ subclass of Cornbleet's general family, unifying the Cornbleet–Rinous (1981) and Šarbort–Tyc (2012) lines of work;
+- Construction of the equivalent geodesic surfaces for the Luneburg, Eaton and intermediate Morse profiles;
+- Numerical verification by ray tracing that geodesics on the constructed surfaces coincide with the rays in the original GRIN medium.
 
-[阅读论文主线笔记 →](/research/2026/08/15/morse-lens-thesis.html)
+[Read the thesis thread →](/research/2026/08/15/morse-lens-thesis.html)
 
-## 期刊论文 {#papers}
+## Journal articles {#papers}
 
-目前尚无正式发表的期刊论文。硕士阶段的工作开始后，这里会按年份更新。
+No peer-reviewed journal articles yet. This section will be updated by year once the MSc work begins.
 
 <!--
-【待补充】投稿/预印本格式：
+Template for future entries:
 - **Z. Zheng**, A. Author. "Title", *Journal*, 2026. [DOI](https://doi.org/...) / [arXiv](https://arxiv.org/abs/...)
 -->
 
-## 项目 {#projects}
+## Projects {#projects}
 
-### Morse 透镜射线追踪器
+### Morse lens ray tracer
 
-把 GRIN 剖面映射为旋转曲面，在曲面上积分测地线方程，并与原介质中的光线路径对比。
+Maps GRIN profiles onto surfaces of revolution, integrates the geodesic equations on the surface, and compares the result with rays in the original medium.
 
-- 技术栈：Python · NumPy · Matplotlib
-- 产出：毕业论文的全部数值图；正在整理为可复现的 notebook
-- 相关：[从 Fermat 原理到 Morse 透镜](/research/2026/08/15/morse-lens-thesis.html)
+- Stack: Python · NumPy · Matplotlib
+- Output: all numerical figures in the thesis; being packaged as a reproducible notebook
+- Related: [From Fermat's principle to the Morse lens](/research/2026/08/15/morse-lens-thesis.html)
 
-### 变换光学文献索引
+### Transformation optics literature index
 
-1961–2022 年间的 37 篇变换光学经典论文，按"度规等价—坐标变换—隐形衣—实验实现"四条线索整理。
+Thirty-seven classic transformation-optics papers from 1961 to 2022, organized along four threads: metric equivalence, coordinate transformations, cloaks, and experimental realizations.
 
-- 产出：[隐形衣如何炼成：变换光学 60 年](/physics/2026/08/16/transformation-optics-60-years.html)
+- Output: [How the invisibility cloak was made: sixty years of transformation optics](/physics/2026/08/16/transformation-optics-60-years.html)
 
-### 单光子干涉实验
+### Single-photon interference experiment
 
-量子光学课程实验：用衰减激光近似单光子源，验证单光子条件下的干涉条纹累积。
+Quantum-optics teaching lab: an attenuated laser approximates a single-photon source, and interference fringes are recorded as the phase is scanned.
 
-- 关键词：衰减激光单光子源 · 分束器 · 符合计数
-- 相关：[单光子干涉实验笔记](/lab%20notes/2026/03/08/single-photon-interference.html)
+- Keywords: attenuated-laser source · beam splitters · coincidence counting
+- Related: [Lab notes: single-photon interference](/lab%20notes/2026/03/08/single-photon-interference.html)
 
 <!--
-【待补充】获奖与学术活动，取消注释后填写：
-## 获奖与荣誉
-- 2025 · 某某奖学金
-## 学术活动
-- 2026 · 某某会议 poster
+Awards and activities template:
+## Awards
+- 2025 · Some scholarship
+## Talks
+- 2026 · Conference poster
 -->

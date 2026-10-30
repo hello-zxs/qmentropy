@@ -3,6 +3,8 @@ title: "Archive"
 permalink: /year-archive/
 layout: posts
 author_profile: true
+lang: en
+ref: archive
 ---
 
-按时间倒序排列的全部文章。
+Every post, newest first.

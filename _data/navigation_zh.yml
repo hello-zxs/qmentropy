@@ -1,0 +1,13 @@
+main:
+  - title: "首页"
+    url: /zh/
+  - title: "研究"
+    url: /zh/research/
+  - title: "笔记"
+    url: /zh/notes/
+  - title: "论文与项目"
+    url: /zh/publications/
+  - title: "简历"
+    url: /zh/cv/
+  - title: "关于"
+    url: /zh/about/

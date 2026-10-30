@@ -6,7 +6,14 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
 <!-- 自定义样式（首页、卡片、打印版 CV） -->
-<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}?v=3">
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}?v=4">
+
+{% if page.ref and site.data.i18n.refs[page.ref] %}
+{% assign pair = site.data.i18n.refs[page.ref] %}
+<link rel="alternate" hreflang="en" href="{{ pair.en | absolute_url }}">
+<link rel="alternate" hreflang="zh-Hans" href="{{ pair.zh | absolute_url }}">
+<link rel="alternate" hreflang="x-default" href="{{ pair.en | absolute_url }}">
+{% endif %}
 
 {%- comment -%}
   公式与图表按需加载。只有 front matter 里 mathjax: true / mermaid: true

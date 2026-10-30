@@ -1,48 +1,50 @@
 ---
-title: "变换光学基础：从 Fermat 原理到隐形衣"
+title: "Transformation optics: from Fermat's principle to the invisibility cloak"
 date: 2026-03-01
 categories:
   - Physics
 tags:
   - Transformation Optics
 toc: true
+lang: en
+ref: transformation-optics-basics
 ---
 
-变换光学（Transformation Optics）的核心思想：**光的路径由空间几何决定**。如果我们能"弯曲"空间的度量，就能任意控制光的传播。
+The central idea of transformation optics: **the path of light is determined by the geometry of space**. If we can "bend" the metric of space, we can control the propagation of light at will.
 
-## 1. Fermat 原理与折射率
+## 1. Fermat's principle and the refractive index
 
-光的传播遵循 Fermat 原理——光走**光程极值**的路径：
+Light follows Fermat's principle — it takes the path of **stationary optical path length**:
 
 $$S = \int n(\mathbf{r}) \, ds$$
 
-其中 $n(\mathbf{r})$ 是折射率分布，$ds$ 是路径微元。变换光学的目标就是设计 $n(\mathbf{r})$ 使得光沿我们想要的路径传播。
+where $n(\mathbf{r})$ is the refractive-index distribution and $ds$ a path element. The goal of transformation optics is to design $n(\mathbf{r})$ so that light follows a path we choose.
 
-## 2. 坐标变换与等效介质
+## 2. Coordinate transformations and effective media
 
-Pendry 等人的关键洞察（[Science 2006](https://www.science.org/doi/10.1126/science.1125907)）：对空间做坐标变换后，Maxwell 方程组形式不变，但介电常数和磁导率变为：
+The key insight of Pendry et al. ([Science 2006](https://www.science.org/doi/10.1126/science.1125907)): after a coordinate transformation of space, Maxwell's equations keep their form, but the permittivity and permeability become
 
 $$\varepsilon' = \frac{\Lambda \varepsilon \Lambda^T}{\det \Lambda}, \qquad \mu' = \frac{\Lambda \mu \Lambda^T}{\det \Lambda}$$
 
-其中 $\Lambda$ 是变换的 Jacobian 矩阵。**几何变换 ↔ 材料参数**，这就是"变换光学"名字的由来。
+where $\Lambda$ is the Jacobian of the transformation. **Geometric transformation ↔ material parameters** — that is where the name comes from.
 
-## 3. 隐形衣（Invisibility Cloak）
+## 3. The invisibility cloak
 
-最简单的隐形衣设计：把空间中的一个区域"压缩"成一个点。径向映射：
+The simplest cloak: "compress" a region of space into a point. The radial mapping is
 
 $$r' = a + \frac{b-a}{b} r$$
 
-对应的径向介电常数和磁导率分量发散于内边界——这就是为什么理想隐形衣需要"奇异材料"。实际实现常用**超表面**或**共形映射**近似。
+The radial components of $\varepsilon$ and $\mu$ diverge at the inner boundary — which is why an ideal cloak needs "singular materials". Practical implementations approximate it with **metasurfaces** or **conformal mapping**.
 
-## 4. Geodesic Lens
+## 4. Geodesic lens
 
-我的研究兴趣之一：**测地线透镜**。把透镜设计成弯曲的表面，光沿表面测地线传播。折射率分布与表面几何的关系（Cornbleet）：
+One of my research interests: **geodesic lenses**. Design the lens as a curved surface, and light follows geodesics on it. The relation between the index profile and the surface geometry (Cornbleet) is
 
 $$n(r) = \sqrt{1 + \left(\frac{r}{a}\right)^2}$$
 
-这种设计完全避开奇异材料，可用 3D 打印实现——是变换光学走向实用化的路径之一。
+This design avoids singular materials entirely and can be 3D-printed — one route toward practical transformation optics.
 
-## 5. 参考资源
+## 5. References
 
 - Pendry, Schurig & Smith, "Controlling Electromagnetic Fields", *Science* 312, 1780 (2006)
 - Leonhardt, "Optical Conformal Mapping", *Science* 312, 1777 (2006)
