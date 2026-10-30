@@ -1,15 +1,13 @@
 main:
   - title: "Home"
     url: /
-  - title: "Physics Notes"
-    url: /tags/#physics
   - title: "Research"
+    url: /research/
+  - title: "Notes"
     url: /tags/
   - title: "Publications"
     url: /publications/
   - title: "CV"
     url: /cv/
-  - title: "Timeline"
-    url: /year-archive/
   - title: "About"
     url: /about/

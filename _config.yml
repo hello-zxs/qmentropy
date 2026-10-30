@@ -6,10 +6,11 @@
 # ---------- 站点基本信息 ----------
 title: "Physics Lab Notes"
 name: "Zheng Xiangsheng"
-description: "Physics @ XMUM → MSc @ Western University | Transformation Optics & Quantum Optics"
-url: "https://qmentropy.com"         # 已修正：你的自定义域名（来自 CNAME）
+description: "Physics notes on transformation optics, geodesic lenses and quantum optics — by Zheng Xiangsheng, MSc at Western University."
+url: "https://qmentropy.com"         # 自定义域名（来自 CNAME）
 baseurl: ""
-timezone: "Asia/Kuala_Lumpur"        # 你的时区（XMU Malaysia）
+timezone: "America/Toronto"          # 现居 London, Ontario
+title_separator: "·"
 
 # ---------- 主题设置 ----------
 remote_theme: "mmistakes/minimal-mistakes"
@@ -21,12 +22,11 @@ future: true                          # 允许"未来日期"的文章立即发�
 repository: "hello-zxs/qmentropy"    # 仓库地址（giscus 评论需要）
 
 # ---------- 学术功能 (MathJax + 分页 + Mermaid) ----------
+# MathJax / Mermaid 不再全站加载：由 _includes/head/custom.html 按页面
+# 的 mathjax / mermaid 开关按需注入（见 defaults），首页与归档页因此
+# 少加载约 4 MB 脚本。
 paginate: 5
 paginate_path: /page:num/
-mathjax: true
-head_scripts:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
 
 # ---------- 评论系统 (giscus) ----------
 # 【★启用评论前必做】见 README「启用评论」章节:
@@ -60,20 +60,38 @@ defaults:
       share: false
       related: true
       toc: true
+      mathjax: true          # 文章默认渲染公式
+      mermaid: false         # 需要时在文章 front matter 里打开
   - scope:
-      path: "_pages"
+      path: ""
       type: pages
     values:
       layout: single
       author_profile: true
+      mathjax: false
+      mermaid: false
 
 # ---------- 集合 ----------
 collections:
   posts:
     output: true
 
+# ---------- 排除文件（不发布到站点） ----------
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - README.md
+  - tools/
+  - package.json
+  - package-lock.json
+
 # ---------- 插件 ----------
 plugins:
+  - jekyll-remote-theme
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-include-cache
@@ -84,7 +102,7 @@ plugins:
 author:
   name: "Zheng Xiangsheng"
   avatar: "/assets/images/avatar.svg"
-  bio: "Physics BSc @ XMUM → MSc @ Western University (2026)<br>Transformation Optics & Quantum Optics"
+  bio: "Physics BSc @ XMUM → MSc @ Western University<br>Transformation optics · Geodesic lenses · Quantum optics"
   location: "London, Ontario, Canada"
   links:
     - label: "Email: helloworld.3a@gmail.com"
@@ -98,21 +116,23 @@ author:
       url: "/cv/"
 
 # ---------- 页脚 ----------
+# 主题会自动追加 Atom Feed，这里只放 GitHub 与归档入口，避免重复。
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/hello-zxs"
-    - label: "Atom Feed"
-      icon: "fas fa-fw fa-rss-square"
-      url: "/feed.xml"
+    - label: "Archive"
+      icon: "fas fa-fw fa-calendar-alt"
+      url: "/year-archive/"
 
 # ---------- SEO ----------
 twitter:
   username:
+  card: summary_large_image
 facebook:
   username:
-og_image: /assets/images/avatar.svg
+og_image: /assets/images/og.png
 
 # ---------- 归档页面 ----------
 category_archive:

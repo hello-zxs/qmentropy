@@ -1,10 +1,13 @@
-name: Build Jekyll Site
+name: Build Jekyll site
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -13,22 +16,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: "3.3"
           bundler-cache: true
 
-      - name: Install Dependencies
-        run: |
-          gem install bundler
-          bundle install || true
+      - name: Build site
+        run: bundle exec jekyll build --trace
 
-      - name: Build Site
+      - name: Check output
         run: |
-          bundle exec jekyll build --future || jekyll build --future
-
-      - name: Check Output
-        run: |
-          test -d _site && echo "✅ 构建成功，输出目录 _site 存在"
-          test -f _site/index.html && echo "✅ index.html 已生成"
+          set -e
+          test -f _site/index.html
+          test -f _site/404.html
+          test -f _site/research/index.html
+          test -f _site/publications/index.html
+          test -f _site/assets/images/og.png
+          echo "✅ build ok"

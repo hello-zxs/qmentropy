@@ -1,13 +1,35 @@
-<!-- 自定义 head：favicon、主题色、Mermaid 初始化 -->
-<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-<meta name="theme-color" content="#1a237e">
+<!-- 站点图标 -->
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
+<meta name="theme-color" content="#0b1220">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
-<!-- 自定义样式（进度条、返回顶部） -->
-<link rel="stylesheet" href="/assets/css/custom.css">
+<!-- 自定义样式（首页、卡片、打印版 CV） -->
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}?v=3">
 
-<!-- Mermaid 图表初始化 -->
+{%- comment -%}
+  公式与图表按需加载。只有 front matter 里 mathjax: true / mermaid: true
+  的页面才会付出这几个 MB 的代价；文章默认开启公式（_config.yml defaults）。
+{%- endcomment -%}
+{% if page.mathjax %}
 <script>
-  if (typeof mermaid !== 'undefined') {
-    mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
-  }
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
 </script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endif %}
+
+{% if page.mermaid %}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', securityLevel: 'loose' });
+</script>
+{% endif %}

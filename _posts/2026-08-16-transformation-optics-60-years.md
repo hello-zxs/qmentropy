@@ -36,7 +36,7 @@ $$\varepsilon' = \frac{\Lambda \varepsilon \Lambda^T}{\det \Lambda}, \qquad \mu'
 ## 3. 两个 2006：两种"隐身哲学"
 
 - **Pendry 路线（坐标变换）**：把空间区域"压缩"，用超材料实现各向异性 $\varepsilon'/\mu'$——隐身衣的经典方案
-- **Leonhardt 路线（共形映射）**：用保角映射只需求**各向同性**折射率 $n = n_0|dw/dz|$——更容易实现，但只能二维工作
+- **Leonhardt 路线（共形映射）**：用保角映射只需求**各向同性**折射率 $n = n_0 \lvert dw/dz \rvert$——更容易实现，但只能二维工作
 
 两条路线在 2010 年代合流于"共形变换光学"：例如两个相吻的 Maxwell 鱼眼镜组合即可构成隐形衣。
 

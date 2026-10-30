@@ -4,38 +4,62 @@ permalink: /publications/
 layout: single
 author_profile: true
 toc: true
+toc_sticky: true
+toc_label: "本页目录"
 ---
 
-> 研究产出与项目列表。论文见刊后会同步更新。
+> 论文与项目清单，随进展更新。目前以毕业论文和研究项目为主；正式发表的论文会按年份列在最前面。
 
-## 论文 (Publications)
+## 学位论文 {#thesis}
 
-<!-- 【★填写】发表/预印本论文，格式示例： -->
-### 2026
+### Ray tracing and equivalent geodesic lenses for Morse lens
 
-- **（示例）** Z. Zheng, et al. "Geodesic Lens Design via Transformation Optics", *in preparation*.
+**Zheng Xiangsheng** · 物理学荣誉学士毕业论文 · 厦门大学马来西亚分校 · 2026
 
-<!-- 模板：
-### 年份
-- **作者.** "标题", *期刊/会议*, 年份. [DOI](链接) / [arXiv](链接)
+导师：Dr. Yap Seong Shan · 副导师：Prof. Chen Huanyang（陈焕阳）
+
+- 证明共形 Morse 透镜等价于 Cornbleet 一般族的 (A = B, C = 1) 子类，统一 Cornbleet–Rinous (1981) 与 Šarbort–Tyc (2012) 两条独立文献线索；
+- 构造 Luneburg、Eaton 与中间 Morse 剖面对应的等效测地线曲面；
+- 用射线追踪数值验证曲面测地线与原 GRIN 介质中的光线路径一致。
+
+[阅读论文主线笔记 →](/research/2026/08/15/morse-lens-thesis.html)
+
+## 期刊论文 {#papers}
+
+目前尚无正式发表的期刊论文。硕士阶段的工作开始后，这里会按年份更新。
+
+<!--
+【待补充】投稿/预印本格式：
+- **Z. Zheng**, A. Author. "Title", *Journal*, 2026. [DOI](https://doi.org/...) / [arXiv](https://arxiv.org/abs/...)
 -->
 
-## 项目 (Projects)
+## 项目 {#projects}
 
-### Transformation Optics 学习项目
-- 复现 Cornbleet 测地线透镜的折射率分布模拟
-- 技术：Python + NumPy + 射线追踪
+### Morse 透镜射线追踪器
+
+把 GRIN 剖面映射为旋转曲面，在曲面上积分测地线方程，并与原介质中的光线路径对比。
+
+- 技术栈：Python · NumPy · Matplotlib
+- 产出：毕业论文的全部数值图；正在整理为可复现的 notebook
+- 相关：[从 Fermat 原理到 Morse 透镜](/research/2026/08/15/morse-lens-thesis.html)
+
+### 变换光学文献索引
+
+1961–2022 年间的 37 篇变换光学经典论文，按"度规等价—坐标变换—隐形衣—实验实现"四条线索整理。
+
+- 产出：[隐形衣如何炼成：变换光学 60 年](/physics/2026/08/16/transformation-optics-60-years.html)
 
 ### 单光子干涉实验
-- XMU 量子光学课程实验，验证波粒二象性
-- 复现量子擦除实验（计划中）
 
-<!-- 【★填写】你的其他项目，每个项目：名称 + 一句话说明 + 技术栈 -->
+量子光学课程实验：用衰减激光近似单光子源，验证单光子条件下的干涉条纹累积。
 
-## 获奖与荣誉 (Awards)
+- 关键词：衰减激光单光子源 · 分束器 · 符合计数
+- 相关：[单光子干涉实验笔记](/lab%20notes/2026/03/08/single-photon-interference.html)
 
-<!-- 【★填写】奖学金、竞赛、荣誉 -->
-
-## 学术活动 (Activities)
-
-<!-- 【★填写】学术会议、讲座、研讨班参与记录 -->
+<!--
+【待补充】获奖与学术活动，取消注释后填写：
+## 获奖与荣誉
+- 2025 · 某某奖学金
+## 学术活动
+- 2026 · 某某会议 poster
+-->

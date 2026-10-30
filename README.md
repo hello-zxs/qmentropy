@@ -1,13 +1,23 @@
 # qmentropy.com
 
-> 物理学学术笔记站 · 变换光学 & 量子光学
-> 基于 Jekyll + Minimal Mistakes 主题，托管于 GitHub Pages。
+> 郑翔升的物理学笔记站：变换光学、测地线透镜与量子光学。
+> Jekyll + [Minimal Mistakes](https://mmistakes.com/work/jekyll-themes/minimal-mistakes/)（remote theme），托管于 GitHub Pages。
 
-## 快速开始
+## 站点结构
 
-### 写一篇新笔记
+| 路径 | 内容 |
+|------|------|
+| `/` | 首页：研究方向卡片 + 最新文章 |
+| `/research/` | 三条研究主线与在研问题 |
+| `/tags/` | 按标签浏览全部笔记 |
+| `/publications/` | 学位论文、论文与项目 |
+| `/cv/` | 简历（可直接打印为 PDF） |
+| `/year-archive/` | 按时间归档 |
+| `/about/` | 关于我 / 关于本站 |
 
-在 `_posts/` 下新建文件，命名格式：`YYYY-MM-DD-标题.md`，头部 front matter 示例：
+## 写一篇新笔记
+
+在 `_posts/` 下新建 `YYYY-MM-DD-slug.md`：
 
 ```markdown
 ---
@@ -16,87 +26,86 @@ date: 2026-03-15
 categories:
   - Physics
 tags:
-  - 标签1
+  - Transformation Optics
 toc: true
 ---
 
-正文内容... 公式用 $$...$$ 渲染
+正文。公式用 $...$（行内）或 $$...$$（块级）。
 ```
 
-### 本地预览（需要 Ruby）
+也可以用生成器：
+
+```powershell
+pwsh -File tools\new-post.ps1 -Title "笔记标题" -Tags "物理,光学"
+```
+
+## 公式与图表的按需加载
+
+首页、归档页、404 页面**不会**加载 MathJax / Mermaid；只有需要的页面才付这份流量。
+
+- 文章默认 `mathjax: true`（见 `_config.yml` 的 `defaults`）；
+- 其他页面需要公式时，在 front matter 加 `mathjax: true`；
+- 需要流程图时，在 front matter 加 `mermaid: true`。
+
+## 本地预览
+
+需要 Ruby 3.3+：
 
 ```bash
-gem install jekyll bundler
 bundle install
 bundle exec jekyll serve
-# 打开 http://localhost:4000
+# http://127.0.0.1:4000
 ```
 
-### 部署（GitHub Pages）
+## 图片素材
 
-推送到 `main` 分支即可自动构建：
+首屏背景、三张方向卡片、社交分享图和 favicon 都由脚本生成（Pillow + numpy）：
+
+```bash
+python tools/make_assets.py
+```
+
+输出到 `assets/images/`，固定随机种子，可重复生成。修改配色或构图后重跑即可。
+
+## 部署
+
+推送到 `main` 即触发 GitHub Pages 构建：
+
 ```bash
 git add .
 git commit -m "更新内容"
 git push origin main
 ```
 
-## 目录结构
+`.github/workflows/jekyll-build.yml` 会在每次 push / PR 时跑一次 `jekyll build` 并检查关键页面是否生成，构建失败会直接显示在 Actions 里。
+
+## 可选：评论与统计
+
+两项都需要各自的账号，未配置时站点不会发出任何第三方请求。
+
+**giscus 评论**
+
+1. 仓库 Settings → General → 勾选 Discussions；
+2. 安装 [giscus app](https://github.com/apps/giscus)；
+3. 在 [giscus.app](https://giscus.app) 选择 `hello-zxs/qmentropy`，把生成的 `repo_id`、`category_id` 填入 `_config.yml`；
+4. 在文章的 front matter 里设置 `comments: true`。
+
+**GoatCounter 统计**
+
+1. 在 [goatcounter.com](https://www.goatcounter.com/signup) 注册；
+2. 把站点代码填入 `_config.yml` 的 `goatcounter_code`。
+
+## 目录
 
 ```
-├── _config.yml          # 站点配置（★ 个人信息的唯一填写处）
-├── _posts/              # 文章（命名 YYYY-MM-DD-标题.md）
-├── _data/navigation.yml # 导航栏
-├── _includes/head/custom.html  # 自定义 head（favicon 等）
-├── assets/images/       # 头像、favicon
-├── about.md             # 关于页
-├── tags.md              # 标签归档
-└── year-archive.md      # 按年归档
+├── _config.yml                 # 站点配置
+├── _data/navigation.yml        # 顶部导航
+├── _includes/head/custom.html  # 图标、按需加载的 MathJax/Mermaid
+├── _includes/footer/custom.html# 进度条、返回顶部、统计
+├── _posts/                     # 文章
+├── assets/css/custom.css       # 自定义样式层
+├── assets/images/              # 头像、hero、卡片、OG 图、favicon
+├── tools/make_assets.py        # 图片生成脚本
+├── research.md / publications.md / cv.md / about.md / 404.md
+└── Gemfile                     # 本地 / CI 依赖
 ```
-
-## ★ 上线前必填（约 30 秒）
-
-打开 `_config.yml`，搜索 `【★填写】` 标记，填写：
-1. `name` —— 你的名字 ✅（已填 Zheng Xiangsheng）
-2. `author.links` 的 Email ✅（已填）
-3. `author.links` 的 GitHub ✅（已填）
-
-## 启用评论（giscus，约 2 分钟）
-
-1. GitHub 仓库 → **Settings → General** → 勾选 **Discussions**
-2. 安装 giscus 应用：https://github.com/apps/giscus
-3. 打开 https://giscus.app ，填仓库名 `hello-zxs/qmentropy`，选择分类
-4. 把生成的 **repo_id** 和 **category_id** 填入 `_config.yml` 的 `comments.giscus` 下
-5. （可选）取消注释 `# language: "zh-CN"` 启用中文评论界面
-
-## 启用访问统计（GoatCounter，约 1 分钟）
-
-1. 免费注册：https://www.goatcounter.com/signup
-2. 注册后获得站点代码（如 `qmentropy`）
-3. 填入 `_config.yml` 的 `goatcounter_code`
-
-## 新笔记生成器
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\new-post.ps1 -Title "笔记标题" -Tags "物理,光学"
-```
-
-自动创建带 front matter 模板的文章，写作零门槛。
-
-## 功能清单
-
-- ✅ MathJax 数学公式（$...$ 行内，$$...$$ 块级）
-- ✅ Mermaid 流程图/实验装置图（```mermaid 代码块）
-- ✅ giscus 评论（需按上文启用）
-- ✅ GoatCounter 访问统计（需按上文启用）
-- ✅ 阅读进度条 + 返回顶部按钮
-- ✅ 暗色主题
-- ✅ 自定义 404 页面
-- ✅ Publications 出版物/项目页
-- ✅ GitHub Actions 自动构建检查
-- ✅ 站内搜索
-- ✅ 按标签/按年份归档
-- ✅ 文章目录（toc）、阅读时间、相关文章
-- ✅ 自定义域名 qmentropy.com
-- ✅ 自定义 favicon 与头像
-- ✅ SEO / Sitemap / RSS Feed
