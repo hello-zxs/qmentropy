@@ -1,0 +1,28 @@
+{%- if page.lang == 'zh' -%}
+  {%- assign nav = site.data.navigation_zh.main -%}
+{%- else -%}
+  {%- assign nav = site.data.navigation.main -%}
+{%- endif -%}
+{%- assign pair = site.data.i18n.refs[page.ref] -%}
+{%- if pair -%}
+  {%- if page.lang == 'zh' -%}{%- assign alt_url = pair.en -%}{%- else -%}{%- assign alt_url = pair.zh -%}{%- endif -%}
+{%- else -%}
+  {%- if page.layout == 'paper' -%}
+    {%- assign alt_url = '/zh/publications/' -%}
+  {%- elsif page.lang == 'zh' -%}
+    {%- assign alt_url = '/' -%}
+  {%- else -%}
+    {%- assign alt_url = '/zh/' -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="menu-panel" id="site-menu" tabindex="-1" hidden>
+  <nav aria-label="{% if page.lang == 'zh' %}移动端菜单{% else %}Mobile menu{% endif %}">
+    {%- for link in nav -%}
+      <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
+    {%- endfor -%}
+    <a class="menu-panel__lang" href="{{ alt_url | relative_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-CN{% endif %}">
+      {% if page.lang == 'zh' %}Read in English{% else %}阅读中文版{% endif %}
+    </a>
+  </nav>
+</div>

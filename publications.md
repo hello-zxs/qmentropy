@@ -1,14 +1,13 @@
 ---
 title: "Publications"
 permalink: /publications/
-layout: single
-author_profile: true
+layout: page
+kicker: "Publications"
+lead: "Peer-reviewed articles, theses, and manuscripts. Full texts are typeset as IEEE-style papers, each with a printable PDF, an IEEE and APA citation, and a BibTeX entry."
 toc: false
 lang: en
 ref: publications
 ---
-
-Peer-reviewed articles, theses, and manuscripts. Full texts are typeset as IEEE-style papers, each with a printable PDF, an IEEE and APA citation, and a BibTeX entry.
 
 {% for pub in site.data.publications %}
 <article class="pub">

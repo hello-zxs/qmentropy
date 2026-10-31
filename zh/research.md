@@ -1,12 +1,11 @@
 ---
 title: "研究"
 permalink: /zh/research/
-layout: single
-author_profile: true
+layout: page
+kicker: "研究"
+lead: "几何如何决定光的传播——毕业论文与当前工作的三条线索。"
 mathjax: true
 toc: true
-toc_sticky: true
-toc_label: "本页目录"
 lang: zh
 locale: zh-CN
 ref: research

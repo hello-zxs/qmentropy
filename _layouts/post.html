@@ -1,0 +1,37 @@
+{%- assign html_lang = 'en' -%}
+{%- if page.lang == 'zh' -%}{%- assign html_lang = 'zh-CN' -%}{%- endif -%}
+{%- assign read_time = page.content | number_of_words | divided_by: 180 | plus: 1 -%}
+{%- if page.lang == 'zh' -%}{%- assign date_format = "%Y 年 %-m 月 %-d 日" -%}{%- else -%}{%- assign date_format = "%b %-d, %Y" -%}{%- endif -%}
+<!doctype html>
+<html lang="{{ html_lang }}">
+  <head>
+    {% include site/head.html title=page.title description=page.excerpt type="article" %}
+  </head>
+  <body class="theme-a site-post">
+    <a class="skip" href="#main">{% if page.lang == 'zh' %}跳到正文{% else %}Skip to content{% endif %}</a>
+
+    {% include site/nav.html %}
+    {% include site/menu.html %}
+
+    <main id="main" class="wrap">
+      <header class="post-head">
+        {% if page.categories.size > 0 %}<p class="kicker">{{ page.categories | join: " · " }}</p>{% endif %}
+        <h1>{{ page.title }}</h1>
+        <p class="post-meta">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: date_format }}</time>
+          · {% if page.lang == 'zh' %}约 {{ read_time }} 分钟{% else %}{{ read_time }} min read{% endif %}
+        </p>
+      </header>
+
+      <div class="page-layout{% if page.toc %} page-layout--toc{% endif %}">
+        <article class="prose post-body">{{ content }}</article>
+        {% if page.toc %}
+        <aside class="page-toc" data-toc data-toc-title="{% if page.lang == 'zh' %}本页目录{% else %}On this page{% endif %}"></aside>
+        {% endif %}
+      </div>
+    </main>
+
+    {% include site/footer.html %}
+    {% include site/scripts.html %}
+  </body>
+</html>

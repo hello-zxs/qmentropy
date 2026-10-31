@@ -1,12 +1,11 @@
 ---
 title: "Research"
 permalink: /research/
-layout: single
-author_profile: true
+layout: page
+kicker: "Research"
+lead: "How geometry shapes light — the three threads behind my thesis and current work."
 mathjax: true
 toc: true
-toc_sticky: true
-toc_label: "On this page"
 lang: en
 ref: research
 ---

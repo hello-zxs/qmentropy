@@ -6,6 +6,12 @@
   year: 2026
   featured: true
   title: "Ray tracing and equivalent geodesic lenses for the Morse lens"
+  authors: "X. Zheng"
+  venue: "Xiamen University Malaysia, Sepang, Malaysia"
+  abstract: "We construct the equivalent geodesic-lens representation of the Morse refractive-index profile, show that the conformal Morse lens is the (A = B, C = 1) subclass of Cornbleet’s general family, and validate the construction by ray tracing."
+  url: "/papers/morse-lens/"
+  pdf: ""
+  doi: ""
   cite_ieee: "X. Zheng, “Ray tracing and equivalent geodesic lenses for the Morse lens,” BSc (Hons) thesis, Xiamen Univ. Malaysia, Sepang, Malaysia, 2026."
   cite_apa: "Zheng, X. (2026). Ray tracing and equivalent geodesic lenses for the Morse lens [Bachelor’s thesis, Xiamen University Malaysia]."
   bibtex: |

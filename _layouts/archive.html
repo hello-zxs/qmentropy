@@ -1,0 +1,80 @@
+{%- assign html_lang = 'en' -%}
+{%- if page.lang == 'zh' -%}{%- assign html_lang = 'zh-CN' -%}{%- endif -%}
+{%- if page.lang == 'zh' -%}
+  {%- assign posts = site.zh_posts -%}
+{%- else -%}
+  {%- assign posts = site.posts -%}
+{%- endif -%}
+{%- assign posts = posts | where_exp: "post", "post.hidden != true" | sort: "date" | reverse -%}
+{%- if page.lang == 'zh' -%}{%- assign short_date = "%m 月 %-d 日" -%}{%- assign full_date = "%Y-%m-%d" -%}{%- else -%}{%- assign short_date = "%b %-d" -%}{%- assign full_date = "%b %-d, %Y" -%}{%- endif -%}
+<!doctype html>
+<html lang="{{ html_lang }}">
+  <head>
+    {% include site/head.html title=page.title description=page.description type="website" %}
+  </head>
+  <body class="theme-a">
+    <a class="skip" href="#main">{% if page.lang == 'zh' %}跳到正文{% else %}Skip to content{% endif %}</a>
+
+    {% include site/nav.html %}
+    {% include site/menu.html %}
+
+    <main id="main" class="wrap">
+      <header class="page-head">
+        {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+        <h1>{{ page.title }}</h1>
+        {% if page.lead %}<p class="page-lead">{{ page.lead }}</p>{% endif %}
+      </header>
+
+      {% if page.archive_type == "tags" %}
+      {%- assign tags = posts | map: "tags" | join: "," | split: "," | uniq | sort -%}
+      <div class="tag-row">
+        <button class="tag-chip is-active" type="button" data-filter="all">{% if page.lang == 'zh' %}全部{% else %}All{% endif %}</button>
+        {%- for tag in tags -%}
+          {%- unless tag == "" -%}
+          <button class="tag-chip" type="button" data-filter="{{ tag | slugify }}">{{ tag }}</button>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+      {% endif %}
+
+      {% if page.archive_type == "year" %}
+        {%- assign groups = posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+        {%- for group in groups -%}
+        <h2 class="year-heading">{{ group.name }}</h2>
+        <ul class="archive-list">
+          {%- for post in group.items -%}
+          <li class="archive-item">
+            <a href="{{ post.url | relative_url }}">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: short_date }}</time>
+              <div>
+                <h2>{{ post.title }}</h2>
+                {% if post.excerpt %}<p>{{ post.excerpt | strip_html | truncate: 150 }}</p>{% endif %}
+              </div>
+              <span class="arrow" aria-hidden="true">›</span>
+            </a>
+          </li>
+          {%- endfor -%}
+        </ul>
+        {%- endfor -%}
+      {% else %}
+      <ul class="archive-list">
+        {%- for post in posts -%}
+        <li class="archive-item" data-tags="{{ post.tags | join: ' ' | slugify }}">
+          <a href="{{ post.url | relative_url }}">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: full_date }}</time>
+            <div>
+              <h2>{{ post.title }}</h2>
+              {% if post.excerpt %}<p>{{ post.excerpt | strip_html | truncate: 150 }}</p>{% endif %}
+            </div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+      {% endif %}
+    </main>
+
+    {% include site/footer.html %}
+    {% include site/scripts.html %}
+  </body>
+</html>

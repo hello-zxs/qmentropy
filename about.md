@@ -1,11 +1,9 @@
 ---
 title: "About"
 permalink: /about/
-layout: single
-author_profile: true
+layout: page
+kicker: "About"
 toc: true
-toc_sticky: true
-toc_label: "On this page"
 lang: en
 ref: about
 ---
@@ -26,8 +24,8 @@ My thesis studied the equivalent surface construction and ray tracing of the Mor
 
 ## This site
 
-- Built with [Jekyll](https://jekyllrb.com/) and the [Minimal Mistakes](https://mademistakes.com/work/jekyll-themes/minimal-mistakes/) theme, hosted on GitHub Pages
-- Equations rendered with MathJax 3; diagrams with Mermaid when needed
+- Built with [Jekyll](https://jekyllrb.com/) and a custom light layout — no third-party theme; hosted on GitHub Pages
+- Equations rendered with MathJax 3 on pages that need it
 - Source: [github.com/hello-zxs/qmentropy](https://github.com/hello-zxs/qmentropy)
 - Domain: qmentropy.com
 

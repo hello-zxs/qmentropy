@@ -1,49 +1,23 @@
 # ============================================
 # qmentropy.com — 站点配置
-# ★ 需要你手动填写的地方都标注了 【★填写】
+# 自定义 Jekyll 站点，不依赖第三方主题
 # ============================================
 
 # ---------- 站点基本信息 ----------
 title: "Physics Lab Notes"
 name: "Zheng Xiangsheng"
 description: "Physics notes on transformation optics, geodesic lenses and quantum optics — by Zheng Xiangsheng, MSc at Western University."
-url: "https://qmentropy.com"         # 自定义域名（来自 CNAME）
+url: "https://qmentropy.com"
 baseurl: ""
-timezone: "America/Toronto"          # 现居 London, Ontario
+timezone: "America/Toronto"
 title_separator: "·"
+locale: "en"                    # 默认英文；中文页面在 front matter 写 locale: zh-CN
+future: true
+repository: "hello-zxs/qmentropy"
 
-# ---------- 主题设置 ----------
-remote_theme: "mmistakes/minimal-mistakes@4.28.1"
-minimal_mistakes_skin: "dark"         # 已切换暗色主题: air / contrast / dark / mint / neon / plum / sunrise
-locale: "en"                          # 默认英文；中文页面在 front matter 里覆盖为 zh-CN
-search: true
-words_per_minute: 200
-future: true                          # 允许"未来日期"的文章立即发布（否则构建时会被跳过）
-repository: "hello-zxs/qmentropy"    # 仓库地址（giscus 评论需要）
-
-# ---------- 学术功能 (MathJax + Mermaid) ----------
-# MathJax / Mermaid 不再全站加载：由 _includes/head/custom.html 按页面
-# 的 mathjax / mermaid 开关按需注入（见 defaults），首页与归档页因此
-# 少加载约 4 MB 脚本。
-
-# ---------- 评论系统 (giscus) ----------
-# 【★启用评论前必做】见 README「启用评论」章节:
-#   1. GitHub 仓库 -> Settings -> 勾选 Discussions
-#   2. 安装 giscus app: https://github.com/apps/giscus
-#   3. 打开 https://giscus.app 配置后填入下面的 repo_id / category_id
-comments:
-  provider: "giscus"
-  giscus:
-    repo_id: ""             # 【★填写】giscus.app 生成的 repo_id
-    category_name: "Announcements"  # 可用 Discussions 分类名
-    category_id: ""         # 【★填写】giscus.app 生成的 category_id
-    description: "Comments for qmentropy.com"
-    # language: "zh-CN"     # 取消注释启用中文界面
-
-# ---------- 访问统计 (GoatCounter) ----------
-# 【★启用统计必做】免费注册: https://www.goatcounter.com/signup
-# 注册后获得站点代码，填入下方 YOURCODE
-goatcounter_code: ""        # 【★填写】形如 "qmentropy"，留空则统计不加载
+# ---------- 访问统计（可选） ----------
+# https://www.goatcounter.com/signup → 填入站点代码；留空则不加载
+goatcounter_code: ""
 
 # ---------- 默认布局 ----------
 defaults:
@@ -51,33 +25,23 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
-      author_profile: true
-      read_time: false
-      comments: false
-      share: false
-      related: true
+      layout: post
       toc: true
-      mathjax: true          # 文章默认渲染公式
-      mermaid: false         # 需要时在文章 front matter 里打开
+      mathjax: true
+      mermaid: false
   - scope:
       path: ""
       type: pages
     values:
-      layout: single
-      author_profile: true
+      layout: page
+      toc: false
       mathjax: false
       mermaid: false
   - scope:
       path: ""
       type: zh_posts
     values:
-      layout: single
-      author_profile: true
-      read_time: false
-      comments: false
-      share: false
-      related: false         # 相关文章只从英文 posts 里取，中文页关闭
+      layout: post
       toc: true
       mathjax: true
       mermaid: false
@@ -89,7 +53,7 @@ collections:
   zh_posts:
     output: true
 
-# ---------- 排除文件（不发布到站点） ----------
+# ---------- 不发布到站点的文件 ----------
 exclude:
   - .sass-cache/
   - .jekyll-cache/
@@ -105,52 +69,8 @@ exclude:
 
 # ---------- 插件 ----------
 plugins:
-  - jekyll-remote-theme
-  - jekyll-sitemap
-  - jekyll-include-cache
-  - jekyll-seo-tag
   - jekyll-feed
-
-# ---------- 侧边栏 (个人资料) ----------
-author:
-  name: "Zheng Xiangsheng"
-  avatar: "/assets/images/avatar.svg"
-  bio: "Physics BSc @ XMUM → MSc @ Western University<br>Transformation optics · Geodesic lenses · Quantum optics"
-  location: "London, Ontario, Canada"
-  links:
-    - label: "Email: helloworld.3a@gmail.com"
-      icon: "fas fa-fw fa-envelope"
-      url: "mailto:helloworld.3a@gmail.com"
-    - label: "GitHub: hello-zxs"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/hello-zxs"
-    - label: "CV"
-      icon: "fas fa-fw fa-file-alt"
-      url: "/cv/"
-
-# ---------- 页脚 ----------
-# 主题会自动追加 Atom Feed，这里只放 GitHub 与归档入口，避免重复。
-footer:
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/hello-zxs"
-    - label: "Archive"
-      icon: "fas fa-fw fa-calendar-alt"
-      url: "/year-archive/"
+  - jekyll-sitemap
 
 # ---------- SEO ----------
-twitter:
-  username:
-  card: summary_large_image
-facebook:
-  username:
 og_image: /assets/images/og.png
-
-# ---------- 归档页面 ----------
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/

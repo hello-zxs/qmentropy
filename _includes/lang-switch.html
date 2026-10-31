@@ -1,8 +1,0 @@
-{% assign pair = site.data.i18n.refs[page.ref] %}
-{% if pair %}
-  {% if page.lang == 'zh' %}
-    <a class="qm-lang-switch" href="{{ pair.en | relative_url }}" hreflang="en" lang="en" title="Read in English">EN</a>
-  {% else %}
-    <a class="qm-lang-switch" href="{{ pair.zh | relative_url }}" hreflang="zh-CN" lang="zh-CN" title="阅读中文版">中文</a>
-  {% endif %}
-{% endif %}

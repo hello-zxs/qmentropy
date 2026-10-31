@@ -1,11 +1,10 @@
 ---
 title: "Curriculum Vitae"
 permalink: /cv/
-layout: single
-author_profile: true
+layout: page
+kicker: "CV"
+lead: "Physics MSc student at Western University. Transformation optics, geodesic lenses, and quantum optics."
 toc: true
-toc_sticky: true
-toc_label: "On this page"
 lang: en
 ref: cv
 ---

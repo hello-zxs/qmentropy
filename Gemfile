@@ -5,11 +5,8 @@ source "https://rubygems.org"
 # 这里保持一致，便于在本地复现 Pages 的结果。
 gem "jekyll", "~> 4.3"
 
-gem "jekyll-remote-theme", "~> 0.4"
 gem "jekyll-sitemap", "~> 1.4"
 gem "jekyll-feed", "~> 0.17"
-gem "jekyll-seo-tag", "~> 2.8"
-gem "jekyll-include-cache", "~> 0.2"
 
 # Ruby 3.x 不再内置 webrick，`jekyll serve` 需要它
 gem "webrick", "~> 1.8"

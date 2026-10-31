@@ -1,11 +1,9 @@
 ---
 title: "关于"
 permalink: /zh/about/
-layout: single
-author_profile: true
+layout: page
+kicker: "关于"
 toc: true
-toc_sticky: true
-toc_label: "本页目录"
 lang: zh
 locale: zh-CN
 ref: about
@@ -27,7 +25,7 @@ ref: about
 
 ## 这个站点
 
-- 基于 [Jekyll](https://jekyllrb.com/) 与 [Minimal Mistakes](https://mademistakes.com/work/jekyll-themes/minimal-mistakes/) 主题，托管在 GitHub Pages
+- 基于 [Jekyll](https://jekyllrb.com/) 与自己的浅色布局，不依赖第三方主题；托管在 GitHub Pages
 - 公式由 MathJax 3 渲染，图表用 Mermaid
 - 站点源文件：[github.com/hello-zxs/qmentropy](https://github.com/hello-zxs/qmentropy)
 - 域名：qmentropy.com

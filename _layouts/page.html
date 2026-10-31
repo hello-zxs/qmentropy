@@ -1,0 +1,35 @@
+{%- assign html_lang = 'en' -%}
+{%- if page.lang == 'zh' -%}{%- assign html_lang = 'zh-CN' -%}{%- endif -%}
+<!doctype html>
+<html lang="{{ html_lang }}">
+  <head>
+    {% include site/head.html title=page.title description=page.description type="website" %}
+  </head>
+  <body class="theme-a">
+    <a class="skip" href="#main">{% if page.lang == 'zh' %}跳到正文{% else %}Skip to content{% endif %}</a>
+
+    {% include site/nav.html %}
+    {% include site/menu.html %}
+
+    <main id="main" class="wrap">
+      {% unless page.hide_header %}
+      <header class="page-head">
+        {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+        <h1>{{ page.title }}</h1>
+        {% if page.lead %}<p class="page-lead">{{ page.lead }}</p>{% endif %}
+        {% if page.subtitle %}<p class="page-meta">{{ page.subtitle }}</p>{% endif %}
+      </header>
+      {% endunless %}
+
+      <div class="page-layout{% if page.toc %} page-layout--toc{% endif %}">
+        <article class="prose">{{ content }}</article>
+        {% if page.toc %}
+        <aside class="page-toc" data-toc data-toc-title="{% if page.lang == 'zh' %}本页目录{% else %}On this page{% endif %}"></aside>
+        {% endif %}
+      </div>
+    </main>
+
+    {% include site/footer.html %}
+    {% include site/scripts.html %}
+  </body>
+</html>

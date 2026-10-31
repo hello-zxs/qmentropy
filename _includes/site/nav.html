@@ -1,0 +1,58 @@
+{%- if page.lang == 'zh' -%}
+  {%- assign nav = site.data.navigation_zh.main -%}
+  {%- assign home_url = '/zh/' -%}
+{%- else -%}
+  {%- assign nav = site.data.navigation.main -%}
+  {%- assign home_url = '/' -%}
+{%- endif -%}
+{%- assign pair = site.data.i18n.refs[page.ref] -%}
+{%- if pair -%}
+  {%- if page.lang == 'zh' -%}{%- assign alt_url = pair.en -%}{%- else -%}{%- assign alt_url = pair.zh -%}{%- endif -%}
+{%- else -%}
+  {%- if page.layout == 'paper' -%}
+    {%- assign alt_url = '/zh/publications/' -%}
+  {%- elsif page.lang == 'zh' -%}
+    {%- assign alt_url = '/' -%}
+  {%- else -%}
+    {%- assign alt_url = '/zh/' -%}
+  {%- endif -%}
+{%- endif -%}
+
+<header class="nav site-nav">
+  <div class="nav__inner">
+    <a class="brand" href="{{ home_url | relative_url }}">{{ site.title }}</a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {%- for link in nav -%}
+        {%- unless link.url == '/' or link.url == '/zh/' -%}
+          {%- assign active = false -%}
+          {%- if page.url == link.url -%}{%- assign active = true -%}{%- endif -%}
+          {%- if link.url == '/tags/' and page.collection == 'posts' -%}{%- assign active = true -%}{%- endif -%}
+          {%- if link.url == '/zh/notes/' and page.collection == 'zh_posts' -%}{%- assign active = true -%}{%- endif -%}
+          {%- if page.layout == 'paper' and link.url contains 'publications' -%}{%- assign active = true -%}{%- endif -%}
+          <a href="{{ link.url | relative_url }}"{% if active %} class="is-active" aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endunless -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="nav__tools">
+      <a class="lang" href="{{ alt_url | relative_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-CN{% endif %}" lang="{% if page.lang == 'zh' %}en{% else %}zh-CN{% endif %}">
+        {% if page.lang == 'zh' %}EN{% else %}中文{% endif %}
+      </a>
+
+      {% if page.layout == 'paper' %}
+      <button class="print-btn" type="button" data-print>Print / PDF</button>
+      {% endif %}
+
+      <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu"
+              aria-label="{% if page.lang == 'zh' %}菜单{% else %}Menu{% endif %}">
+        <svg class="icon-menu" width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true">
+          <path d="M0 1h18M0 11h18" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <svg class="icon-close" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>

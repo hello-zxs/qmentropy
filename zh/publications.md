@@ -1,8 +1,9 @@
 ---
 title: "论文"
 permalink: /zh/publications/
-layout: single
-author_profile: true
+layout: page
+kicker: "论文"
+lead: "论文全文为英文，按 IEEE 格式排版；这里保留中文信息与入口。"
 toc: false
 lang: zh
 locale: zh-CN

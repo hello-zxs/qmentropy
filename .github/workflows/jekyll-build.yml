@@ -38,8 +38,11 @@ jobs:
           test -f _site/zh/cv/index.html
           grep -q "home-apple" _site/index.html
           grep -q "home-apple" _site/zh/index.html
-          test -f _site/assets/css/home.css
-          test -f _site/assets/js/home.js
+          test -f _site/assets/css/site.css
+          test -f _site/assets/js/site.js
+          test -f _site/tags/index.html
+          test -f _site/year-archive/index.html
+          grep -q "site-nav" _site/research/index.html
           test -f _site/papers/morse-lens/index.html
           test -f _site/papers/transformation-optics-review/index.html
           grep -q "References" _site/papers/morse-lens/index.html

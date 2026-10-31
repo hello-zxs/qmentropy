@@ -1,0 +1,70 @@
+{%- assign page_title = include.title | default: page.title | default: site.title -%}
+{%- assign page_description = include.description | default: page.description | default: page.excerpt | strip_html | truncate: 160 | default: site.description -%}
+{%- assign og_type = include.type | default: "website" -%}
+{%- assign full_title = page_title -%}
+{%- unless page_title contains site.title -%}
+  {%- assign full_title = page_title | append: " — " | append: site.title -%}
+{%- endunless -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f5f5f7">
+<script>document.documentElement.classList.add('js');</script>
+<title>{{ full_title | escape }}</title>
+<meta name="description" content="{{ page_description | escape }}">
+<meta name="author" content="Zheng Xiangsheng">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ page_description | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/images/og.png' | absolute_url }}">
+<meta property="og:locale" content="{% if page.lang == 'zh' %}zh_CN{% else %}en_US{% endif %}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page_title | escape }}">
+<meta name="twitter:description" content="{{ page_description | escape }}">
+<meta name="twitter:image" content="{{ '/assets/images/og.png' | absolute_url }}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Zheng Xiangsheng",
+  "url": "https://qmentropy.com/",
+  "jobTitle": "Physics MSc student",
+  "affiliation": { "@type": "Organization", "name": "Western University" },
+  "sameAs": ["https://github.com/hello-zxs"]
+}
+</script>
+
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
+
+<link rel="preload" href="{{ '/assets/fonts/inter-tight-600.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+{% if include.extra_css %}<link rel="stylesheet" href="{{ include.extra_css | relative_url }}">{% endif %}
+
+{% if page.ref and site.data.i18n.refs[page.ref] %}
+{% assign pair = site.data.i18n.refs[page.ref] %}
+<link rel="alternate" hreflang="en" href="{{ pair.en | absolute_url }}">
+<link rel="alternate" hreflang="zh-Hans" href="{{ pair.zh | absolute_url }}">
+<link rel="alternate" hreflang="x-default" href="{{ pair.en | absolute_url }}">
+{% endif %}
+
+{% if page.mathjax %}
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      tags: 'ams'
+    },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endif %}

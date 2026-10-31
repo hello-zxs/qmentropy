@@ -1,0 +1,10 @@
+<footer class="footer site-footer">
+  <div class="footer__inner">
+    <span>© {{ 'now' | date: '%Y' }} {% if page.lang == 'zh' %}郑翔升{% else %}Zheng Xiangsheng{% endif %} · {{ site.title }}</span>
+    <span class="footer__links">
+      <a href="https://github.com/hello-zxs">GitHub</a>
+      <a href="mailto:helloworld.3a@gmail.com">{% if page.lang == 'zh' %}邮件{% else %}Email{% endif %}</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </span>
+  </div>
+</footer>

@@ -1,11 +1,10 @@
 ---
 title: "简历"
 permalink: /zh/cv/
-layout: single
-author_profile: true
+layout: page
+kicker: "简历"
+lead: "Western University 物理硕士生；变换光学、测地线透镜与量子光学。"
 toc: true
-toc_sticky: true
-toc_label: "目录"
 lang: zh
 locale: zh-CN
 ref: cv

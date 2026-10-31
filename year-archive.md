@@ -1,10 +1,12 @@
 ---
 title: "Archive"
 permalink: /year-archive/
-layout: posts
-author_profile: true
+layout: archive
+archive_type: year
+kicker: "Archive"
+lead: "Every post, newest first."
 lang: en
 ref: archive
 ---
 
-Every post, newest first.
+

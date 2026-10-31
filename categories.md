@@ -1,8 +1,8 @@
 ---
 title: "Categories"
 permalink: /categories/
-layout: archive
-author_profile: true
+layout: page
+kicker: "Archive"
 lang: en
 ref: categories
 sitemap: false
