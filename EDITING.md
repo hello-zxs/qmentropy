@@ -13,6 +13,7 @@
 | 页脚 | `_includes/site/footer.html` |
 | `<head>`、meta、OG、字体、MathJax | `_includes/site/head.html` |
 | 全站交互 | `assets/js/site.js` |
+| 滚动动效方向/重置 | `assets/js/site.js` 的 reveal 段；样式在 `site.css` 的 `/* motion */` |
 | 阅读进度 / 返回顶部 / 统计 | `_includes/site/scripts.html` |
 
 ## 页面类型

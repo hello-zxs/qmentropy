@@ -47,6 +47,7 @@
 <link rel="preload" href="{{ '/assets/fonts/inter-tight-600.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 {% if include.extra_css %}<link rel="stylesheet" href="{{ include.extra_css | relative_url }}">{% endif %}
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 
 {% if page.ref and site.data.i18n.refs[page.ref] %}
 {% assign pair = site.data.i18n.refs[page.ref] %}

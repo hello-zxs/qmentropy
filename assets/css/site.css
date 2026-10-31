@@ -844,9 +844,18 @@ h2 {
   transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 
+/* Re-entering from the top when scrolling up */
+.js .reveal.from-top {
+  transform: translateY(-26px);
+}
+
 .js .reveal.in {
   opacity: 1;
   transform: none;
+}
+
+.js .page-head.reveal {
+  transition-delay: 0.04s;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -869,6 +878,7 @@ h2 {
   }
 
   .js .reveal,
+  .js .reveal.from-top,
   .reveal {
     opacity: 1;
     transform: none;
@@ -1043,6 +1053,18 @@ html[lang="zh-CN"] .note-list h3 {
 }
 
 .prose > :first-child {
+  margin-top: 0;
+}
+
+.prose-section {
+  margin: 2.2em 0 0;
+}
+
+.prose > .prose-section:first-child {
+  margin-top: 0;
+}
+
+.prose-section > h2:first-child {
   margin-top: 0;
 }
 
@@ -1440,5 +1462,12 @@ html[lang="zh-CN"] .note-list h3 {
 
   .prose a {
     color: #000;
+  }
+
+  .reveal,
+  .js .reveal,
+  .js .reveal.from-top {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

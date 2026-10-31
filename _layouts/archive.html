@@ -19,7 +19,7 @@
     {% include site/menu.html %}
 
     <main id="main" class="wrap">
-      <header class="page-head">
+      <header class="page-head reveal">
         {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
         <h1>{{ page.title }}</h1>
         {% if page.lead %}<p class="page-lead">{{ page.lead }}</p>{% endif %}
@@ -27,7 +27,7 @@
 
       {% if page.archive_type == "tags" %}
       {%- assign tags = posts | map: "tags" | join: "," | split: "," | uniq | sort -%}
-      <div class="tag-row">
+      <div class="tag-row reveal">
         <button class="tag-chip is-active" type="button" data-filter="all">{% if page.lang == 'zh' %}全部{% else %}All{% endif %}</button>
         {%- for tag in tags -%}
           {%- unless tag == "" -%}
@@ -40,8 +40,8 @@
       {% if page.archive_type == "year" %}
         {%- assign groups = posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
         {%- for group in groups -%}
-        <h2 class="year-heading">{{ group.name }}</h2>
-        <ul class="archive-list">
+        <h2 class="year-heading reveal">{{ group.name }}</h2>
+        <ul class="archive-list reveal">
           {%- for post in group.items -%}
           <li class="archive-item">
             <a href="{{ post.url | relative_url }}">
@@ -57,7 +57,7 @@
         </ul>
         {%- endfor -%}
       {% else %}
-      <ul class="archive-list">
+      <ul class="archive-list reveal">
         {%- for post in posts -%}
         <li class="archive-item" data-tags="{{ post.tags | join: ' ' | slugify }}">
           <a href="{{ post.url | relative_url }}">

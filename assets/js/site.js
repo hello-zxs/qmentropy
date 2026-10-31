@@ -53,19 +53,65 @@
     else desktop.addListener(onBreakpoint);
   }
 
-  /* Reveal sections once */
-  var items = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  /* Group each h2 section so the heading and its text animate together. */
+  document.querySelectorAll('.prose').forEach(function (prose) {
+    var current = null;
+    Array.prototype.slice.call(prose.children).forEach(function (node) {
+      if (node.tagName === 'H2') {
+        current = document.createElement('section');
+        current.className = 'reveal prose-section';
+        prose.insertBefore(current, node);
+        current.appendChild(node);
+      } else if (current) {
+        current.appendChild(node);
+      }
+    });
+  });
+  document.querySelectorAll('.prose > .pub').forEach(function (el) {
+    el.classList.add('reveal');
+  });
+
+  var revealItems = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var scrollDirection = 'down';
+  var lastY = window.scrollY;
+
+  if ('IntersectionObserver' in window && revealItems.length) {
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
+        var el = entry.target;
+        el.classList.toggle('from-top', scrollDirection === 'up');
+        el.classList.add('in');
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    items.forEach(function (el) { observer.observe(el); });
+    }, { threshold: 0.02, rootMargin: '0px 0px -40px 0px' });
+
+    revealItems.forEach(function (el) { observer.observe(el); });
+
+    /* Reset only once an element is fully offscreen, so it can replay. */
+    var resetScheduled = false;
+    var resetReveals = function () {
+      var vh = window.innerHeight;
+      revealItems.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.bottom < -40 || rect.top > vh + 40) el.classList.remove('in');
+      });
+    };
+
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (y < lastY - 2) scrollDirection = 'up';
+      else if (y > lastY + 2) scrollDirection = 'down';
+      lastY = y;
+
+      if (resetScheduled) return;
+      resetScheduled = true;
+      window.requestAnimationFrame(function () {
+        resetScheduled = false;
+        resetReveals();
+      });
+    }, { passive: true });
   } else {
-    items.forEach(function (el) { el.classList.add('in'); });
+    revealItems.forEach(function (el) { el.classList.add('in'); });
   }
 
   /* Table of contents from h2/h3 */
