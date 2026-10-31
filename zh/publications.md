@@ -3,14 +3,12 @@ title: "论文"
 permalink: /zh/publications/
 layout: page
 kicker: "论文"
-lead: "论文全文为英文，按 IEEE 格式排版；这里保留中文信息与入口。"
+lead: "论文全文为英文，按 IEEE 格式排版，附 IEEE/APA 引用与 BibTeX。"
 toc: false
 lang: zh
 locale: zh-CN
 ref: publications
 ---
-
-论文全文为英文，按 IEEE 格式排版：摘要、Index Terms、编号章节、[n] 引用与参考文献、BibTeX，以及可打印为 PDF 的版式。中文站点保留论文信息与入口，正文以英文为准。
 
 {% for pub in site.data.publications %}
 <article class="pub">
@@ -30,15 +28,3 @@ ref: publications
   {% endif %}
 </article>
 {% endfor %}
-
-## 期刊论文
-
-目前尚无正式发表的期刊论文。硕士阶段的工作开始后，这里会按年份更新。
-
-## 项目
-
-**Morse 透镜射线追踪器** —— 把 GRIN 剖面映射为旋转曲面，在曲面上积分测地线方程，并与原介质中的光线路径对比。技术栈：Python · NumPy · Matplotlib。
-
-**变换光学文献索引** —— 1961–2022 年间的 37 篇经典论文，按“度规等价—坐标变换—隐形衣—实验实现”四条线索整理。
-
-**单光子干涉实验** —— 量子光学课程实验；衰减激光单光子源、分束器、符合计数。

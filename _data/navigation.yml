@@ -3,8 +3,6 @@ main:
     url: /
   - title: "Research"
     url: /research/
-  - title: "Notes"
-    url: /tags/
   - title: "Publications"
     url: /publications/
   - title: "CV"

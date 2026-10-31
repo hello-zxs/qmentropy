@@ -5,7 +5,6 @@
 Requires matplotlib (in addition to the Pillow/numpy used by make_assets.py).
 Outputs:
     assets/images/paper-fig1.png  geodesic on a surface of revolution
-    assets/images/paper-fig2.png  coordinate grid before/after a transformation
 """
 
 from pathlib import Path
@@ -66,54 +65,10 @@ def figure_surface() -> None:
     print("  assets/images/paper-fig1.png")
 
 
-def _warp(x, y, amp=0.55, sigma=0.75):
-    dx, dy = x, y
-    r = np.hypot(dx, dy)
-    factor = 1.0 + amp * np.exp(-(r ** 2) / (2 * sigma ** 2))
-    return dx * factor, dy * factor
-
-
-def figure_grid() -> None:
-    """A coordinate grid before and after a radial transformation."""
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.4), dpi=300)
-
-    for ax, warped in zip(axes, (False, True)):
-        for x in np.linspace(-2, 2, 17):
-            y = np.linspace(-2, 2, 240)
-            xx = np.full_like(y, x)
-            if warped:
-                xx, yy = _warp(xx, y)
-            else:
-                yy = y
-            ax.plot(xx, yy, color="#555555", linewidth=0.5)
-        for y in np.linspace(-2, 2, 17):
-            x = np.linspace(-2, 2, 240)
-            yy = np.full_like(x, y)
-            if warped:
-                xx, yy = _warp(x, yy)
-            else:
-                xx = x
-            ax.plot(xx, yy, color="#555555", linewidth=0.5)
-
-        ax.set_xlim(-2.6, 2.6)
-        ax.set_ylim(-2.6, 2.6)
-        ax.set_aspect("equal")
-        ax.axis("off")
-
-    axes[0].set_title("(a) virtual space", fontsize=10, pad=6)
-    axes[1].set_title("(b) transformed space", fontsize=10, pad=6)
-
-    fig.subplots_adjust(left=0.02, right=0.98, top=0.9, bottom=0.04, wspace=0.04)
-    fig.savefig(OUT / "paper-fig2.png", dpi=300, bbox_inches="tight", facecolor="white")
-    plt.close(fig)
-    print("  assets/images/paper-fig2.png")
-
-
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     print("Generating paper figures …")
     figure_surface()
-    figure_grid()
     print("Done.")
 
 

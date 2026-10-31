@@ -21,10 +21,10 @@
 |---|---|---|
 | 首页 | `home-apple` | `_data/home*.yml` + `_includes/home/*` |
 | Research / Publications / CV / About | `page` | 同名 `.md` 的正文；页头文字在 front matter 的 `kicker` / `lead` |
-| 笔记文章 | `post` | `_posts/` 或 `_zh_posts/` |
-| Notes / Archive | `archive` | `tags.md`、`year-archive.md`、`zh/notes.md` |
 | 论文全文 | `paper` | `papers/<id>.md` + `_data/publications.yml` |
 | 404 | `page` | `404.md` |
+
+`post` / `archive` 布局还在，但目前没有发布笔记。
 
 ## 首页
 
@@ -34,9 +34,7 @@
 | 状态标签 | `_data/home.yml` → `hero.status` |
 | 代表性论文标题/按钮文字 | `_data/home.yml` → `publications` |
 | 论文条目本身 | `_data/publications.yml`（与 /publications/ 共用） |
-| 三张研究方向卡片 | `_data/home.yml` → `research.tiles` |
-| 黑色论文段 | `_data/home.yml` → `thesis` |
-| 最新文章 | `_includes/home/notes.html`（默认取 4 篇） |
+| 三条研究方向 | `_data/home.yml` → `research.tiles` |
 | 中文首页全部文案 | `_data/home_zh.yml`（字段与英文一一对应） |
 
 ## 论文
@@ -53,24 +51,18 @@
 
 新增论文：`publications.yml` 加一条 → 新建 `papers/<id>.md`（`layout: paper`、`pub_id: <id>`、`references:`）→ `/publications/` 自动出现。
 
-## 笔记与归档
+## 笔记（暂未发布）
 
-- 英文文章：`_posts/YYYY-MM-DD-slug.md`，front matter 写 `lang: en`、`ref: slug`。
-- 中文文章：`_zh_posts/YYYY-MM-DD-slug.md`，`lang: zh`、`locale: zh-CN`、`ref: slug`，并写死 `permalink: /zh/...`。
-- 语言切换的 URL 对应写在 `_data/i18n.yml`。
-- 标签筛选：`_layouts/archive.html` + `assets/js/site.js` 的 `.tag-chip` 逻辑。
-- 年份归档：`_layouts/archive.html` 里 `archive_type: year` 分支。
+- 英文：`_posts/YYYY-MM-DD-slug.md`；中文：`_zh_posts/YYYY-MM-DD-slug.md`。
+- 需要时再在导航和 `_data/i18n.yml` 里加入口；目前站上没有 Notes/Archive 页面。
+- `_layouts/archive.html` 与 `_layouts/post.html` 保留，标签筛选逻辑在 `assets/js/site.js`。
 
 ## 图片
 
 | 文件 | 用途 | 重新生成 |
 |---|---|---|
 | `assets/images/hero-light.png` | 首页首屏背景 | `python tools/make_assets.py` |
-| `assets/images/feature-to.png` | 变换光学卡片 | 同上 |
-| `assets/images/feature-lens.png` | 测地线透镜卡片 + 论文段 | 同上 |
-| `assets/images/feature-quantum.png` | 量子光学卡片 | 同上 |
 | `assets/images/paper-fig1.png` | Morse 论文图 1 | `python tools/make_paper_figures.py` |
-| `assets/images/paper-fig2.png` | 综述图 1 | 同上 |
 
 ## 改完怎么发布
 

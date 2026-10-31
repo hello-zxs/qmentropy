@@ -43,7 +43,7 @@ London, Ontario, Canada
 - Constructed the equivalent geodesic surfaces for the Luneburg, Eaton and intermediate Morse profiles, and verified them by ray tracing;
 - Built an end-to-end pipeline from GRIN profile to surface metric to numerical ray paths.
 
-[Read the thesis thread →](/research/2026/08/15/morse-lens-thesis.html)
+[Read the full paper →](/papers/morse-lens/)
 
 ## Skills
 
@@ -56,9 +56,7 @@ London, Ontario, Canada
 
 ## Output
 
-- **Thesis**: *Ray tracing and equivalent geodesic lenses for Morse lens*, Xiamen University Malaysia, 2026
-- **Notes**: [Sixty years of transformation optics](/physics/2026/08/16/transformation-optics-60-years.html), [single-photon interference](/lab%20notes/2026/03/08/single-photon-interference.html)
-- **Projects**: Morse lens ray tracer, transformation-optics literature index (see [Publications](/publications/))
+- **Thesis**: *Ray tracing and equivalent geodesic lenses for Morse lens*, Xiamen University Malaysia, 2026 — [full text](/papers/morse-lens/)
 
 <!--
 To add later:

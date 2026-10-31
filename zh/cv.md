@@ -44,7 +44,7 @@ London, Ontario, Canada
 - 构造 Luneburg、Eaton 与中间 Morse 剖面的等效测地线曲面，并完成射线追踪验证；
 - 建立了一套从 GRIN 剖面到曲面度规、再到数值光线路径的完整流程。
 
-[论文主线笔记 →](/zh/research/2026/08/15/morse-lens-thesis.html)
+[阅读全文 →](/papers/morse-lens/)
 
 ## 技能
 
@@ -57,9 +57,7 @@ London, Ontario, Canada
 
 ## 学术产出
 
-- **学位论文**：*Ray tracing and equivalent geodesic lenses for Morse lens*，厦门大学马来西亚分校，2026
-- **研究笔记**：[变换光学 60 年](/zh/physics/2026/08/16/transformation-optics-60-years.html)、[单光子干涉](/zh/lab-notes/2026/03/08/single-photon-interference.html)
-- **项目**：Morse 透镜射线追踪器、变换光学文献索引（详见[论文与项目](/zh/publications/)）
+- **学位论文**：*Ray tracing and equivalent geodesic lenses for Morse lens*，厦门大学马来西亚分校，2026 —— [全文](/papers/morse-lens/)
 
 <!--
 【待补充，取消注释后填写】

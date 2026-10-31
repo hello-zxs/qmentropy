@@ -23,24 +23,3 @@
       type   = {BSc (Hons) thesis},
       address = {Sepang, Malaysia}
     }
-
-- id: transformation-optics-review
-  type: "Review Article"
-  year: 2026
-  featured: true
-  title: "Sixty years of transformation optics: From Dolin’s conjecture to experimental cloaks"
-  authors: "X. Zheng"
-  venue: "Manuscript"
-  abstract: "A review of the transformation-optics programme, from Dolin’s 1961 conjecture and the metamaterial turn of 2000 to the coordinate-transformation and conformal-mapping cloaks of 2006 and their experimental realization. The review separates the mathematical invariance of Maxwell’s equations from the material question of whether the required constitutive parameters can be built."
-  url: "/papers/transformation-optics-review/"
-  pdf: ""
-  doi: ""
-  cite_ieee: "X. Zheng, “Sixty years of transformation optics: From Dolin’s conjecture to experimental cloaks,” review manuscript, 2026."
-  cite_apa: "Zheng, X. (2026). Sixty years of transformation optics: From Dolin’s conjecture to experimental cloaks [Review article]. Unpublished manuscript."
-  bibtex: |
-    @unpublished{xiangsheng2026sixty,
-      author = {Zheng, Xiangsheng},
-      title  = {Sixty years of transformation optics: From Dolin's conjecture to experimental cloaks},
-      year   = {2026},
-      note   = {Review manuscript}
-    }

@@ -23,11 +23,6 @@ $$\varepsilon' = \frac{\Lambda\,\varepsilon\,\Lambda^{T}}{\det\Lambda}, \qquad
 
 "Curved space" thus becomes "special material": the problem of designing a light path becomes the problem of designing $\varepsilon(\mathbf{r})$ and $\mu(\mathbf{r})$. Pendry and co-workers used this idea to propose the invisibility cloak in 2006; Leonhardt reached the two-dimensional version through conformal mapping at the same time.
 
-**Notes**
-
-- [How the invisibility cloak was made: sixty years of transformation optics](/physics/2026/08/16/transformation-optics-60-years.html) — a main thread through 37 classic papers (1961–2022)
-- [Transformation optics: from Fermat's principle to the invisibility cloak](/physics/2026/03/01/transformation-optics-basics.html) — from the optical-path variation to the coordinate transformation
-
 **Open questions**: how to realize anisotropic and dispersive parameters in real structures; bandwidth and loss; where transformation media end and metasurface design begins.
 
 ## Geodesic lenses {#geodesic-lenses}
@@ -46,7 +41,6 @@ My thesis studies the **Morse lens** family. Main results:
 **Full paper**
 
 - [Ray tracing and equivalent geodesic lenses for the Morse lens](/papers/morse-lens/) — thesis paper with the derivation, parameter correspondence and ray-tracing validation
-- [From Fermat's principle to the Morse lens: the thread of my thesis](/research/2026/08/15/morse-lens-thesis.html) — shorter reading note
 
 Advisors: Dr. Yap Seong Shan; co-advisor Prof. Huanyang Chen, author of the original Morse-lens paper. The workflow is mostly ray tracing in Python/NumPy, with Mathematica for symbolic derivations and numerical cross-checks.
 
@@ -54,16 +48,11 @@ Advisors: Dr. Yap Seong Shan; co-advisor Prof. Huanyang Chen, author of the orig
 
 At the single-photon level, interference can no longer be read as two waves overlapping: one photon passes through the apparatus at a time, yet the fringes still build up point by point. It is the cleanest expression of wave–particle duality, and the starting point of quantum measurement.
 
-**Notes**
-
-- [Lab notes: single-photon interference](/lab%20notes/2026/03/08/single-photon-interference.html)
-
 Questions I am interested in: single-photon sources and coincidence counting; the trade-off between path information and interference visibility (quantum erasure); and the effect of detector dark counts on the result.
 
 ## What's next {#next}
 
 - Turn the thesis ray tracer into a reproducible notebook with parameters and convergence checks;
-- Keep building the transformation-optics literature index (37 classic papers so far) into a searchable resource;
 - Update this page once the project at Western takes shape.
 
 If any of these threads interests you, feel free to [write](mailto:helloworld.3a@gmail.com).

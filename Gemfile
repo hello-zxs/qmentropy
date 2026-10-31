@@ -6,7 +6,6 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.3"
 
 gem "jekyll-sitemap", "~> 1.4"
-gem "jekyll-feed", "~> 0.17"
 
 # Ruby 3.x 不再内置 webrick，`jekyll serve` 需要它
 gem "webrick", "~> 1.8"

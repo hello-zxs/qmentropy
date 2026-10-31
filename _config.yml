@@ -69,7 +69,6 @@ exclude:
 
 # ---------- 插件 ----------
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
 
 # ---------- SEO ----------

@@ -9,7 +9,7 @@
 - **一套浅色系统**：白/浅灰底、黑色正文、蓝色链接，Inter / Inter Tight 自托管字体。
 - **论文是“论文纸”**：`/papers/<id>/` 用衬线体、编号章节、`[n]` 参考文献和打印版式；导航与页脚仍与全站一致。
 - **数据驱动**：首页文案在 `_data/home*.yml`，论文元数据在 `_data/publications.yml`，导航在 `_data/navigation*.yml`。
-- **少依赖**：只剩 `jekyll-feed`、`jekyll-sitemap`；没有主题、没有前端框架、没有 CDN（MathJax 仅论文页按需加载）。
+- **少依赖**：只剩 `jekyll-sitemap`；没有主题、没有前端框架，MathJax 仅在需要公式的页面加载。
 
 ## 页面类型
 
@@ -17,10 +17,10 @@
 |---|---|---|
 | `/`、`/zh/` | `home-apple` | `_data/home.yml`、`_data/home_zh.yml` |
 | Research / Publications / CV / About | `page` | `research.md`、`publications.md`、`cv.md`、`about.md`（中文在 `zh/`） |
-| 笔记文章 | `post` | `_posts/`（英）、`_zh_posts/`（中） |
-| Notes 列表 / Archive | `archive` | `tags.md`、`year-archive.md`、`zh/notes.md` |
 | 论文全文 | `paper` | `papers/<id>.md` |
 | 404 | `page`（`hide_header: true`） | `404.md` |
+
+笔记的 `post` / `archive` 布局与样式保留着，但**目前没有发布任何笔记**；等有真实内容再启用。
 
 ## 全站骨架
 
@@ -47,7 +47,7 @@
 
 - 文案：`_data/home.yml`（英）、`_data/home_zh.yml`（中）
 - 结构：`_layouts/home-apple.html` + `_includes/home/*.html`
-- 首屏大标题是姓名；下面是 Selected publications（读 `_data/publications.yml`）、三条研究线索、论文段、最新笔记。
+- 首屏大标题是姓名；下面是 Selected publications（读 `_data/publications.yml`）与三条研究线索。
 
 ## 论文（IEEE 格式）
 
@@ -60,9 +60,9 @@
 
 新增一篇论文：`publications.yml` 加记录 → 新建 `papers/<id>.md` → `/publications/` 与首页自动出现。
 
-## 笔记
+## 笔记（暂未发布）
 
-英文 `_posts/YYYY-MM-DD-slug.md`，中文 `_zh_posts/YYYY-MM-DD-slug.md`；两边的 `lang` + `ref` 用于语言切换，`_data/i18n.yml` 记录对应 URL。`/tags/` 是带标签筛选的 Notes 列表，`/year-archive/` 按年归档。
+`post` 与 `archive` 布局还在，但 `_posts/`、`_zh_posts/` 目前是空的，站上也没有 Notes/Archive 入口。等有真正值得发布的实验记录或笔记时，再按 `_posts/YYYY-MM-DD-slug.md` 添加，并在导航里加回入口。
 
 ## 双语
 
@@ -108,15 +108,15 @@ git push origin main
 │   ├── home/                    # 首页分段
 │   └── paper/reference.html     # IEEE 参考文献
 ├── _layouts/                    # page / post / archive / paper / home-apple
-├── _posts/  _zh_posts/          # 双语笔记
+├── _posts/  _zh_posts/          # 暂空，笔记基础设施保留
 ├── papers/                      # 论文全文
 ├── zh/                          # 中文页面
 ├── assets/css/site.css          # 全站样式（token 在顶部）
 ├── assets/css/paper.css         # 论文样式 + 打印
 ├── assets/js/site.js            # 全站交互
 ├── assets/fonts/                # 自托管 Inter / Inter Tight
-├── assets/images/               # hero、卡片、OG、favicon、论文插图
-├── tools/make_assets.py         # 图片生成
+├── assets/images/               # hero、OG、favicon、论文插图
+├── tools/make_assets.py         # 图片生成（hero）
 ├── tools/make_paper_figures.py  # 论文插图
 ├── EDITING.md                   # “想改什么 → 去哪”
 └── Gemfile

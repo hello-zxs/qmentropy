@@ -3,9 +3,7 @@ main:
     url: /zh/
   - title: "研究"
     url: /zh/research/
-  - title: "笔记"
-    url: /zh/notes/
-  - title: "论文与项目"
+  - title: "论文"
     url: /zh/publications/
   - title: "简历"
     url: /zh/cv/

@@ -24,11 +24,6 @@ $$\varepsilon' = \frac{\Lambda\,\varepsilon\,\Lambda^{T}}{\det\Lambda}, \qquad
 
 于是"弯曲空间"变成"特殊材料"：设计光路的问题，变成设计 $\varepsilon(\mathbf{r})$、$\mu(\mathbf{r})$ 的问题。Pendry 等人在 2006 年用这个思路给出了隐形衣方案，同一时期 Leonhardt 从共形映射出发得到了二维版本。
 
-**相关笔记**
-
-- [隐形衣如何炼成：变换光学 60 年](/zh/physics/2026/08/16/transformation-optics-60-years.html) —— 37 篇经典论文梳理出的主线（1961–2022）
-- [变换光学基础：从 Fermat 原理到隐形衣](/zh/physics/2026/03/01/transformation-optics-basics.html) —— 从光程变分到坐标变换的推导
-
 **我关心的问题**：各向异性与色散参数如何在实际结构中实现；宽带化与损耗；以及变换介质与超表面设计之间的边界在哪里。
 
 ## 测地线透镜 {#geodesic-lenses}
@@ -47,7 +42,6 @@ $$\rho = n(r)\,r, \qquad ds = n(r)\,dr, \qquad dz^{2} = ds^{2} - d\rho^{2}$$
 **论文全文**
 
 - [Ray tracing and equivalent geodesic lenses for the Morse lens](/papers/morse-lens/) — 含推导、参数对应与射线追踪验证的完整论文（英文）
-- [从 Fermat 原理到 Morse 透镜：我的毕业论文主线](/zh/research/2026/08/15/morse-lens-thesis.html) — 较短的阅读笔记
 
 导师：Dr. Yap Seong Shan；副导师：Prof. Chen Huanyang（陈焕阳，Morse 透镜原始论文作者）。工具以 Python/NumPy 的射线追踪为主，Mathematica 用于符号推导与数值对照。
 
@@ -55,16 +49,11 @@ $$\rho = n(r)\,r, \qquad ds = n(r)\,dr, \qquad dz^{2} = ds^{2} - d\rho^{2}$$
 
 在单光子层面，干涉不再能由"两束波叠加"直观解释：一次只有一个光子通过装置，条纹却依然逐点累积出来。这是波粒二象性最干净的实验表达，也是量子测量课程的起点。
 
-**相关笔记**
-
-- [量子光学实验笔记：单光子干涉](/zh/lab-notes/2026/03/08/single-photon-interference.html)
-
 我关注的问题：单光子源与符合计数、路径信息与干涉可见度的取舍（量子擦除），以及探测器暗计数对结果的影响。
 
 ## 接下来 {#next}
 
 - 把毕业论文的射线追踪代码整理成可复现的 notebook，附参数与收敛性检查；
-- 继续整理变换光学文献库（目前 37 篇经典论文），做成可检索的索引；
 - 在 Western 开展新的课题后，在这里更新研究方向。
 
 如果你对其中任何一条线索感兴趣，欢迎[写信](mailto:helloworld.3a@gmail.com)讨论。

@@ -1,5 +1,5 @@
 # 双语页面的对应关系：ref -> { en: 路径, zh: 路径 }
-# 页面/文章在 front matter 里写 ref: <key>，语言切换器据此找到另一语言版本。
+# 页面在 front matter 里写 ref: <key>，语言切换器据此找到另一语言版本。
 refs:
   home:
     en: "/"
@@ -16,28 +16,3 @@ refs:
   about:
     en: "/about/"
     zh: "/zh/about/"
-  notes:
-    en: "/tags/"
-    zh: "/zh/notes/"
-  categories:
-    en: "/categories/"
-    zh: "/zh/notes/"
-  archive:
-    en: "/year-archive/"
-    zh: "/zh/notes/"
-
-  transformation-optics-basics:
-    en: "/physics/2026/03/01/transformation-optics-basics.html"
-    zh: "/zh/physics/2026/03/01/transformation-optics-basics.html"
-  single-photon-interference:
-    en: "/lab%20notes/2026/03/08/single-photon-interference.html"
-    zh: "/zh/lab-notes/2026/03/08/single-photon-interference.html"
-  morse-lens-thesis:
-    en: "/research/2026/08/15/morse-lens-thesis.html"
-    zh: "/zh/research/2026/08/15/morse-lens-thesis.html"
-  transformation-optics-60-years:
-    en: "/physics/2026/08/16/transformation-optics-60-years.html"
-    zh: "/zh/physics/2026/08/16/transformation-optics-60-years.html"
-  test-note:
-    en: "/physics/2026/02/25/test-note.html"
-    zh: "/zh/physics/2026/02/25/test-note.html"
