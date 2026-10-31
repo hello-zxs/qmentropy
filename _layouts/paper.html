@@ -1,0 +1,113 @@
+---
+---
+{%- assign pub = site.data.publications | where: "id", page.pub_id | first -%}
+{%- assign paper_title = page.title | default: pub.title -%}
+{%- assign paper_desc = page.description | default: pub.abstract -%}
+{%- assign paper_abstract = pub.abstract | default: page.description -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>{{ paper_title }} — Zheng Xiangsheng</title>
+    <meta name="description" content="{{ paper_desc | escape }}">
+    <meta name="author" content="Zheng Xiangsheng">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ paper_title | escape }}">
+    <meta property="og:description" content="{{ paper_desc | escape }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ '/assets/images/og.png' | absolute_url }}">
+    <meta property="og:locale" content="en_US">
+
+    <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/paper.css' | relative_url }}">
+
+    {% if page.mathjax %}
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams'
+        },
+        options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {% endif %}
+  </head>
+
+  <body class="paper">
+    <header class="paper-nav">
+      <div class="paper-nav__inner">
+        <a class="paper-brand" href="{{ '/' | relative_url }}">Physics Lab Notes</a>
+        <nav>
+          <a href="{{ '/publications/' | relative_url }}">Publications</a>
+          <a href="{{ '/zh/publications/' | relative_url }}" lang="zh-CN">中文</a>
+          <button type="button" class="print-btn" data-print>Print / PDF</button>
+        </nav>
+      </div>
+    </header>
+
+    <article class="sheet">
+      <header class="paper-head">
+        {% if pub.type %}<p class="paper-type">{{ pub.type }}{% if pub.venue %} · {{ pub.venue }}{% endif %}{% if pub.year %} · {{ pub.year }}{% endif %}</p>{% endif %}
+        <h1>{{ paper_title }}</h1>
+        <p class="paper-authors">Zheng Xiangsheng</p>
+        <p class="paper-affiliation">Physics Programme, Xiamen University Malaysia, Sepang, Malaysia</p>
+        <p class="paper-contact">helloworld.3a@gmail.com · qmentropy.com</p>
+      </header>
+
+      <section class="abstract" aria-label="Abstract">
+        <h2>Abstract</h2>
+        <p>{{ paper_abstract }}</p>
+        {% if page.index_terms %}
+        <p class="index-terms"><strong>Index Terms—</strong>{{ page.index_terms }}</p>
+        {% endif %}
+      </section>
+
+      <div class="paper-body">
+        {{ content }}
+      </div>
+
+      {% if page.references %}
+      <section class="references" aria-label="References">
+        <h2>References</h2>
+        <ol>
+          {%- for ref in page.references -%}
+          <li>{% include paper/reference.html ref=ref %}</li>
+          {%- endfor -%}
+        </ol>
+      </section>
+      {% endif %}
+
+      {% if pub %}
+      <section class="paper-cite" id="cite" aria-label="Citation">
+        <h2>Cite this paper</h2>
+        <p><strong>IEEE</strong> {{ pub.cite_ieee }}</p>
+        <p><strong>APA</strong> {{ pub.cite_apa }}</p>
+        {% if pub.bibtex %}
+        <details>
+          <summary>BibTeX</summary>
+          <pre>{{ pub.bibtex }}</pre>
+        </details>
+        {% endif %}
+      </section>
+      {% endif %}
+    </article>
+
+    <footer class="paper-footer">
+      <p>© {{ 'now' | date: '%Y' }} Zheng Xiangsheng · <a href="{{ '/' | relative_url }}">Physics Lab Notes</a> · <a href="{{ '/publications/' | relative_url }}">Publications</a></p>
+    </footer>
+
+    <script>
+      document.querySelectorAll('[data-print]').forEach(function (button) {
+        button.addEventListener('click', function () { window.print(); });
+      });
+    </script>
+  </body>
+</html>

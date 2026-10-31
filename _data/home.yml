@@ -2,16 +2,23 @@
 # Chinese counterpart: _data/home_zh.yml
 
 hero:
-  eyebrow: "Zheng Xiangsheng · Physics MSc, Western University"
+  eyebrow: "Physics MSc · Western University"
   title_lines:
-    - "Notes on the"
-    - "geometry of light."
-  lead: "Transformation optics, geodesic lenses, and quantum optics at the single-photon level."
-  primary_label: "Explore the research"
-  primary_url: "/research/"
-  secondary_label: "Read the notes"
-  secondary_url: "/tags/"
+    - "Zheng Xiangsheng"
+  lead: "I study how geometry shapes light — transformation optics, geodesic lenses, and quantum optics at the single-photon level."
+  primary_label: "Selected publications"
+  primary_url: "#publications"
+  secondary_label: "Research"
+  secondary_url: "/research/"
   status: "MSc @ Western University · London, Ontario · 2026–"
+
+publications:
+  kicker: "Publications"
+  title: "Selected publications"
+  all_label: "All publications"
+  all_url: "/publications/"
+  full_text: "Full text"
+  cite: "Cite"
 
 research:
   kicker: "Research"
@@ -43,8 +50,8 @@ thesis:
     - "Morse lens,"
     - "ray-traced."
   text: "A proof that conformal Morse lenses sit inside Cornbleet’s general family — and a ray tracer that shows the equivalent surfaces agree."
-  link_label: "Read the thesis thread"
-  url: "/research/2026/08/15/morse-lens-thesis.html"
+  link_label: "Read the full paper"
+  url: "/papers/morse-lens/"
   image: "/assets/images/feature-lens.png"
   alt: "Ray tracing through a lens onto a curved surface"
 

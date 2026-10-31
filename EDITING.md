@@ -20,6 +20,20 @@
 | 配色 / 圆角 / 字体 / 动效时长 | `assets/css/home.css` 顶部的 `:root` |
 | 页面结构 | `_layouts/home-apple.html` + `_includes/home/*.html` |
 | 首页脚本（滚动、菜单） | `assets/js/home.js` |
+| 首页“代表性论文” | `_data/publications.yml` + `_includes/home/publications.html` |
+
+## 论文（IEEE）
+
+| 想改什么 | 去哪里 |
+|---|---|
+| 论文列表、顺序、摘要 | `_data/publications.yml` |
+| 论文正文 | `papers/<id>.md` |
+| 参考文献 | 论文 front matter 的 `references:` 列表 |
+| IEEE / APA 引用、BibTeX | `_data/publications.yml` 的 `cite_ieee` / `cite_apa` / `bibtex` |
+| 论文版式、打印 PDF | `assets/css/paper.css`（含 `@media print`） |
+| 论文插图 | `python tools/make_paper_figures.py`（需要 matplotlib） |
+
+新增论文：在 `_data/publications.yml` 加一条 → 新建 `papers/<id>.md`（`layout: paper`、`pub_id: <id>`、`references:`）→ `/publications/` 自动出现。
 
 ## 图片
 
@@ -29,6 +43,8 @@
 | `assets/images/feature-to.png` | 变换光学卡片 | 同上 |
 | `assets/images/feature-lens.png` | 测地线透镜卡片 + 论文段 | 同上 |
 | `assets/images/feature-quantum.png` | 量子光学卡片 | 同上 |
+| `assets/images/paper-fig1.png` | Morse 论文图 1 | `python tools/make_paper_figures.py` |
+| `assets/images/paper-fig2.png` | 综述图 1 | 同上 |
 
 ## 首页结构
 
@@ -39,6 +55,7 @@ _layouts/home-apple.html       ← <head> + 页面骨架
 _includes/home/nav.html        ← 顶部导航（含语言切换）
 _includes/home/menu.html       ← 移动端菜单
 _includes/home/hero.html       ← 首屏
+_includes/home/publications.html ← 代表性论文
 _includes/home/research.html   ← 三张卡片
 _includes/home/thesis.html     ← 黑色论文段
 _includes/home/notes.html      ← 最新文章（自动取最新 4 篇）
@@ -47,6 +64,13 @@ _data/home.yml / home_zh.yml   ← 全部文案
 assets/css/home.css            ← 设计 token + 布局
 assets/js/home.js              ← 导航、滚动淡入、移动菜单
 assets/fonts/*.woff2           ← 自托管 Inter / Inter Tight
+
+papers/<id>.md                 ← 论文正文
+_data/publications.yml         ← 论文元数据、IEEE/APA 引用、BibTeX
+_layouts/paper.html            ← 论文版式
+_includes/paper/reference.html ← IEEE 参考文献渲染
+assets/css/paper.css           ← 论文样式 + 打印版式
+tools/make_paper_figures.py    ← 论文插图
 ```
 
 ## 双语怎么对应

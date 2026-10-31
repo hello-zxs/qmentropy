@@ -1,0 +1,27 @@
+<section class="section section--publications" id="publications">
+  <div class="wrap reveal">
+    <div class="notes__head">
+      <div>
+        <p class="kicker">{{ include.publications.kicker }}</p>
+        <h2>{{ include.publications.title }}</h2>
+      </div>
+      <a class="link" href="{{ include.publications.all_url | relative_url }}">{{ include.publications.all_label }} <span>›</span></a>
+    </div>
+
+    <ol class="pub-list">
+      {%- for pub in site.data.publications -%}
+        {%- if pub.featured -%}
+        <li class="pub-item">
+          <p class="pub-item__meta">{{ pub.type }} · {{ pub.year }}</p>
+          <h3 class="pub-item__title"><a href="{{ pub.url | relative_url }}">{{ pub.title }}</a></h3>
+          <p class="pub-item__cite">{{ pub.cite_ieee }}</p>
+          <p class="pub-item__links">
+            <a href="{{ pub.url | relative_url }}">{{ include.publications.full_text | default: "Full text" }}</a>
+            <a href="{{ pub.url | relative_url }}#cite">{{ include.publications.cite | default: "Cite" }}</a>
+          </p>
+        </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>

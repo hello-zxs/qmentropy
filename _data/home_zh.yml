@@ -1,16 +1,23 @@
 # 首页文案（中文）。英文对应文件：_data/home.yml
 
 hero:
-  eyebrow: "郑翔升 · Western University 物理硕士"
+  eyebrow: "物理硕士 · Western University"
   title_lines:
-    - "用几何，"
-    - "设计光。"
-  lead: "变换光学、测地线透镜，以及单光子层面的量子光学。"
-  primary_label: "浏览研究"
-  primary_url: "/zh/research/"
-  secondary_label: "阅读笔记"
-  secondary_url: "/zh/notes/"
+    - "郑翔升"
+  lead: "研究几何如何决定光的传播：变换光学、测地线透镜，以及单光子层面的量子光学。"
+  primary_label: "代表性论文"
+  primary_url: "#publications"
+  secondary_label: "研究方向"
+  secondary_url: "/zh/research/"
   status: "MSc @ Western University · London, Ontario · 2026–"
+
+publications:
+  kicker: "论文"
+  title: "代表性论文"
+  all_label: "全部论文"
+  all_url: "/zh/publications/"
+  full_text: "全文"
+  cite: "引用"
 
 research:
   kicker: "研究"
@@ -42,8 +49,8 @@ thesis:
     - "Morse 透镜，"
     - "射线追踪。"
   text: "证明共形 Morse 透镜属于 Cornbleet 一般族，并用射线追踪验证等效曲面。"
-  link_label: "阅读论文主线"
-  url: "/zh/research/2026/08/15/morse-lens-thesis.html"
+  link_label: "阅读全文"
+  url: "/papers/morse-lens/"
   image: "/assets/images/feature-lens.png"
   alt: "通过透镜并在曲面上会聚的射线追踪"
 

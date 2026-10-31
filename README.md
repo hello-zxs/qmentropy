@@ -42,6 +42,26 @@ ref: research     # 双语页面的对应键，见 _data/i18n.yml
 
 首页以外（Research、Publications、CV、About、文章）仍然沿用原来的深色主题；后续如果要把整套设计延伸过去，再改主题布局。
 
+## 论文（IEEE 格式）
+
+`/publications/` 是论文列表，`/papers/<id>/` 是完整论文页：
+
+| 文件 | 作用 |
+|------|------|
+| `_data/publications.yml` | 论文元数据：标题、类型、摘要、IEEE/APA 引用、BibTeX、链接 |
+| `papers/<id>.md` | 论文正文（Markdown），front matter 里写 `pub_id` 与 `references` |
+| `_layouts/paper.html` | 论文版式：标题/作者/摘要/Index Terms/正文/参考文献/引用块 |
+| `_includes/paper/reference.html` | 单条参考文献的 IEEE 渲染 |
+| `assets/css/paper.css` | 论文页样式与 `@media print` 版式 |
+| `tools/make_paper_figures.py` | 论文插图（matplotlib） |
+
+- 参考文献写在论文 front matter 的 `references:` 列表里，页面按 IEEE 顺序编号。
+- 每篇论文自动从 `_data/publications.yml` 取 IEEE/APA 引用与 BibTeX，避免两处维护。
+- 页面右上角 “Print / PDF” 调用浏览器打印，`paper.css` 的 print 规则去掉导航、改为白底单栏。
+- 中文入口 `/zh/publications/` 列出同一批论文，正文仍为英文。
+
+新增一篇论文：在 `_data/publications.yml` 加一条记录 → 新建 `papers/<id>.md`（`layout: paper`、`pub_id: <id>`、`references:`）→ 在 `/publications/` 自动出现。
+
 ## 新增一篇双语文章
 
 1. 英文：`_posts/YYYY-MM-DD-slug.md`，front matter 加 `lang: en`、`ref: slug`；
@@ -151,17 +171,23 @@ git push origin main
 ├── _data/home_zh.yml           # 中文首页文案
 ├── _includes/masthead.html     # 覆盖主题：内页语言切换 + 双语导航
 ├── _includes/lang-switch.html  # 内页语言切换按钮
-├── _includes/home/             # 首页片段（nav/menu/hero/research/thesis/notes/footer）
+├── _includes/home/             # 首页片段（nav/menu/hero/publications/research/thesis/notes/footer）
+├── _includes/paper/reference.html # IEEE 参考文献渲染
 ├── _layouts/default.html       # 覆盖主题：取消 masthead 缓存
 ├── _layouts/home-apple.html    # 首页独立布局
+├── _layouts/paper.html         # 论文版式（摘要/章节/参考文献/引用块）
+├── _data/publications.yml      # 论文元数据、IEEE/APA 引用、BibTeX
+├── papers/                     # 论文正文（morse-lens.md、transformation-optics-review.md）
 ├── _posts/                     # 英文文章
 ├── _zh_posts/                  # 中文文章（collection）
 ├── zh/                         # 中文页面
 ├── assets/css/custom.css       # 内页样式
 ├── assets/css/home.css         # 首页样式（token 在顶部）
+├── assets/css/paper.css        # 论文样式 + 打印版式
 ├── assets/js/home.js           # 首页交互
 ├── assets/fonts/               # 自托管 Inter / Inter Tight
-├── assets/images/              # hero、卡片、OG 图、favicon
+├── assets/images/              # hero、卡片、OG 图、favicon、论文插图
 ├── tools/make_assets.py        # 图片生成脚本（含 hero-light.png）
+├── tools/make_paper_figures.py # 论文插图（matplotlib）
 └── Gemfile                     # 本地 / CI 依赖
 ```

@@ -44,9 +44,10 @@ My thesis studies the **Morse lens** family. Main results:
 - A proof that conformal Morse lenses are exactly the $(A=B,\;C=1)$ subclass of Cornbleet's general family, unifying the Cornbleet–Rinous (1981) and Šarbort–Tyc (2012) lines of work;
 - Equivalent surface constructions for the Luneburg, Eaton and intermediate Morse profiles, verified by ray tracing.
 
-**Notes**
+**Full paper**
 
-- [From Fermat's principle to the Morse lens: the thread of my thesis](/research/2026/08/15/morse-lens-thesis.html)
+- [Ray tracing and equivalent geodesic lenses for the Morse lens](/papers/morse-lens/) — thesis paper with the derivation, parameter correspondence and ray-tracing validation
+- [From Fermat's principle to the Morse lens: the thread of my thesis](/research/2026/08/15/morse-lens-thesis.html) — shorter reading note
 
 Advisors: Dr. Yap Seong Shan; co-advisor Prof. Huanyang Chen, author of the original Morse-lens paper. The workflow is mostly ray tracing in Python/NumPy, with Mathematica for symbolic derivations and numerical cross-checks.
 

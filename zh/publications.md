@@ -1,68 +1,43 @@
 ---
-title: "论文与项目"
+title: "论文"
 permalink: /zh/publications/
 layout: single
 author_profile: true
-toc: true
-toc_sticky: true
-toc_label: "本页目录"
+toc: false
 lang: zh
 locale: zh-CN
 ref: publications
 ---
 
-> 论文与项目清单，随进展更新。目前以毕业论文和研究项目为主；正式发表的论文会按年份列在最前面。
+论文全文为英文，按 IEEE 格式排版：摘要、Index Terms、编号章节、[n] 引用与参考文献、BibTeX，以及可打印为 PDF 的版式。中文站点保留论文信息与入口，正文以英文为准。
 
-## 学位论文 {#thesis}
+{% for pub in site.data.publications %}
+<article class="pub">
+  <p class="pub__meta">{{ pub.year }} · {% case pub.type %}{% when "BSc (Hons) Thesis" %}学位论文{% when "Review Article" %}综述{% else %}{{ pub.type }}{% endcase %}</p>
+  <h2 class="pub__title"><a href="{{ pub.url | relative_url }}">{{ pub.title }}</a></h2>
+  <p class="pub__cite">{{ pub.cite_ieee }}</p>
+  <p class="pub__abstract">{{ pub.abstract }}</p>
+  <p class="pub__links">
+    <a href="{{ pub.url | relative_url }}">阅读全文（英文 HTML）</a>
+    <a href="{{ pub.url | relative_url }}#cite">引用</a>
+  </p>
+  {% if pub.bibtex %}
+  <details class="pub__bibtex">
+    <summary>BibTeX</summary>
+    <pre>{{ pub.bibtex }}</pre>
+  </details>
+  {% endif %}
+</article>
+{% endfor %}
 
-### Ray tracing and equivalent geodesic lenses for Morse lens
-
-**Zheng Xiangsheng** · 物理学荣誉学士毕业论文 · 厦门大学马来西亚分校 · 2026
-
-导师：Dr. Yap Seong Shan · 副导师：Prof. Chen Huanyang（陈焕阳）
-
-- 证明共形 Morse 透镜等价于 Cornbleet 一般族的 (A = B, C = 1) 子类，统一 Cornbleet–Rinous (1981) 与 Šarbort–Tyc (2012) 两条独立文献线索；
-- 构造 Luneburg、Eaton 与中间 Morse 剖面对应的等效测地线曲面；
-- 用射线追踪数值验证曲面测地线与原 GRIN 介质中的光线路径一致。
-
-[阅读论文主线笔记 →](/zh/research/2026/08/15/morse-lens-thesis.html)
-
-## 期刊论文 {#papers}
+## 期刊论文
 
 目前尚无正式发表的期刊论文。硕士阶段的工作开始后，这里会按年份更新。
 
-<!--
-【待补充】投稿/预印本格式：
-- **Z. Zheng**, A. Author. "Title", *Journal*, 2026. [DOI](https://doi.org/...) / [arXiv](https://arxiv.org/abs/...)
--->
+## 项目
 
-## 项目 {#projects}
+**Morse 透镜射线追踪器** —— 把 GRIN 剖面映射为旋转曲面，在曲面上积分测地线方程，并与原介质中的光线路径对比。技术栈：Python · NumPy · Matplotlib。
 
-### Morse 透镜射线追踪器
+**变换光学文献索引** —— 1961–2022 年间的 37 篇经典论文，按“度规等价—坐标变换—隐形衣—实验实现”四条线索整理。
 
-把 GRIN 剖面映射为旋转曲面，在曲面上积分测地线方程，并与原介质中的光线路径对比。
-
-- 技术栈：Python · NumPy · Matplotlib
-- 产出：毕业论文的全部数值图；正在整理为可复现的 notebook
-- 相关：[从 Fermat 原理到 Morse 透镜](/zh/research/2026/08/15/morse-lens-thesis.html)
-
-### 变换光学文献索引
-
-1961–2022 年间的 37 篇变换光学经典论文，按"度规等价—坐标变换—隐形衣—实验实现"四条线索整理。
-
-- 产出：[隐形衣如何炼成：变换光学 60 年](/zh/physics/2026/08/16/transformation-optics-60-years.html)
-
-### 单光子干涉实验
-
-量子光学课程实验：用衰减激光近似单光子源，验证单光子条件下的干涉条纹累积。
-
-- 关键词：衰减激光单光子源 · 分束器 · 符合计数
-- 相关：[单光子干涉实验笔记](/zh/lab-notes/2026/03/08/single-photon-interference.html)
-
-<!--
-【待补充】获奖与学术活动，取消注释后填写：
-## 获奖与荣誉
-- 2025 · 某某奖学金
-## 学术活动
-- 2026 · 某某会议 poster
--->
+**单光子干涉实验** —— 量子光学课程实验；衰减激光单光子源、分束器、符合计数。

@@ -40,4 +40,7 @@ jobs:
           grep -q "home-apple" _site/zh/index.html
           test -f _site/assets/css/home.css
           test -f _site/assets/js/home.js
+          test -f _site/papers/morse-lens/index.html
+          test -f _site/papers/transformation-optics-review/index.html
+          grep -q "References" _site/papers/morse-lens/index.html
           echo "✅ build ok"
