@@ -395,7 +395,7 @@ body.menu-open .lab-menu-btn__close {
 }
 .lab-hero__sub {
   max-width: 44ch;
-  margin-top: 42px;
+  margin-top: 60px;
   font-size: clamp(0.98rem, 1.2vw, 1.1rem);
   line-height: 1.65;
   color: var(--lab-muted);
@@ -1085,7 +1085,7 @@ body.menu-open .lab-menu-btn__close {
   }
   .lab-hero__sub {
     font-size: 0.96rem;
-    margin-top: 34px;
+    margin-top: 48px;
   }
   .lab-instrument__bar {
     flex-wrap: wrap;
