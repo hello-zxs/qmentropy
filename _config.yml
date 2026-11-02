@@ -4,9 +4,9 @@
 # ============================================
 
 # ---------- 站点基本信息 ----------
-title: "Physics Lab Notes"
+title: "QMENTROPY"
 name: "Zheng Xiangsheng"
-description: "Physics notes on transformation optics, geodesic lenses and quantum optics — by Zheng Xiangsheng, MSc at Western University."
+description: "The working notebook of Zheng Xiangsheng — transformation optics, geodesic lenses, quantum optics, and the computations behind the papers."
 url: "https://qmentropy.com"
 baseurl: ""
 timezone: "America/Toronto"

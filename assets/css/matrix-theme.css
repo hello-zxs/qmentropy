@@ -1,0 +1,53 @@
+/* qmentropy.com — the Lab theme over the Jekyll archive.
+   Keeps the archive's paper layout; shifts the signal from Apple blue to
+   instrument teal, and gives the matrix a place in the nav and footer. */
+
+:root {
+  --accent: #0e6f7a;
+  --accent-hover: #0b5c66;
+}
+
+.brand-role {
+  display: inline-block;
+  margin-left: -22px;
+  padding: 2px 5px 1px;
+  border: 1px solid rgba(14, 111, 122, 0.35);
+  font-family: var(--body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #0e6f7a;
+  white-space: nowrap;
+}
+
+.nav-ext {
+  color: #0e6f7a;
+}
+
+.nav-ext:hover {
+  color: #0b5c66;
+}
+
+.mx-wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.site-footer .mx-strip {
+  margin-bottom: 14px;
+}
+
+.footer__inner {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 700px) {
+  .brand-role {
+    display: none;
+  }
+}

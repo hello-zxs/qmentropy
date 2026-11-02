@@ -21,6 +21,7 @@
 <header class="nav site-nav">
   <div class="nav__inner">
     <a class="brand" href="{{ home_url | relative_url }}">{{ site.title }}</a>
+    <span class="brand-role">Lab</span>
 
     <nav class="nav__links" aria-label="Primary">
       {%- for link in nav -%}
@@ -31,6 +32,7 @@
           <a href="{{ link.url | relative_url }}"{% if active %} class="is-active" aria-current="page"{% endif %}>{{ link.title }}</a>
         {%- endunless -%}
       {%- endfor -%}
+      <a class="nav-ext" href="https://zhengxs.com/">Index ↗</a>
     </nav>
 
     <div class="nav__tools">

@@ -1,7 +1,320 @@
 ---
-layout: home-apple
-title: "Physics Lab Notes"
-description: "Physics notes by Zheng Xiangsheng on transformation optics, geodesic lenses, and quantum optics."
+layout: null
+title: "QMENTROPY — The Lab"
+description: "The working notebook of Zheng Xiangsheng: transformation optics, geodesic lenses, single photons, and the computations behind the papers."
 lang: en
 ref: home
 ---
+<!DOCTYPE html>
+<html lang="en" data-matrix="lab">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QMENTROPY — The Lab | Zheng Xiangsheng</title>
+<meta name="description" content="The working notebook of Zheng Xiangsheng: transformation optics, geodesic lenses, single photons, and the computations behind the papers.">
+<meta name="author" content="Zheng Xiangsheng">
+<meta name="theme-color" content="#07090A">
+<meta name="matrix-site" content="lab">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://qmentropy.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="QMENTROPY">
+<meta property="og:title" content="QMENTROPY — The Lab">
+<meta property="og:description" content="Instruments, papers and computations in light and geometry.">
+<meta property="og:url" content="https://qmentropy.com/">
+<meta property="og:image" content="https://qmentropy.com/assets/images/og.png">
+<meta property="og:locale" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QMENTROPY — The Lab">
+<meta name="twitter:description" content="Instruments, papers and computations in light and geometry.">
+<meta name="twitter:image" content="https://qmentropy.com/assets/images/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Zheng Xiangsheng",
+  "alternateName": "郑翔升",
+  "url": "https://qmentropy.com/",
+  "jobTitle": "Physics MSc student",
+  "affiliation": { "@type": "Organization", "name": "Western University" },
+  "sameAs": ["https://github.com/hello-zxs", "https://zhengxs.com/", "https://zhengxiangsheng.com/"]
+}
+</script>
+<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/inter-tight-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/lab.css">
+<link rel="stylesheet" href="/assets/matrix/matrix.css">
+</head>
+<body class="lab-page">
+<a class="lab-skip" href="#main">Skip to content</a>
+
+<header class="lab-nav">
+  <div class="lab-wrap lab-nav__inner">
+    <a class="lab-brand" href="/">QMENTROPY <span>Lab</span></a>
+    <nav class="lab-links" aria-label="Primary">
+      <a href="/research/">Research</a>
+      <a href="/papers/morse-lens/">Papers</a>
+      <a href="/publications/">Publications</a>
+      <a href="/about/">About</a>
+      <a class="lab-index-link" href="https://zhengxs.com/">Index ↗</a>
+    </nav>
+    <button class="lab-menu-btn" type="button" data-lab-menu aria-expanded="false" aria-controls="lab-menu">
+      <i aria-hidden="true"></i>
+      <span class="lab-menu-btn__open">Menu</span>
+      <span class="lab-menu-btn__close">Close</span>
+    </button>
+  </div>
+</header>
+
+<div class="lab-menu" id="lab-menu" aria-hidden="true">
+  <nav aria-label="Lab menu">
+    <a href="/research/"><span>Research</span><span>01</span></a>
+    <a href="/papers/morse-lens/"><span>Papers</span><span>02</span></a>
+    <a href="/publications/"><span>Publications</span><span>03</span></a>
+    <a href="/about/"><span>About</span><span>04</span></a>
+    <a href="https://zhengxs.com/"><span>Index ↗</span><span>05</span></a>
+    <a href="https://zhengxiangsheng.com/"><span>Record ↗</span><span>06</span></a>
+    <a href="https://zhengxs.com/matrix/"><span>The matrix ↗</span><span>07</span></a>
+  </nav>
+  <div class="lab-menu__foot">
+    <span>QMENTROPY / The Lab</span>
+    <a href="mailto:helloworld.3a@gmail.com">helloworld.3a@gmail.com</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="lab-hero">
+    <div class="lab-wrap lab-hero__grid">
+      <div class="lab-copy">
+        <p class="lab-eyebrow">QMENTROPY / The Lab — London, Ontario</p>
+        <h1>Experiments in <em>light</em> and geometry.</h1>
+        <p class="lab-hero__sub">The working notebook of Zheng Xiangsheng. Transformation optics, geodesic lenses and single photons — with the calculations left in.</p>
+        <div class="lab-actions">
+          <a class="lab-btn" href="#field">Open the field <span aria-hidden="true">↓</span></a>
+          <a class="lab-link" href="/papers/morse-lens/">Read the thesis <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="lab-hero__meta">
+          <span><i></i>Transformation optics</span>
+          <span><i></i>Geodesic lenses</span>
+          <span><i></i>Quantum optics</span>
+        </p>
+      </div>
+
+      <figure class="lab-instrument" id="field">
+        <div class="lab-instrument__bar">
+          <span><b>Fig. L1</b></span>
+          <span class="lab-instrument__title">Two-source field</span>
+          <span class="live"><i></i>Live</span>
+        </div>
+        <div class="lab-instrument__stage">
+          <canvas data-field role="img" aria-label="A live two-source interference field. Drag source B to move it; the fringes shift."></canvas>
+          <span class="lab-instrument__hint">Drag a source</span>
+        </div>
+        <div class="lab-instrument__controls">
+          <label for="coherence">Coherence γ</label>
+          <input class="lab-range" id="coherence" data-coherence type="range" min="0" max="1" step="0.01" value="0.92">
+          <output data-visibility>V = 0.92</output>
+          <button type="button" data-reset>Reset</button>
+        </div>
+        <figcaption><b>Fig. L1 —</b> A two-source interference field. Drag source B; lower the coherence and the fringes lose contrast. The intensity is sampled from I ∝ 1 + γ cos(k Δr).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="lab-section" id="instruments">
+    <div class="lab-wrap">
+      <div class="lab-section__head">
+        <div>
+          <p class="lab-kicker"><b>01</b> / Instruments</p>
+          <h2>Three ways to look at <em>a field.</em></h2>
+        </div>
+        <p>An instrument is an argument you can move. The live field is here; the surface and photon counters live in the Index's research lab, and the full paper lives in the archive.</p>
+      </div>
+      <div class="lab-cards">
+        <a class="lab-card" href="#field">
+          <div class="lab-card__top"><span>01 / Coherence</span><span>Live</span></div>
+          <h3>The two-source field.</h3>
+          <p>A pair of coherent points, a tunable degree of coherence, and the fringes in between.</p>
+          <div class="lab-card__link"><span>You are here</span><em>↓</em></div>
+        </a>
+        <a class="lab-card" href="https://zhengxs.com/research/#geodesic-lenses">
+          <div class="lab-card__top"><span>02 / Surface</span><span>Index ↗</span></div>
+          <h3>The equivalent surface.</h3>
+          <p>The Luneburg lens as a sphere, with geodesics you can rotate and follow.</p>
+          <div class="lab-card__link"><span>Open the instrument</span><em>↗</em></div>
+        </a>
+        <a class="lab-card" href="https://zhengxs.com/research/#quantum-optics">
+          <div class="lab-card__top"><span>03 / Photons</span><span>Index ↗</span></div>
+          <h3>One photon at a time.</h3>
+          <p>A double slit with single detections, a which-path switch, and a visibility that falls.</p>
+          <div class="lab-card__link"><span>Open the instrument</span><em>↗</em></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section lab-section--tint" id="research">
+    <div class="lab-wrap">
+      <div class="lab-section__head">
+        <div>
+          <p class="lab-kicker"><b>02</b> / The programme</p>
+          <h2>Geometry, light, and <em>information.</em></h2>
+        </div>
+        <p>The research page is the long version: equations, assumptions, and the figures that did not survive. These are the three threads that hold it together.</p>
+      </div>
+      <div class="lab-index">
+        <a class="lab-index__row" href="/research/#transformation-optics">
+          <span class="lab-index__num">01</span>
+          <h3>Transformation optics</h3>
+          <p>Coordinate transformations rewritten as material parameters — from Fermat's principle to the cloak.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="lab-index__row" href="/research/#geodesic-lenses">
+          <span class="lab-index__num">02</span>
+          <h3>Geodesic lenses</h3>
+          <p>Morse, Luneburg and Eaton lenses as equivalent surfaces; the thesis lives in this thread.</p>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="lab-index__row" href="/research/#quantum-optics">
+          <span class="lab-index__num">03</span>
+          <h3>Quantum optics</h3>
+          <p>Single-photon interference and path information, approached one detection at a time.</p>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section" id="paper">
+    <div class="lab-wrap">
+      <div class="lab-section__head">
+        <div>
+          <p class="lab-kicker"><b>03</b> / The paper</p>
+          <h2>The thesis, <em>in full.</em></h2>
+        </div>
+        <p>The anchor of the lab: a BSc thesis on the Morse lens, its equivalent geodesic surfaces, and the ray tracing that checks them.</p>
+      </div>
+      <div class="lab-paper">
+        <div>
+          <p class="lab-paper__meta">BSc (Hons) Thesis · Xiamen University Malaysia · 2026</p>
+          <h2>Ray tracing and equivalent geodesic lenses for the Morse lens</h2>
+          <p class="lab-paper__abstract">We construct the equivalent geodesic-lens representation of the Morse refractive-index profile, show that the conformal Morse lens is the (A = B, C = 1) subclass of Cornbleet's general family, and validate the construction by ray tracing.</p>
+          <div class="lab-paper__links">
+            <a class="lab-btn" href="/papers/morse-lens/">Read the paper <span aria-hidden="true">↗</span></a>
+            <a class="lab-link" href="/assets/pdf/morse-lens.pdf">Download PDF</a>
+            <a class="lab-link" href="/papers/morse-lens/#cite">Cite</a>
+          </div>
+        </div>
+        <aside class="lab-paper__side">
+          <b>Record</b>
+          <span>Type <em>BSc thesis</em></span>
+          <span>Year <em>2026</em></span>
+          <span>School <em>XMUM</em></span>
+          <span>Length <em>7 pages</em></span>
+          <span>Version <em>web edition</em></span>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section lab-section--tint" id="notebook">
+    <div class="lab-wrap">
+      <div class="lab-section__head">
+        <div>
+          <p class="lab-kicker"><b>04</b> / Reading</p>
+          <h2>Field notes, <em>from the Index.</em></h2>
+        </div>
+        <p>The long-form notes live on the Index; this is the reading list. Each one is a working note, not a paper — the figures and the code are the point.</p>
+      </div>
+      <div class="lab-notebook">
+        <a class="lab-notebook__row" href="https://zhengxs.com/notes/why-a-lens-is-a-surface/">
+          <span class="lab-notebook__date">02 Nov 2026</span>
+          <div>
+            <h3>Why a lens is a surface</h3>
+            <p>The metric equivalence behind geodesic lenses — and why the Luneburg lens is a sphere.</p>
+          </div>
+          <span class="lab-notebook__tag">Transformation optics ↗</span>
+        </a>
+        <a class="lab-notebook__row" href="https://zhengxs.com/notes/tracing-the-morse-lens/">
+          <span class="lab-notebook__date">24 Oct 2026</span>
+          <div>
+            <h3>Tracing a ray through the Morse lens</h3>
+            <p>RK4, a step-size study, and the difference between numerical error and optical aberration.</p>
+          </div>
+          <span class="lab-notebook__tag">Numerics ↗</span>
+        </a>
+        <a class="lab-notebook__row" href="https://zhengxs.com/notes/one-photon-at-a-time/">
+          <span class="lab-notebook__date">12 Oct 2026</span>
+          <div>
+            <h3>One photon at a time</h3>
+            <p>Double-slit interference with single detections, and what a teaching lab actually measures.</p>
+          </div>
+          <span class="lab-notebook__tag">Quantum optics ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab-section" id="about">
+    <div class="lab-wrap">
+      <div class="lab-section__head">
+        <div>
+          <p class="lab-kicker"><b>05</b> / About the lab</p>
+          <h2>A notebook, <em>not a monument.</em></h2>
+        </div>
+        <p>QMENTROPY is the research side of a three-site matrix. The Index is the living signal; the Record is the formal dossier; this is where the work is kept.</p>
+      </div>
+      <div class="lab-about">
+        <div>
+          <p>I am Zheng Xiangsheng, a physics MSc student at Western University. The lab collects the computations behind the writing: ray tracers, conformal maps, surface constructions, and the occasional figure that took longer than the paragraph it illustrates.</p>
+          <p>The rule is simple: if a figure appears in a note, the model and the parameters should be available. If a claim appears in a paper, the assumption that could break it should be visible. The Lab is where that standard is enforced.</p>
+        </div>
+        <div class="lab-about__links">
+          <a href="/research/"><span>Research archive</span><span>01 ↗</span></a>
+          <a href="/publications/"><span>Publications</span><span>02 ↗</span></a>
+          <a href="/about/"><span>About the lab</span><span>03 ↗</span></a>
+          <a href="https://zhengxiangsheng.com/"><span>CV &amp; record ↗</span><span>Record</span></a>
+          <a href="https://zhengxs.com/"><span>The Index ↗</span><span>Index</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="lab-footer">
+  <div class="lab-wrap">
+    <div class="lab-footer__top">
+      <div>
+        <p class="lab-footer__mark">QMENTROPY <span>/</span> The Lab</p>
+        <p class="lab-footer__note">Instruments, papers and computations in light and geometry. Built by hand; no analytics, no trackers.</p>
+      </div>
+      <div class="lab-footer__links">
+        <a href="mailto:helloworld.3a@gmail.com">Email</a>
+        <a href="https://github.com/hello-zxs">GitHub ↗</a>
+        <a href="https://zhengxs.com/">Index ↗</a>
+        <a href="https://zhengxiangsheng.com/">Record ↗</a>
+        <a href="/zh/" lang="zh-Hans">中文</a>
+      </div>
+    </div>
+    <nav class="mx-strip" aria-label="The matrix">
+      <span class="mx-strip__label">The matrix</span>
+      <a data-site="index" href="https://zhengxs.com/">Index <em>zhengxs.com</em></a>
+      <a data-site="lab" class="is-current" aria-current="page" href="https://qmentropy.com/">Lab <em>qmentropy.com</em></a>
+      <a data-site="record" href="https://zhengxiangsheng.com/">Record <em>zhengxiangsheng.com</em></a>
+      <a class="mx-strip__about" href="https://zhengxs.com/matrix/">About the matrix ↗</a>
+    </nav>
+    <div class="lab-footer__bottom">
+      <span>© 2026 Zheng Xiangsheng · 郑翔升</span>
+      <span>Lab notes, not peer-reviewed papers</span>
+      <span>qmentropy.com</span>
+    </div>
+  </div>
+</footer>
+
+<script defer src="/assets/js/lab.js"></script>
+<script defer src="/assets/matrix/matrix.js"></script>
+</body>
+</html>

@@ -36,7 +36,8 @@ jobs:
           test -f _site/zh/index.html
           test -f _site/zh/research/index.html
           test -f _site/zh/cv/index.html
-          grep -q "home-apple" _site/index.html
+          grep -q "lab-page" _site/index.html
+          grep -q "QMENTROPY" _site/index.html
           grep -q "home-apple" _site/zh/index.html
           test -f _site/assets/css/site.css
           test -f _site/assets/js/site.js

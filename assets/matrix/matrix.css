@@ -1,0 +1,369 @@
+/* ==========================================================================
+   THE MATRIX — a portable three-site layer
+   Two lines to install:
+     <link rel="stylesheet" href="/assets/matrix/matrix.css">
+     <script defer src="/assets/matrix/matrix.js"></script>
+   Set <meta name="matrix-site" content="index|lab|record"> on each site.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Matrix Newsreader";
+  src: url("../fonts/newsreader-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Matrix Mono";
+  src: url("../fonts/plex-mono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Matrix Mono";
+  src: url("../fonts/plex-mono-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --mx-index: #ff6a3d;
+  --mx-lab: #7fdcf2;
+  --mx-record: #8fa6ff;
+  --mx-bg: rgba(8, 9, 11, 0.92);
+  --mx-fg: #f3f0e7;
+  --mx-muted: rgba(243, 240, 231, 0.52);
+  --mx-hair: rgba(243, 240, 231, 0.16);
+  --mx-hair-strong: rgba(243, 240, 231, 0.28);
+  --mx-serif: "Matrix Newsreader", "Newsreader", Georgia, serif;
+  --mx-mono: "Matrix Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  --mx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- dock ---------------------------------------------------------- */
+.mx-dock {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 500;
+  font-family: var(--mx-mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.35s var(--mx-ease), transform 0.35s var(--mx-ease);
+}
+.mx-dock.is-hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+body.menu-open .mx-dock {
+  opacity: 0;
+  pointer-events: none;
+}
+.mx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--mx-hair);
+  border-radius: 999px;
+  background: var(--mx-bg);
+  color: var(--mx-fg);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: border-color 0.25s var(--mx-ease), background-color 0.25s var(--mx-ease);
+}
+.mx-btn:hover {
+  border-color: var(--mx-hair-strong);
+  background: rgba(8, 9, 11, 0.97);
+}
+.mx-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.mx-dots i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mx-c, var(--mx-fg));
+  opacity: 0.28;
+}
+.mx-dots i[data-role="index"] { --mx-c: var(--mx-index); }
+.mx-dots i[data-role="lab"] { --mx-c: var(--mx-lab); }
+.mx-dots i[data-role="record"] { --mx-c: var(--mx-record); }
+.mx-dots i.is-current {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--mx-c);
+}
+.mx-label {
+  min-width: 3.6em;
+  text-align: left;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+.mx-chev {
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--mx-muted);
+  border-right: 1px solid var(--mx-muted);
+  transform: rotate(-45deg) translateY(2px);
+  transition: transform 0.25s var(--mx-ease);
+}
+.mx-dock.is-open .mx-chev {
+  transform: rotate(135deg) translateY(-1px);
+}
+
+/* ---------- panel --------------------------------------------------------- */
+.mx-panel {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  width: 352px;
+  max-width: calc(100vw - 24px);
+  max-height: min(520px, calc(100vh - 110px));
+  overflow-y: auto;
+  background: #090a0c;
+  color: var(--mx-fg);
+  border: 1px solid var(--mx-hair);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(7px);
+  transition: opacity 0.3s var(--mx-ease), transform 0.3s var(--mx-ease), visibility 0.3s;
+}
+.mx-dock.is-open .mx-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.mx-panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 16px 13px;
+  border-bottom: 1px solid var(--mx-hair);
+}
+.mx-panel__head span {
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  color: var(--mx-muted);
+}
+.mx-panel__head strong {
+  font-family: var(--mx-serif);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--mx-fg);
+}
+.mx-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr) auto;
+  column-gap: 11px;
+  row-gap: 4px;
+  padding: 13px 16px 14px;
+  border-bottom: 1px solid var(--mx-hair);
+  color: var(--mx-fg);
+  transition: background-color 0.2s var(--mx-ease);
+}
+.mx-item:hover {
+  background: rgba(243, 240, 231, 0.045);
+}
+.mx-item:focus-visible {
+  outline: 2px solid var(--mx-lab);
+  outline-offset: -2px;
+}
+.mx-dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--mx-c);
+}
+.mx-item[data-site="index"] { --mx-c: var(--mx-index); }
+.mx-item[data-site="lab"] { --mx-c: var(--mx-lab); }
+.mx-item[data-site="record"] { --mx-c: var(--mx-record); }
+.mx-item__main {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.mx-item__main strong {
+  font-family: var(--mx-serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: none;
+}
+.mx-domain {
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  color: var(--mx-muted);
+  white-space: nowrap;
+}
+.mx-here {
+  font-size: 7.5px;
+  letter-spacing: 0.12em;
+  color: var(--mx-c);
+  opacity: 0;
+}
+.mx-item.is-current .mx-here {
+  opacity: 1;
+}
+.mx-item.is-current {
+  background: rgba(243, 240, 231, 0.03);
+}
+.mx-item small {
+  grid-column: 2 / 4;
+  font-family: var(--mx-mono);
+  font-size: 8.5px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--mx-muted);
+}
+.mx-panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 16px;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--mx-muted);
+}
+.mx-panel__foot a {
+  color: var(--mx-fg);
+  border-bottom: 1px solid var(--mx-hair-strong);
+  padding-bottom: 2px;
+  transition: border-color 0.2s var(--mx-ease);
+}
+.mx-panel__foot a:hover {
+  border-color: var(--mx-fg);
+}
+.mx-panel__foot span {
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
+
+/* ---------- footer strip -------------------------------------------------- */
+.mx-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 26px;
+  padding: 16px 0;
+  border-top: 1px solid var(--mx-hair);
+  font-family: var(--mx-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mx-muted);
+}
+.mx-strip__label {
+  color: var(--mx-muted);
+}
+.mx-strip a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(243, 240, 231, 0.7);
+  transition: color 0.2s var(--mx-ease);
+}
+.mx-strip a:hover {
+  color: var(--mx-fg);
+}
+.mx-strip i {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mx-index);
+}
+.mx-strip a[data-site="lab"] i { background: var(--mx-lab); }
+.mx-strip a[data-site="record"] i { background: var(--mx-record); }
+.mx-strip a.is-current {
+  color: var(--mx-fg);
+}
+.mx-strip a.is-current::after {
+  content: "· you are here";
+  color: var(--mx-muted);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+}
+.mx-strip em {
+  font-style: normal;
+  font-size: 7.5px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--mx-muted);
+}
+.mx-strip__about {
+  margin-left: auto;
+  letter-spacing: 0.08em;
+}
+.mx-strip__about::before {
+  display: none;
+}
+.mx-strip--light {
+  --mx-fg: #15171b;
+  --mx-muted: #6b6f77;
+  --mx-hair: rgba(21, 23, 27, 0.14);
+  --mx-hair-strong: rgba(21, 23, 27, 0.28);
+}
+.mx-strip--light a {
+  color: #3c4048;
+}
+.mx-strip--light a:hover,
+.mx-strip--light a.is-current {
+  color: #15171b;
+}
+.mx-strip--light i {
+  background: #a8432a;
+}
+.mx-strip--light a[data-site="lab"] i { background: #0e6f7a; }
+.mx-strip--light a[data-site="record"] i { background: #1f3a93; }
+
+@media (max-width: 560px) {
+  .mx-dock {
+    display: none;
+  }
+  .mx-btn {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 9px;
+  }
+  .mx-label {
+    min-width: 0;
+  }
+  .mx-panel {
+    width: calc(100vw - 24px);
+  }
+  .mx-strip {
+    gap: 8px 16px;
+    font-size: 8px;
+  }
+  .mx-strip__about {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+@media print {
+  .mx-dock {
+    display: none !important;
+  }
+}

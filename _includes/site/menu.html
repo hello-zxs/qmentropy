@@ -21,6 +21,9 @@
     {%- for link in nav -%}
       <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
     {%- endfor -%}
+    <a href="https://zhengxs.com/">Index ↗</a>
+    <a href="https://zhengxiangsheng.com/">Record ↗</a>
+    <a href="https://zhengxs.com/matrix/">The matrix ↗</a>
     <a class="menu-panel__lang" href="{{ alt_url | relative_url }}" hreflang="{% if page.lang == 'zh' %}en{% else %}zh-CN{% endif %}">
       {% if page.lang == 'zh' %}Read in English{% else %}阅读中文版{% endif %}
     </a>
