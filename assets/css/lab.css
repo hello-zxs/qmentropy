@@ -291,7 +291,7 @@ body.menu-open .lab-menu-btn__close {
   letter-spacing: -0.03em;
   line-height: 1;
 }
-.lab-menu nav a span {
+.lab-menu nav a span:last-child {
   font-family: var(--lab-mono);
   font-size: 9px;
   font-weight: 400;
