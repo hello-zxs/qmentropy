@@ -101,13 +101,7 @@ body.menu-open {
   background: none;
   cursor: pointer;
 }
-.lab-page h1,
-.lab-page h2,
-.lab-page h3,
-.lab-page p,
-.lab-page figure,
-.lab-page dl,
-.lab-page dd {
+.lab-page :where(h1, h2, h3, p, figure, dl, dd) {
   margin: 0;
 }
 .lab-page ul {
