@@ -268,6 +268,44 @@ summary:focus-visible {
   border-top: 2px solid var(--ink);
 }
 
+/* ---------- erratum ---------- */
+.erratum {
+  margin: 0 0 30px;
+  padding: 16px 20px;
+  border-left: 2px solid #0e6f7a;
+  background: #f4f6f7;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.erratum h2 {
+  margin: 0 0 8px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0b5a63;
+}
+.erratum ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+.erratum li {
+  margin-bottom: 8px;
+}
+.erratum p {
+  margin: 8px 0 0;
+  text-align: left;
+  text-indent: 0;
+}
+.erratum-mark {
+  color: #0b5a63;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-size: 0.8em;
+  vertical-align: 0.3em;
+}
+
 /* ---------- references ---------- */
 .references {
   margin-top: 48px;

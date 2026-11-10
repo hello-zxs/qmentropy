@@ -4,11 +4,11 @@
 <em>{{ r.title }}</em>. {{ r.publisher }}, {{ r.year }}.
 {%- else -%}
 “{{ r.title }},”
-{%- if r.journal %} <em>{{ r.journal }}</em>{% if r.volume %}, vol. {{ r.volume }}{% endif %}{% if r.number %}, no. {{ r.number }}{% endif %}{% if r.pages %}, pp. {{ r.pages }}{% endif %}, {{ r.year }}.
+{%- if r.journal %} <em>{{ r.journal }}</em>{% if r.volume %}, vol. {{ r.volume }}{% endif %}{% if r.number %}, no. {{ r.number }}{% endif %}{% if r.pages %}, pp. {{ r.pages }}{% endif %}{% if r.article %}, Art. no. {{ r.article }}{% endif %}, {{ r.year }}.
 {%- elsif r.arxiv %} arXiv:{{ r.arxiv }}, {{ r.year }}.
 {%- elsif r.venue %} {{ r.venue }}, {{ r.year }}.
 {%- else %} {{ r.year }}.
 {%- endif -%}
 {%- endif -%}
-{%- if r.doi %} doi: {{ r.doi }}.{% endif -%}
-{%- if r.url %} [Online]. Available: {{ r.url }}{% endif -%}
+{%- if r.doi %} doi: <a href="https://doi.org/{{ r.doi }}">{{ r.doi }}</a>.{% endif -%}
+{%- if r.url %} [Online]. Available: <a href="{{ r.url }}">{{ r.url }}</a>{% endif -%}

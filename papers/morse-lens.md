@@ -14,13 +14,13 @@ references:
     publisher: "Brown Univ. Press"
     year: 1944
   - authors: "S. P. Morgan"
-    title: "General solution of the Luneburg lens problem"
+    title: "General solution of the Luneberg lens problem"
     journal: "J. Appl. Phys."
     volume: 29
     number: 9
-    pages: "1358–1366"
+    pages: "1358–1368"
     year: 1958
-    doi: "10.1063/1.1723435"
+    doi: "10.1063/1.1723441"
   - authors: "S. Cornbleet"
     title: "Microwave and Geometrical Optics"
     book: true
@@ -31,9 +31,9 @@ references:
     journal: "J. Opt."
     volume: 14
     number: 7
-    pages: "075103"
+    article: "075705"
     year: 2012
-    doi: "10.1088/2040-8978/14/7/075103"
+    doi: "10.1088/2040-8978/14/7/075705"
   - authors: "H. Chen"
     title: "The Morse lens"
     arxiv: "2002.03884"
@@ -62,7 +62,7 @@ references:
     number: 1
     pages: "15–23"
     year: 2015
-    doi: "10.1038/nphoton.2014.274"
+    doi: "10.1038/nphoton.2014.307"
   - authors: "D. Schurig et al."
     title: "Metamaterial electromagnetic cloak at microwave frequencies"
     journal: "Science"
@@ -72,6 +72,18 @@ references:
     year: 2006
     doi: "10.1126/science.1133628"
 ---
+
+<section class="erratum" id="erratum" aria-labelledby="erratum-title">
+<h2 id="erratum-title">Erratum to the web edition · 10 November 2026</h2>
+<p>Three statements in the text below are wrong. They are left as first published, marked †, and corrected here.</p>
+<ol>
+<li><strong>Section IV-B and Table I, Luneburg row.</strong> The reconstructed Luneburg surface is not a spherical cap. With \(n^{2}=2-r^{2}\), equation (4) gives \(s'(\rho)=\tfrac12\bigl(1+1/\sqrt{1-\rho^{2}}\bigr)\), hence \(s(\rho)=\tfrac12\left(\rho+\arcsin\rho\right)\): Rinehart's surface [E1]. The sphere is the equivalent surface of Maxwell's fish-eye, not of the Luneburg lens.</li>
+<li><strong>Sections IV-B and VI, and Table I, Eaton row.</strong> The optical length to the origin does not diverge: \(\int_{0}^{1}\sqrt{2/r-1}\;dr=1+\pi/2\). For the whole family (6), equation (4) integrates to \(s(\rho)=B\left(\rho+\arcsin\rho\right)\). A real surface exists for \(B\ge\tfrac12\), and for every such \(B\) it has finite height and a vertical tangent at the rim. For \(B&gt;\tfrac12\) its apex is conical, with half-angle \(\arcsin(1/2B)\), which is \(30^{\circ}\) for the Eaton lens. The Eaton surface is therefore closed; the limits differ at the apex, not in closure.</li>
+<li><strong>Section II-A.</strong> A rotationally symmetric profile has one invariant of this kind, \(L=n\,r^{2}\,d\varphi/ds=n\,r\sin\psi\) (Bouguer's formula). The quantity \(n\cos\psi\) is not conserved.</li>
+</ol>
+<p>The corrections concern how the reconstructed surfaces are described. Equations (1)–(9) and the numerical procedure of Sections IV-A and V are unchanged. The bibliographic details of [2], [4] and [8] have also been corrected.</p>
+<p>[E1] R. F. Rinehart, “A solution of the problem of rapid scanning for radar antennae,” <em>J. Appl. Phys.</em>, vol. 19, no. 9, pp. 860–862, 1948. doi: <a href="https://doi.org/10.1063/1.1698221">10.1063/1.1698221</a>.</p>
+</section>
 
 ## I. Introduction
 
@@ -96,7 +108,7 @@ In a medium with refractive index $n(\mathbf{r})$, Fermat's principle states tha
 
 $$S=\int n(\mathbf{r})\,ds \tag{1}$$
 
-is stationary along a ray, where $ds$ is the Euclidean arc length. For a spherically symmetric profile $n=n(r)$, the ray problem has two conserved quantities: the optical angular momentum $L=n(r)\,r^{2}\dot{\varphi}$ and the ray invariant $n\cos\psi$, with $\psi$ the angle between the ray and the radial direction.
+is stationary along a ray, where $ds$ is the Euclidean arc length. For a spherically symmetric profile $n=n(r)$, the ray problem has two conserved quantities: the optical angular momentum $L=n(r)\,r^{2}\dot{\varphi}$ and the ray invariant $n\cos\psi$, with $\psi$ the angle between the ray and the radial direction. <a class="erratum-mark" href="#erratum" aria-label="Corrected in the erratum">†</a>
 
 ### B. Surface of revolution
 
@@ -161,17 +173,17 @@ For a given $B$, (6) provides $n(r)$ on $0<r\le1$. The projected radius $\rho(r)
 
 ### B. Closure criterion
 
-The surface closes if and only if $z(\rho)$ remains finite as $\rho\to\rho_{\max}$ and $dz/d\rho\to\infty$ there. For the Luneburg case the reconstructed surface is a spherical cap: $\rho$ reaches the rim with a vertical tangent, and the lens is closed. For the Eaton case, $n\sim r^{-1/2}$ as $r\to0$, so the optical length diverges and the surface cannot close at the bottom; the profile opens into a vertical tangent. Intermediate Morse profiles inherit the behavior of the nearer limit. Table I summarizes the correspondence.
+The surface closes if and only if $z(\rho)$ remains finite as $\rho\to\rho_{\max}$ and $dz/d\rho\to\infty$ there. For the Luneburg case the reconstructed surface is a spherical cap: $\rho$ reaches the rim with a vertical tangent, and the lens is closed. For the Eaton case, $n\sim r^{-1/2}$ as $r\to0$, so the optical length diverges and the surface cannot close at the bottom; the profile opens into a vertical tangent. <a class="erratum-mark" href="#erratum" aria-label="Corrected in the erratum">†</a> Intermediate Morse profiles inherit the behavior of the nearer limit. Table I summarizes the correspondence.
 
 <table>
-<caption>TABLE I. Parameter correspondence and surface behavior.</caption>
+<caption>TABLE I. Parameter correspondence and surface behavior. Entries marked † are corrected in the erratum.</caption>
 <thead>
 <tr><th>Profile</th><th><em>B</em></th><th><em>a</em></th><th><em>n</em><sup>2</sup>(<em>r</em>)</th><th>Equivalent surface</th></tr>
 </thead>
 <tbody>
-<tr><td>Luneburg</td><td>1/2</td><td>−2</td><td>2 − <em>r</em><sup>2</sup></td><td>Closed, spherical cap</td></tr>
+<tr><td>Luneburg</td><td>1/2</td><td>−2</td><td>2 − <em>r</em><sup>2</sup></td><td>Closed, spherical cap <a class="erratum-mark" href="#erratum" aria-label="Corrected in the erratum">†</a></td></tr>
 <tr><td>Morse</td><td>(1/2, 1)</td><td>(−2, −1)</td><td>2<em>r</em><sup>−2+1/B</sup> − <em>r</em><sup>−2+2/B</sup></td><td>Interpolates between the limits</td></tr>
-<tr><td>Eaton</td><td>1</td><td>−1</td><td>2/<em>r</em> − 1</td><td>Open at the origin; vertical tangent</td></tr>
+<tr><td>Eaton</td><td>1</td><td>−1</td><td>2/<em>r</em> − 1</td><td>Open at the origin; vertical tangent <a class="erratum-mark" href="#erratum" aria-label="Corrected in the erratum">†</a></td></tr>
 </tbody>
 </table>
 
@@ -205,7 +217,7 @@ In all three cases the surface trajectories reproduce the topology of the GRIN r
 
 ## VI. Discussion
 
-The construction separates two questions that are often conflated in transformation optics: whether an equivalent geometry exists, and whether the required medium can be built. The metric equivalence answers the first question. The closure criterion answers the second in the geometric-optics sense: a profile admits a closed geodesic lens exactly when its reconstructed surface closes. The Eaton limit shows that this is not automatic — the divergence of the index at the origin is a geometric obstruction, not a fabrication problem.
+The construction separates two questions that are often conflated in transformation optics: whether an equivalent geometry exists, and whether the required medium can be built. The metric equivalence answers the first question. The closure criterion answers the second in the geometric-optics sense: a profile admits a closed geodesic lens exactly when its reconstructed surface closes. The Eaton limit shows that this is not automatic — the divergence of the index at the origin is a geometric obstruction, not a fabrication problem. <a class="erratum-mark" href="#erratum" aria-label="Corrected in the erratum">†</a>
 
 Three limitations should be stated. First, the treatment is scalar and geometric: polarization, Fresnel coefficients, and wave effects are outside its scope. Second, the construction assumes exact rotational symmetry; a fabricated surface will have finite tolerance, and the sensitivity of the focus to surface error is a separate study. Third, the ray tracing validates the geometry, not a particular realization. A natural next step is to pattern the surface as a dielectric metasurface and to compare the full-wave response with the geodesic prediction.
 
