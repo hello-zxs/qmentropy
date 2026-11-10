@@ -9,7 +9,7 @@
   --desk: #e9e9ec;
   --ink: #111111;
   --muted: #55555c;
-  --faint: #8a8a90;
+  --faint: #6b6b72;
   --rule: #d9d9dd;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --serif: "Times New Roman", "Nimbus Roman", "Liberation Serif", Georgia, serif;
@@ -298,6 +298,11 @@ summary:focus-visible {
   text-align: left;
   text-indent: 0;
 }
+.erratum a:not(.erratum-mark) {
+  color: #0b5a63;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
 .erratum-mark {
   color: #0b5a63;
   text-decoration: none;
@@ -356,6 +361,20 @@ summary:focus-visible {
 
 .paper-cite p {
   margin: 0 0 8px;
+}
+
+.paper-cite__files {
+  margin-top: 12px;
+  font-family: var(--sans);
+  font-size: 12px;
+}
+.paper-cite__files a {
+  display: inline-block;
+  margin-right: 16px;
+  padding: 6px 0;
+}
+.paper-cite summary {
+  padding: 4px 0;
 }
 
 .paper-cite strong {

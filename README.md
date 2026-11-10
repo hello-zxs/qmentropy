@@ -10,7 +10,7 @@ qmentropy.com 是三站矩阵中的 **Lab**：仪器、论文与计算。Index �
 - **青色信号**：Lab accent 为 `#7FDCF2`（暗）/ `#0E6F7A`（纸），替代原来的 Apple 蓝。
 - **论文是“论文纸”**：`/papers/<id>/` 用衬线体、编号章节、`[n]` 参考文献和打印版式；导航与页脚仍与全站一致。
 - **数据驱动**：旧首页文案在 `_data/home*.yml`，论文元数据在 `_data/publications.yml`，导航在 `_data/navigation*.yml`。
-- **少依赖**：只剩 `jekyll-sitemap`；没有主题、没有前端框架，MathJax 仅在需要公式的页面加载。
+- **少依赖**：只剩 `jekyll-sitemap`；没有主题、没有前端框架；公式用自托管的 KaTeX（`assets/katex/`），仅在需要公式的页面加载，不向任何第三方发请求。front matter 的开关沿用旧名 `mathjax: true`。
 - **矩阵坞**：`assets/matrix/` 是共享的 Index / Lab / Record 导航坞；`matrix-theme.css` 负责把旧页面接到 Lab 的青色系统。
 
 ## 三站矩阵
@@ -44,7 +44,8 @@ qmentropy.com 是三站矩阵中的 **Lab**：仪器、论文与计算。Index �
 | `_layouts/archive.html` | Notes / 年份归档：标签筛选、按年分组 |
 | `_layouts/paper.html` | 论文页：摘要、Index Terms、正文、参考文献、引用块 |
 | `_layouts/home-apple.html` | 首页 |
-| `_includes/site/head.html` | 全站 `<head>`：meta、OG、字体、CSS、可选 MathJax |
+| `_includes/site/head.html` | 全站 `<head>`：meta、OG、字体、CSS、可选 KaTeX、统一的 Person 结构化数据 |
+| `_includes/paper/citation-meta.html` | 论文页的学术元数据：`citation_*`（Google Scholar）、Dublin Core、JSON-LD `Thesis` |
 | `_includes/site/nav.html` | 全站导航 + 语言切换 + 论文页 Print 按钮 |
 | `_includes/site/menu.html` | 移动端菜单 |
 | `_includes/site/footer.html` | 全站页脚 |
@@ -71,7 +72,9 @@ qmentropy.com 是三站矩阵中的 **Lab**：仪器、论文与计算。Index �
 - 元数据：`_data/publications.yml`（标题、类型、摘要、IEEE/APA 引用、BibTeX、URL）
 - 正文：`papers/<id>.md`，front matter 写 `layout: paper`、`pub_id: <id>`、`index_terms`、`references`
 - 参考文献：写在 `references:` 列表里，由 `_includes/paper/reference.html` 按 IEEE 渲染并自动编号
-- 引用块：论文页底部自动给出 IEEE / APA / BibTeX，来自 `publications.yml`
+- 引用块：论文页底部自动给出 IEEE / APA / BibTeX，来自 `publications.yml`；可下载的 `.bib` / `.ris` 在 `assets/cite/`
+- 学术元数据：`citation_*`、Dublin Core 与 JSON-LD 由 `_includes/paper/citation-meta.html` 从 `publications.yml` 生成，不必手写
+- 勘误：正文不改写，在论文开头加带日期的 `<section class="erratum">`，并在原句后标 †
 - 打印：右上角 `Print / PDF` 调浏览器打印，`paper.css` 去掉导航、改白底
 - 插图：`python tools/make_paper_figures.py`（需要 matplotlib）
 

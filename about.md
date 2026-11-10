@@ -25,7 +25,7 @@ My thesis studied the equivalent surface construction and ray tracing of the Mor
 ## This site
 
 - Built with [Jekyll](https://jekyllrb.com/) and a custom light layout — no third-party theme; hosted on GitHub Pages
-- Equations rendered with MathJax 3 on pages that need it
+- Equations typeset with a self-hosted copy of KaTeX, loaded only on pages that need it; no third-party requests
 - Source: [github.com/hello-zxs/qmentropy](https://github.com/hello-zxs/qmentropy)
 - Domain: qmentropy.com
 

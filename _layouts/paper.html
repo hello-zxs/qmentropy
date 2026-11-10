@@ -60,6 +60,11 @@
             <pre>{{ pub.bibtex }}</pre>
           </details>
           {% endif %}
+          <p class="paper-cite__files">
+            {% if pub.bib %}<a href="{{ pub.bib | relative_url }}" download>BibTeX file (.bib)</a>{% endif %}
+            {% if pub.ris %}<a href="{{ pub.ris | relative_url }}" download>RIS file (.ris)</a>{% endif %}
+            {% if pub.pdf and pub.pdf != "" %}<a href="{{ pub.pdf | relative_url }}">PDF</a>{% endif %}
+          </p>
         </section>
         {% endif %}
       </article>

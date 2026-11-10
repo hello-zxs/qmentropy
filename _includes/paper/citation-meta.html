@@ -1,0 +1,55 @@
+{%- comment -%}
+  Scholarly metadata for a paper page.
+  - citation_* (Highwire Press) is what Google Scholar reads.
+  - DC.* (Dublin Core) is what Zotero and library harvesters read.
+  - The JSON-LD Thesis node is what general search engines read.
+  Everything comes from _data/publications.yml; nothing is typed twice.
+{%- endcomment -%}
+{%- assign pub = site.data.publications | where: "id", page.pub_id | first -%}
+{%- if pub -%}
+{%- assign paper_url = page.url | absolute_url -%}
+<meta name="citation_title" content="{{ pub.title | escape }}">
+<meta name="citation_author" content="{{ pub.author_family }}, {{ pub.author_given }}">
+<meta name="citation_publication_date" content="{{ pub.year }}">
+<meta name="citation_dissertation_institution" content="{{ pub.institution | escape }}">
+<meta name="citation_dissertation_name" content="{{ pub.type | escape }}">
+<meta name="citation_language" content="{{ pub.language | default: 'en' }}">
+<meta name="citation_keywords" content="{{ pub.keywords | escape }}">
+<meta name="citation_abstract_html_url" content="{{ paper_url }}">
+<meta name="citation_fulltext_html_url" content="{{ paper_url }}">
+{% if pub.pdf and pub.pdf != "" %}<meta name="citation_pdf_url" content="{{ pub.pdf | absolute_url }}">{% endif %}
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.title" content="{{ pub.title | escape }}">
+<meta name="DC.creator" content="{{ pub.author_family }}, {{ pub.author_given }}">
+<meta name="DC.date" content="{{ pub.year }}">
+<meta name="DC.type" content="Thesis">
+<meta name="DC.publisher" content="{{ pub.institution | escape }}">
+<meta name="DC.language" content="{{ pub.language | default: 'en' }}">
+<meta name="DC.subject" content="{{ pub.keywords | escape }}">
+<meta name="DC.description" content="{{ pub.abstract | escape }}">
+<meta name="DC.identifier" content="{{ paper_url }}">
+{% if pub.bib %}<link rel="alternate" type="application/x-bibtex" title="BibTeX" href="{{ pub.bib | relative_url }}">{% endif %}
+{% if pub.ris %}<link rel="alternate" type="application/x-research-info-systems" title="RIS" href="{{ pub.ris | relative_url }}">{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Thesis",
+  "@id": "{{ paper_url }}#thesis",
+  "name": {{ pub.title | jsonify }},
+  "headline": {{ pub.title | jsonify }},
+  "abstract": {{ pub.abstract | jsonify }},
+  "author": { "@id": "https://zhengxiangsheng.com/#person" },
+  "datePublished": "{{ pub.year }}",
+  {% if pub.revised %}"dateModified": "{{ pub.revised }}",{% endif %}
+  "inSupportOf": {{ pub.degree | jsonify }},
+  "sourceOrganization": { "@type": "CollegeOrUniversity", "name": {{ pub.institution | jsonify }} },
+  "publisher": { "@type": "CollegeOrUniversity", "name": {{ pub.institution | jsonify }} },
+  "inLanguage": "{{ pub.language | default: 'en' }}",
+  "keywords": {{ pub.keywords | jsonify }},
+  "isAccessibleForFree": true,
+  "url": "{{ paper_url }}",
+  "mainEntityOfPage": "{{ paper_url }}"{% if pub.pdf and pub.pdf != "" %},
+  "encoding": { "@type": "MediaObject", "encodingFormat": "application/pdf", "contentUrl": "{{ pub.pdf | absolute_url }}" }{% endif %}
+}
+</script>
+{%- endif -%}

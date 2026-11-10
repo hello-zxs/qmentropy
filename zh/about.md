@@ -26,7 +26,7 @@ ref: about
 ## 这个站点
 
 - 基于 [Jekyll](https://jekyllrb.com/) 与自己的浅色布局，不依赖第三方主题；托管在 GitHub Pages
-- 公式由 MathJax 3 渲染，图表用 Mermaid
+- 公式由自托管的 KaTeX 排版，只在需要公式的页面加载，不向第三方发请求
 - 站点源文件：[github.com/hello-zxs/qmentropy](https://github.com/hello-zxs/qmentropy)
 - 域名：qmentropy.com
 

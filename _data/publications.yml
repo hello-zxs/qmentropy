@@ -7,19 +7,31 @@
   featured: true
   title: "Ray tracing and equivalent geodesic lenses for the Morse lens"
   authors: "X. Zheng"
+  # Machine-readable record: used for citation meta tags, JSON-LD and the .bib/.ris files.
+  author_family: "Zheng"
+  author_given: "Xiangsheng"
+  institution: "Xiamen University Malaysia"
+  degree: "BSc (Hons) in Physics"
+  place: "Sepang, Malaysia"
+  language: "en"
+  keywords: "Geodesic lenses; transformation optics; Morse potential; gradient-index optics; ray tracing"
+  revised: "2026-11-10"
   venue: "Xiamen University Malaysia, Sepang, Malaysia"
   abstract: "We construct the equivalent geodesic-lens representation of the Morse refractive-index profile, show that the conformal Morse lens is the (A = B, C = 1) subclass of Cornbleet’s general family, and validate the construction by ray tracing."
   url: "/papers/morse-lens/"
-  pdf: ""
+  pdf: "/assets/pdf/morse-lens.pdf"
+  bib: "/assets/cite/morse-lens.bib"
+  ris: "/assets/cite/morse-lens.ris"
   doi: ""
   cite_ieee: "X. Zheng, “Ray tracing and equivalent geodesic lenses for the Morse lens,” BSc (Hons) thesis, Xiamen Univ. Malaysia, Sepang, Malaysia, 2026."
   cite_apa: "Zheng, X. (2026). Ray tracing and equivalent geodesic lenses for the Morse lens [Bachelor’s thesis, Xiamen University Malaysia]."
   bibtex: |
-    @phdthesis{xiangsheng2026morse,
+    @phdthesis{zheng2026morse,
       author = {Zheng, Xiangsheng},
       title  = {Ray tracing and equivalent geodesic lenses for the Morse lens},
       school = {Xiamen University Malaysia},
       year   = {2026},
       type   = {BSc (Hons) thesis},
-      address = {Sepang, Malaysia}
+      address = {Sepang, Malaysia},
+      url    = {https://qmentropy.com/papers/morse-lens/}
     }

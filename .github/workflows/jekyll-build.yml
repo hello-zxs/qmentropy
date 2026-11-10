@@ -44,4 +44,11 @@ jobs:
           grep -q "site-nav" _site/research/index.html
           test -f _site/papers/morse-lens/index.html
           grep -q "References" _site/papers/morse-lens/index.html
+          grep -q 'name="citation_title"' _site/papers/morse-lens/index.html
+          grep -q 'name="citation_pdf_url"' _site/papers/morse-lens/index.html
+          grep -q '"@type": "Thesis"' _site/papers/morse-lens/index.html
+          test -f _site/assets/cite/morse-lens.bib
+          test -f _site/assets/cite/morse-lens.ris
+          test -f _site/assets/katex/katex.min.js
+          ! grep -rq "cdn.jsdelivr.net" _site --include=*.html
           echo "✅ build ok"

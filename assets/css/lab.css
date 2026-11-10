@@ -12,15 +12,8 @@
 }
 @font-face {
   font-family: "Lab Sans";
-  src: url("../fonts/inter-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Lab Sans";
-  src: url("../fonts/inter-500.woff2") format("woff2");
-  font-weight: 500;
+  src: url("../fonts/inter-var.woff2") format("woff2");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -415,6 +408,14 @@ body.menu-open .lab-menu-btn__close {
   font-weight: 500;
   transition: background-color 0.25s var(--lab-ease), color 0.25s var(--lab-ease),
     border-color 0.25s var(--lab-ease);
+}
+/* `.lab-page a` outranks a bare `.lab-btn`, which left the primary button with
+   near-white text on cyan (1.4:1). State the ink colour at the same weight. */
+.lab-page .lab-btn {
+  color: var(--lab-bg);
+}
+.lab-page .lab-btn--ghost {
+  color: var(--lab-fg);
 }
 .lab-btn:hover {
   background: var(--lab-fg);
@@ -995,10 +996,10 @@ body.menu-open .lab-menu-btn__close {
   gap: 10px 20px;
   padding-top: 16px;
   font-family: var(--lab-mono);
-  font-size: 8px;
+  font-size: 9.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(237, 243, 245, 0.34);
+  color: rgba(237, 243, 245, 0.62);
 }
 
 /* --------------------------------------------------------------------------

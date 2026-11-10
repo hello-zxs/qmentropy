@@ -320,7 +320,7 @@ body.menu-open .mx-dock {
 }
 .mx-strip--light {
   --mx-fg: #15171b;
-  --mx-muted: #6b6f77;
+  --mx-muted: #575b63;
   --mx-hair: rgba(21, 23, 27, 0.14);
   --mx-hair-strong: rgba(21, 23, 27, 0.28);
 }

@@ -11,7 +11,8 @@
 | 导航结构与语言按钮 | `_includes/site/nav.html` |
 | 移动端菜单 | `_includes/site/menu.html` |
 | 页脚 | `_includes/site/footer.html` |
-| `<head>`、meta、OG、字体、MathJax | `_includes/site/head.html` |
+| `<head>`、meta、OG、字体、KaTeX | `_includes/site/head.html` |
+| 论文页的 Google Scholar / Dublin Core / JSON-LD 元数据 | `_includes/paper/citation-meta.html`（数据来自 `_data/publications.yml`） |
 | 全站交互 | `assets/js/site.js` |
 | 滚动动效方向/重置 | `assets/js/site.js` 的 reveal 段；样式在 `site.css` 的 `/* motion */` |
 | 阅读进度 / 返回顶部 / 统计 | `_includes/site/scripts.html` |
@@ -47,6 +48,7 @@
 | 摘要 / Index Terms | `papers/<id>.md` 的 front matter |
 | 参考文献 | 论文 front matter 的 `references:` |
 | IEEE / APA 引用、BibTeX | `_data/publications.yml` 的 `cite_ieee` / `cite_apa` / `bibtex` |
+| 可下载的 `.bib` / `.ris` | `assets/cite/<id>.bib`、`assets/cite/<id>.ris` |
 | 论文版式、打印 PDF | `assets/css/paper.css` |
 | 论文插图 | `python tools/make_paper_figures.py` |
 

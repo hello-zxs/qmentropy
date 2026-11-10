@@ -29,18 +29,25 @@
 <meta name="twitter:description" content="{{ page_description | escape }}">
 <meta name="twitter:image" content="{{ '/assets/images/og.png' | absolute_url }}">
 
+{%- comment -%} One person across the matrix: the Record's @id is the identity, every site points at it. {%- endcomment -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://zhengxiangsheng.com/#person",
   "name": "Zheng Xiangsheng",
+  "familyName": "Zheng",
+  "givenName": "Xiangsheng",
   "alternateName": "郑翔升",
-  "url": "https://qmentropy.com/",
+  "url": "https://zhengxiangsheng.com/",
   "jobTitle": "Physics MSc student",
-  "affiliation": { "@type": "Organization", "name": "Western University" },
-  "sameAs": ["https://github.com/hello-zxs", "https://zhengxs.com/", "https://zhengxiangsheng.com/"]
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "Western University" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Xiamen University Malaysia" },
+  "knowsAbout": ["Transformation optics", "Geodesic lenses", "Gradient-index optics", "Quantum optics"],
+  "sameAs": ["https://github.com/hello-zxs", "https://zhengxs.com/", "https://qmentropy.com/"]
 }
 </script>
+{% if page.layout == 'paper' %}{% include paper/citation-meta.html %}{% endif %}
 
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
@@ -60,16 +67,42 @@
 <link rel="alternate" hreflang="x-default" href="{{ pair.en | absolute_url }}">
 {% endif %}
 
+{%- comment -%}
+  Math is typeset by a self-hosted KaTeX (assets/katex), so a page with
+  equations makes no third-party request. The front-matter switch keeps its
+  historical name, `mathjax: true`.
+{%- endcomment -%}
 {% if page.mathjax %}
+<link rel="stylesheet" href="{{ '/assets/katex/katex.min.css' | relative_url }}">
+<script defer src="{{ '/assets/katex/katex.min.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/katex/auto-render.min.js' | relative_url }}"></script>
 <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      tags: 'ams'
-    },
-    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
-  };
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof window.renderMathInElement !== 'function') return;
+    window.renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+      throwOnError: false,
+      strict: false
+    });
+    // An equation wider than the column scrolls inside itself; make that
+    // scroll reachable from the keyboard.
+    var mark = function () {
+      document.querySelectorAll('.katex-display').forEach(function (el) {
+        if (el.scrollWidth <= el.clientWidth + 1 || el.hasAttribute('tabindex')) return;
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'group');
+        el.setAttribute('aria-label', 'Equation, scrolls sideways');
+      });
+    };
+    mark();
+    window.addEventListener('load', mark);
+    window.addEventListener('resize', mark, { passive: true });
+  });
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endif %}

@@ -1,0 +1,33 @@
+# How to cite the work published at qmentropy.com.
+# GitHub reads this file and shows a "Cite this repository" button.
+cff-version: 1.2.0
+message: "If you use the thesis or its figures, please cite the thesis below."
+title: "qmentropy.com — the Lab"
+type: software
+authors:
+  - family-names: Zheng
+    given-names: Xiangsheng
+    affiliation: Western University
+url: "https://qmentropy.com/"
+repository-code: "https://github.com/hello-zxs/qmentropy"
+preferred-citation:
+  type: thesis
+  title: "Ray tracing and equivalent geodesic lenses for the Morse lens"
+  authors:
+    - family-names: Zheng
+      given-names: Xiangsheng
+  year: 2026
+  thesis-type: "BSc (Hons) thesis"
+  institution:
+    name: "Xiamen University Malaysia"
+    city: Sepang
+    country: MY
+  url: "https://qmentropy.com/papers/morse-lens/"
+  languages:
+    - en
+  keywords:
+    - geodesic lenses
+    - transformation optics
+    - Morse potential
+    - gradient-index optics
+    - ray tracing

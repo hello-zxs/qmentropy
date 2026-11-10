@@ -12,20 +12,13 @@
   src: url("../fonts/inter-tight-600.woff2") format("woff2");
 }
 
+/* One variable file covers every weight; it used to be shipped twice. */
 @font-face {
   font-family: "Inter";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("../fonts/inter-400.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("../fonts/inter-500.woff2") format("woff2");
+  src: url("../fonts/inter-var.woff2") format("woff2");
 }
 
 :root {
@@ -1104,7 +1097,17 @@ html[lang="zh-CN"] .note-list h3 {
 
 .prose a {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* a display equation wider than the column scrolls inside itself, not the page */
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
 }
 
 .prose a:hover {

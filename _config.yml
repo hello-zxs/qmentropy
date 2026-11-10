@@ -63,6 +63,7 @@ exclude:
   - vendor/
   - README.md
   - EDITING.md
+  - CITATION.cff
   - tools/
   - package.json
   - package-lock.json
