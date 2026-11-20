@@ -1,7 +1,7 @@
 # 首页文案（中文）。英文对应文件：_data/home.yml
 
 hero:
-  eyebrow: "物理硕士 · Western University"
+  eyebrow: "软件工程方向研究生 · Western University"
   title_lines:
     - "郑翔升"
   lead: "研究几何如何决定光的传播：变换光学、测地线透镜，以及单光子层面的量子光学。"
@@ -9,7 +9,7 @@ hero:
   primary_url: "#publications"
   secondary_label: "研究方向"
   secondary_url: "/zh/research/"
-  status: "MSc @ Western University · London, Ontario · 2026–"
+  status: "电气与计算机工程系（ECE）· 安大略省伦敦市 · 2026 年起"
 
 publications:
   kicker: "论文"

@@ -3,27 +3,27 @@ title: "Curriculum Vitae"
 permalink: /cv/
 layout: page
 kicker: "CV"
-lead: "Physics MSc student at Western University. Transformation optics, geodesic lenses, and quantum optics."
+lead: "Graduate student in Software Engineering in Western University’s Department of Electrical and Computer Engineering."
 toc: true
 lang: en
 ref: cv
 ---
 
 **Zheng Xiangsheng**  
-Physics MSc student, Western University  
+Software Engineering graduate student, Western University<br>
 London, Ontario, Canada  
 [helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com) · [github.com/hello-zxs](https://github.com/hello-zxs)
 
-*Last updated: October 2026 · transcripts and referees available on request*
+*Last updated: 20 November 2026 · transcripts and referees available on request*
 
 [Current academic record](https://zhengxiangsheng.com/#record) · [Download CV (PDF)](https://zhengxiangsheng.com/assets/cv.pdf)
 
 ## Education
 
-### Western University — MSc in Physics
+### Western University — Electrical and Computer Engineering (ECE)
 **2026 – present** · London, Ontario, Canada
 
-- Started in autumn 2026; research direction: transformation optics and quantum optics.
+- Graduate studies in Software Engineering, beginning in autumn 2026.
 
 ### Xiamen University Malaysia — BSc (Hons) Physics
 **2022 – 2026** · Sepang, Malaysia

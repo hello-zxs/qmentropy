@@ -8,11 +8,11 @@ lang: en
 ref: about
 ---
 
-I am **Zheng Xiangsheng**, a physics graduate of Xiamen University Malaysia (XMUM). Since autumn 2026 I have been pursuing an MSc at Western University in London, Ontario.
+I am **Zheng Xiangsheng**, a physics graduate of Xiamen University Malaysia (XMUM). Since autumn 2026 I have been studying software engineering as a graduate student in the Department of Electrical and Computer Engineering (ECE) at Western University in London, Ontario.
 
 ## Now
 
-- **MSc @ Western University**, started autumn 2026
+- **Software Engineering, Western ECE**, started autumn 2026
 - Research interests: transformation optics, geodesic lenses, quantum optics
 - Based in London, Ontario
 
@@ -20,7 +20,7 @@ I am **Zheng Xiangsheng**, a physics graduate of Xiamen University Malaysia (XMU
 
 I care about the relationship between **geometry and light**: a ray travelling through a curved space follows a geodesic, and if we can design the metric of that space, we can make light follow any path we like. That is transformation optics; reducing a three-dimensional index problem to a two-dimensional surface is the geodesic lens.
 
-My thesis studied the equivalent surface construction and ray tracing of the Morse lens. In my MSc I hope to bring this geometric toolkit closer to experiment — metasurfaces, conformal mapping, and quantum measurement at the single-photon level.
+My thesis studied the equivalent surface construction and ray tracing of the Morse lens. In my optics work I hope to bring this geometric toolkit closer to experiment — metasurfaces, conformal mapping, and quantum measurement at the single-photon level.
 
 ## This site
 

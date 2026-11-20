@@ -1,6 +1,6 @@
 # qmentropy.com — The Lab
 
-郑翔升的个人学术站点 — 物理硕士（Western University），研究方向为变换光学、测地线透镜与量子光学。
+郑翔升的个人学术站点 — Western University 电气与计算机工程系（ECE）软件工程方向研究生，本站收录变换光学、测地线透镜与量子光学。
 
 qmentropy.com 是三站矩阵中的 **Lab**：仪器、论文与计算。Index 在 [zhengxs.com](https://zhengxs.com)，正式履历在 [zhengxiangsheng.com](https://zhengxiangsheng.com)。英文默认在 `/`，中文在 `/zh/`。Jekyll 静态站点，**不依赖第三方主题**。
 

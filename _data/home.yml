@@ -2,7 +2,7 @@
 # Chinese counterpart: _data/home_zh.yml
 
 hero:
-  eyebrow: "Physics MSc · Western University"
+  eyebrow: "Software Engineering · Western University"
   title_lines:
     - "Zheng Xiangsheng"
   lead: "I study how geometry shapes light — transformation optics, geodesic lenses, and quantum optics at the single-photon level."
@@ -10,7 +10,7 @@ hero:
   primary_url: "#publications"
   secondary_label: "Research"
   secondary_url: "/research/"
-  status: "MSc @ Western University · London, Ontario · 2026–"
+  status: "ECE graduate student · London, Ontario · 2026–"
 
 publications:
   kicker: "Publications"

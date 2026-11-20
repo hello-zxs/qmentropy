@@ -3,7 +3,7 @@ title: "简历"
 permalink: /zh/cv/
 layout: page
 kicker: "简历"
-lead: "Western University 物理硕士生；变换光学、测地线透镜与量子光学。"
+lead: "Western University 电气与计算机工程系（ECE）研究生，软件工程方向。"
 toc: true
 lang: zh
 locale: zh-CN
@@ -11,20 +11,20 @@ ref: cv
 ---
 
 **郑翔升 · Zheng Xiangsheng**  
-Physics MSc student, Western University  
+Western University 软件工程方向研究生<br>
 London, Ontario, Canada  
 [helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com) · [github.com/hello-zxs](https://github.com/hello-zxs)
 
-*最近更新：2026 年 10 月 · 成绩单与推荐人信息可邮件索取*
+*最近更新：2026 年 11 月 20 日 · 成绩单与推荐人信息可邮件索取*
 
 [查看最新学术履历](https://zhengxiangsheng.com/#record) · [下载英文简历（PDF）](https://zhengxiangsheng.com/assets/cv.pdf)
 
 ## 教育背景
 
-### Western University — MSc in Physics
+### Western University — 电气与计算机工程系（ECE）
 **2026 – 至今** · London, Ontario, Canada
 
-- 2026 年秋季入学，研究方向为变换光学与量子光学。
+- 2026 年秋季入学，学习软件工程（Software Engineering）。
 
 ### Xiamen University Malaysia — BSc (Hons) Physics
 **2022 – 2026** · Sepang, Malaysia
