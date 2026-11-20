@@ -85,6 +85,8 @@ references:
 <p>[E1] R. F. Rinehart, “A solution of the problem of rapid scanning for radar antennae,” <em>J. Appl. Phys.</em>, vol. 19, no. 9, pp. 860–862, 1948. doi: <a href="https://doi.org/10.1063/1.1698221">10.1063/1.1698221</a>.</p>
 </section>
 
+**Research follow-up · 20 November 2026.** [Explore the general ray solution and animate the equivalent surface](/lab/morse-lens/). The follow-up retains the Morse energy offset and treats returning, critical and open rays.
+
 ## I. Introduction
 
 A gradient-index (GRIN) lens shapes a wavefront by making the refractive index a function of position. The classical examples — the Luneburg lens [1], [2], the Eaton lens, and the Maxwell fisheye — are spherically or cylindrically symmetric, and their ray paths can be obtained analytically. A different but equivalent route replaces the three-dimensional index distribution by a curved surface: if the surface metric is chosen correctly, rays in the medium and geodesics on the surface coincide. Lenses built this way are called geodesic lenses, and the equivalence is the basis of a body of work on microwave and geometrical optics [3], [4].

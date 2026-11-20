@@ -39,6 +39,8 @@ $$\rho = n(r)\,r, \qquad ds = n(r)\,dr, \qquad dz^{2} = ds^{2} - d\rho^{2}$$
 - 证明共形 Morse 透镜恰好是 Cornbleet 一般族的 $(A=B,\;C=1)$ 子类，从而把 Cornbleet–Rinous (1981) 与 Šarbort–Tyc (2012) 两条文献线索统一起来；
 - 给出 Luneburg、Eaton 以及中间 Morse 透镜的等效曲面构造，并用射线追踪验证光线路径。
 
+[调节 Morse 透镜参数，查看曲面与光线](/lab/morse-lens/?lang=zh) · [下载动图](/assets/images/morse-geodesics.gif)
+
 **论文全文**
 
 - [Ray tracing and equivalent geodesic lenses for the Morse lens](/papers/morse-lens/) — 含推导、参数对应与射线追踪验证的完整论文（英文）
