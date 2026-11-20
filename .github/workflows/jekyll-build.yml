@@ -16,6 +16,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Verify Morse optics and closed geodesics
+        run: |
+          node tools/check-morse.mjs
+          node tools/check-morse-closed.mjs
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -43,6 +52,9 @@ jobs:
           test -f _site/assets/js/site.js
           grep -q "site-nav" _site/research/index.html
           test -f _site/papers/morse-lens/index.html
+          test -f _site/lab/morse-lens/closed/index.html
+          test -f _site/assets/js/morse-closed-model.js
+          test -f _site/assets/js/morse-closed-lab.js
           grep -q "References" _site/papers/morse-lens/index.html
           grep -q 'name="citation_title"' _site/papers/morse-lens/index.html
           grep -q 'name="citation_pdf_url"' _site/papers/morse-lens/index.html

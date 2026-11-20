@@ -74,11 +74,11 @@ references:
 ---
 
 <section class="erratum" id="erratum" aria-labelledby="erratum-title">
-<h2 id="erratum-title">Erratum to the web edition · 10 November 2026</h2>
+<h2 id="erratum-title">Erratum to the web edition · 10 November 2026, with a closure clarification on 20 November 2026</h2>
 <p>Three statements in the text below are wrong. They are left as first published, marked †, and corrected here.</p>
 <ol>
 <li><strong>Section IV-B and Table I, Luneburg row.</strong> The reconstructed Luneburg surface is not a spherical cap. With \(n^{2}=2-r^{2}\), equation (4) gives \(s'(\rho)=\tfrac12\bigl(1+1/\sqrt{1-\rho^{2}}\bigr)\), hence \(s(\rho)=\tfrac12\left(\rho+\arcsin\rho\right)\): Rinehart's surface [E1]. The sphere is the equivalent surface of Maxwell's fish-eye, not of the Luneburg lens.</li>
-<li><strong>Sections IV-B and VI, and Table I, Eaton row.</strong> The optical length to the origin does not diverge: \(\int_{0}^{1}\sqrt{2/r-1}\;dr=1+\pi/2\). For the whole family (6), equation (4) integrates to \(s(\rho)=B\left(\rho+\arcsin\rho\right)\). A real surface exists for \(B\ge\tfrac12\), and for every such \(B\) it has finite height and a vertical tangent at the rim. For \(B&gt;\tfrac12\) its apex is conical, with half-angle \(\arcsin(1/2B)\), which is \(30^{\circ}\) for the Eaton lens. The Eaton surface is therefore closed; the limits differ at the apex, not in closure.</li>
+<li><strong>Sections II, IV-B and VI, and Table I, Eaton row.</strong> The optical length to the origin is finite: \(\int_{0}^{1}\sqrt{2/r-1}\;dr=1+\pi/2\). For the whole family (6), equation (4) integrates to \(s(\rho)=B\left(\rho+\arcsin\rho\right)\). The full inner cap embeds for \(B\ge\tfrac12\), with finite height and a vertical tangent at the rim. For \(B&gt;\tfrac12\) its apex is conical, with half-angle \(\arcsin(1/2B)\), which is \(30^{\circ}\) for Eaton. Both the Eaton and Luneburg caps have a circular boundary at the rim. Finite height and a vertical tangent establish neither a compact boundaryless lens nor periodic geodesic flow. See the <a href="/lab/morse-lens/closed/">global embedding obstruction and smooth completion preserving a Luneburg-type Morse cap</a>.</li>
 <li><strong>Section II-A.</strong> A rotationally symmetric profile has one invariant of this kind, \(L=n\,r^{2}\,d\varphi/ds=n\,r\sin\psi\) (Bouguer's formula). The quantity \(n\cos\psi\) is not conserved.</li>
 </ol>
 <p>The corrections concern how the reconstructed surfaces are described. Equations (1)–(9) and the numerical procedure of Sections IV-A and V are unchanged. The bibliographic details of [2], [4] and [8] have also been corrected.</p>
@@ -134,7 +134,7 @@ which is the master identity of the construction. Once $s'(\rho)$ is known, the 
 
 $$z(\rho)=\int_{0}^{\rho}\sqrt{s'(\xi)^{2}-1}\;d\xi. \tag{5}$$
 
-Equation (5) makes the geometry explicit: the existence of a real surface requires $s'(\rho)\ge 1$, and a closed lens requires the integral to remain finite up to the rim and the tangent to become vertical there.
+Equation (5) makes the geometry explicit: the existence of a real surface requires $s'(\rho)\ge 1$, and a closed lens requires the integral to remain finite up to the rim and the tangent to become vertical there. <a class="erratum-mark" href="#erratum" aria-label="Clarified in the erratum">†</a>
 
 ## III. The Morse Profile in Cornbleet's Family
 

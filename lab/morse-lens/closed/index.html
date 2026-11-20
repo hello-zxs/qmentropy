@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Closed Morse-cap lens | QMENTROPY</title>
+<meta name="description" content="A smooth Zoll lens with an exact Luneburg-type Morse cap. Follow rays for one period and verify the embedding and optical length.">
+<link rel="canonical" href="https://qmentropy.com/lab/morse-lens/closed/">
+<link rel="icon" href="/assets/images/favicon.svg"><link rel="stylesheet" href="/assets/katex/katex.min.css">
+<link rel="stylesheet" href="/assets/css/morse.css?v=beam2">
+<script defer src="/assets/katex/katex.min.js"></script><script defer src="/assets/katex/auto-render.min.js"></script>
+<script type="module" src="/assets/js/morse-closed-lab.js"></script>
+</head><body>
+<header class="top"><a class="brand" href="/">QMENTROPY <small>LAB</small></a><nav><a class="en" href="../">Morse lab</a><a class="zh" href="../?lang=zh">Morse 实验</a><a id="language" href="?lang=zh" lang="zh">中文</a></nav></header>
+<main><h1><span class="en">A closed lens with a Morse cap</span><span class="zh">含 <span style="white-space:nowrap">Morse 极帽</span>的<span style="white-space:nowrap">闭合透镜</span></span></h1>
+<p class="intro en">Launch rays from the white ring in different directions. Every ray returns to the ring with its original direction after the same optical length. At full deformation, the blue northern cap reproduces the Luneburg member of the Morse family exactly.</p>
+<p class="intro zh">从白圈标出的同一点向不同方向发射光线。经过相同光程，每条光线都会回到白圈，并恢复出发时的方向。形变系数取 1 时，蓝色北极帽精确复现 Morse 族的 Luneburg 剖面。</p>
+<section class="instrument" aria-label="Closed geodesic lens">
+<div class="views"><figure><figcaption><span class="en">One optical period</span><span class="zh">一个光程周期</span><small>ℓ / a</small></figcaption>
+<canvas id="closed-surface" width="540" height="320" aria-label="Geodesics on the transparent closed surface"></canvas></figure>
+<figure><figcaption><span class="en">Meridian profile</span><span class="zh">子午线截面</span><small>(ρ, z) / a</small></figcaption><canvas id="closed-profile" width="540" height="320" aria-label="Meridian from north to south with the northern cap highlighted"></canvas></figure></div>
+<div class="legend"><span><i class="entry"></i><span class="en">Launch and return</span><span class="zh">出发与返回点</span></span><span><i class="ray"></i><span class="en">Selected ray</span><span class="zh">所选方向</span></span><span id="cap-size"></span><span class="en">Dashed profile · round sphere</span><span class="zh">截面虚线 · 球面参照</span></div>
+<div class="controls">
+<label for="strength"><span><span class="en">Deformation</span><span class="zh">形变系数</span> λ <output id="strength-out" for="strength">1.00</output></span><input id="strength" type="range" min="0" max="1" value="1" step="0.01"></label>
+<label for="cap-edge"><span><span class="en">Cap boundary</span><span class="zh">极帽边界</span> c <output id="edge-out" for="cap-edge">0.50</output></span><input id="cap-edge" type="range" min="0.1" max="0.9" value="0.5" step="0.01"></label>
+<label for="inclination"><span><span class="en">Angle from north</span><span class="zh">与北向子午线夹角</span> <output id="inclination-out" for="inclination">42°</output></span><input id="inclination" type="range" min="0" max="90" value="42" step="1"></label>
+</div><div class="playback"><label for="closed-progress"><span class="en">Optical length</span><span class="zh">累计光程</span> ℓ/a</label><input id="closed-progress" type="range" min="0" max="1000" value="0" step="1"><output id="closed-distance" for="closed-progress">0 / 2π</output></div>
+<div class="actions"><button id="closed-play" aria-pressed="false"><span class="en">Play one period</span><span class="zh">播放一周</span></button><a href="/assets/images/closed-morse-geodesics.gif" download><span class="en">Download one-period GIF</span><span class="zh">下载完整周期动图</span></a><a href="#construction"><span class="en">Derivation and proof</span><span class="zh">构造与证明</span></a></div>
+</section>
+<article id="construction">
+<h2><span class="en">Where the original Morse surface ends</span><span class="zh">原 Morse 曲面在哪里终止？</span></h2>
+<p class="en">The physical model is two-dimensional scalar geometrical optics with rotational symmetry and a homogeneous equivalent surface. A closed surface is compact and has no boundary. A closed ray returns to its initial point and tangent. A smooth Zoll lens satisfies both properties, and every unit-speed geodesic has the same primitive length.</p>
+<p class="zh">模型采用具有旋转对称性的二维标量几何光学，等效曲面上折射率取 1。曲面闭合指紧致且无边界；光线闭合要求回到原位置并恢复原切向。光滑 Zoll 透镜同时满足这两个条件，且所有单位速测地线的最短正周期相同。</p>
+<p class="en">Let \(a=NR\), with \(N,R>0\). For the unmodified radial Morse metric put \(x=(r/R)^k\), \(k\ne0\), and \(H=\epsilon+2x-x^2>0\). Matching circles and meridians gives \(\rho=nr=a\sqrt H\) and \(|ds|=n|dr|\). A real Euclidean surface of revolution requires \(|d\rho/ds|\le1\). At the positive outer root in \(x\), its numerator has a nonzero limit for every \(\epsilon>-1\):</p>
+<p class="zh">设 \(a=NR\)，\(N,R>0\)。对未修改的径向 Morse 度规，取 \(x=(r/R)^k\)、\(k\ne0\)、\(H=\epsilon+2x-x^2>0\)。比较纬圈与子午线得到 \(\rho=nr=a\sqrt H\)、\(|ds|=n|dr|\)。欧氏三维旋转面必须满足 \(|d\rho/ds|\le1\)。对任意 \(\epsilon>-1\)，当 \(x\) 趋近其传播区间的上端点时，下式分子趋于非零值：</p>
+<p class="eq">\[\left|\frac{d\rho}{ds}\right|=\frac{|kx(1-x)|}{H}
+  \ \longrightarrow\ \infty,\qquad x\uparrow x_+=1+\sqrt{1+\epsilon}.\]</p>
+<p class="en">The full unmodified profile therefore has no global isometric realization as an ordinary Euclidean surface of revolution. At zero energy the intrinsic bound noncircular rays can still close when \(1/|k|\) is rational. Truncating at \(x=1\) gives a cap with a circular boundary. Gluing two identical zero-energy inner caps gives a full radial cycle of \(2B(\pi+2\arccos m)\) in azimuth, which depends on impact \(0&lt;m&lt;1\), where \(B=1/k>0\). A common return for all directions needs a different continuation.</p>
+<p class="zh">因此，保留整个传播域及原度规，无法得到全局等距的欧氏三维旋转面。即使如此，零能量下若 \(1/|k|\) 为有理数，内禀的非圆束缚轨道仍可闭合。截在 \(x=1\) 会留下圆形边界；把两片相同的零能量内帽沿边缘拼起来，每个径向周期的方位角成为 \(2B(\pi+2\arccos m)\)，随入射参数 \(0&lt;m&lt;1\) 改变，其中 \(B=1/k>0\)。要让所有方向周期返回，须另选延拓。</p>
+<h2><span class="en">Keep an exact cap and complete the surface</span><span class="zh">保留精确极帽，构造完整曲面</span></h2>
+<p class="en">On the unit angular sphere let \(\theta\) be colatitude, \(u=\cos\theta\), and \(0\le\lambda\le1\). Use the classical odd-function form of a Zoll metric of revolution. The particular smooth cutoff below selects the Morse cap for this design.</p>
+<p class="zh">令 \(\theta\) 为从北极量起的余纬，\(u=\cos\theta\)，\(0\le\lambda\le1\)。采用经典 Zoll 旋转度规的奇函数形式，下面的光滑截断函数用于指定本设计保留的 Morse 极帽。</p>
+<p class="eq">\[g=a^2\!\left[F(u)^2\,d\theta^2+\sin^2\theta\,d\phi^2\right],\qquad
+F(u)=1-\tfrac{\lambda}{2}\operatorname{sgn}(u)(1-|u|)\,\chi(|u|/c),\qquad 0&lt;c&lt;1.\]</p>
+<p class="eq">\[\eta(t)=\begin{cases}e^{-1/t}&t>0\\0&t\le0,\end{cases}\qquad
+\chi(t)=\frac{\eta(t)}{\eta(t)+\eta(1-t)}.\]</p>
+<p class="en">At \(\lambda=0\) this is the round sphere. At \(\lambda=1\) and \(u\ge c\), \(F=(1+u)/2\) exactly. With \(r/R=\sqrt{1-u}\), this reproduces the metric and length scale of the \(\epsilon=0,\ k=2,\ B=1/2\) Morse lens. For any prescribed disk of radius \(0&lt;r_c&lt;R\), choose \(c=1-(r_c/R)^2\). The index equals \(N\sqrt{2-(r/R)^2}\) throughout that disk. At the default \(c=1/2\), \(r_c=R/\sqrt2\) and the colatitude is \(60^\circ\). Intermediate \(\lambda\) values interpolate between the sphere and this design.</p>
+<p class="zh">\(\lambda=0\) 给出标准球面。当 \(\lambda=1\) 且 \(u\ge c\) 时，精确有 \(F=(1+u)/2\)。代入 \(r/R=\sqrt{1-u}\)，即复现原 Morse 族 \(\epsilon=0,\ k=2,\ B=1/2\) 的度规与光程尺度。给定任意半径 \(0&lt;r_c&lt;R\)，取 \(c=1-(r_c/R)^2\)，即可在整个圆盘上保留 \(n(r)=N\sqrt{2-(r/R)^2}\)。默认 \(c=1/2\) 对应 \(r_c=R/\sqrt2\)、余纬 \(60^\circ\)。中间的 \(\lambda\) 给出球面到该设计的连续形变。</p>
+<p class="en">The strict inequality \(r_c&lt;R\) matters. At the equator the odd-function Zoll condition forces \(F(0)=1\), while the original Luneburg meridian reaches \(F(0)=1/2\). An arbitrarily large inner disk can be retained, but the original waist must change in a smooth Zoll completion of this form. Other zero-energy Morse members have polar slope \(|d\rho/ds|=1/(2B)\); only \(B=1/2\) has a regular Euclidean pole.</p>
+<p class="zh">上界 \(r_c&lt;R\) 必须严格。光滑 Zoll 旋转度规的奇函数条件要求赤道处 \(F(0)=1\)，原 Luneburg 子午线在那里却有 \(F(0)=1/2\)。因此可保留任意接近原边缘的内圆盘，原腰线附近须作调整。原零能量 Morse 族的极点斜率为 \(|d\rho/ds|=1/(2B)\)，其中仅 \(B=1/2\) 有正则的欧氏极点。</p>
+<p class="eq">\[\rho=a\sin\theta,\qquad \frac{dz}{d\theta}=-a\sqrt{F^2-u^2},\qquad
+\log\frac{r(\theta)}{r_c}=\int_{\arccos c}^{\theta}\frac{F(\cos v)}{\sin v}\,dv,\qquad n=\rho/r.\]</p>
+<p class="en">These equations reconstruct both a three-dimensional meridian and its planar index. In the north \(F\ge(1+u)/2\), in the south \(F\ge1\), so \(F>|u|\) between the poles. The height is strictly decreasing. At each pole \(F=1\), and nearby \(F^2-u^2\) is \(\sin^2\theta\) times a smooth positive function of \(u\). The meridian meets the axis smoothly at both ends. This gives an embedded sphere without a seam, self-intersection or cone point. The south pole corresponds to \(r\to\infty\) in the planar chart.</p>
+<p class="zh">由这三式可分别重建三维子午线与等效平面折射率。北半球有 \(F\ge(1+u)/2\)，南半球有 \(F\ge1\)，因此两极之间严格满足 \(F>|u|\)，高度单调下降。两极处 \(F=1\)，其附近 \(F^2-u^2\) 可写成 \(\sin^2\theta\) 乘以关于 \(u\) 的光滑正函数。两端均光滑抵达轴线，得到无接缝、无自交、无锥尖的嵌入球面。南极在等效平面坐标中对应 \(r\to\infty\)。</p>
+<h2><span class="en">Why every ray returns in one period</span><span class="zh">为什么所有光线都在一个周期后返回？</span></h2>
+<p class="en">For optical arclength \(\ell\), Clairaut's constant is \(m=a\sin^2\theta\,d\phi/d\ell\). At an equatorial launch it is the sine of the angle from the northward meridian. Rotations, shifts of the starting phase and reversal cover all initial conditions: for \(0<|m|<1\) the ray oscillates between \(\sin\theta=|m|\) in the two hemispheres. Set \(u=\sqrt{1-m^2}\sin t\) with \(t=0\) at the equator.</p>
+<p class="zh">以光程 \(\ell\) 参数化，Clairaut 守恒量为 \(m=a\sin^2\theta\,d\phi/d\ell\)。从赤道发射时，它等于光线与北向子午线夹角的正弦。对 \(0<|m|<1\)，光线在两半球满足 \(\sin\theta=|m|\) 的转向纬线之间往复，因此通过旋转、移动起始相位与反向即可覆盖所有初始条件。置 \(u=\sqrt{1-m^2}\sin t\)，令光线从赤道出发时 \(t=0\)。</p>
+<p class="eq">\[\frac{d\ell}{dt}=aF(u),\qquad \frac{d\phi}{dt}=\frac{m F(u)}{1-u^2},\qquad
+F(u)+F(-u)=2.\]</p>
+<p class="en">Pair \(t\) with \(t+\pi\) in each integral. The odd part \(F-1\) cancels, leaving exactly the round-sphere integrals. For \(0<|m|<1\) they give</p>
+<p class="zh">在两个积分中把 \(t\) 和 \(t+\pi\) 配对，奇函数部分 \(F-1\) 恰好抵消，剩余积分与标准球面相同。对 \(0<|m|<1\)，得到</p>
+<p class="eq">\[\ell(2\pi)-\ell(0)=2\pi a,\qquad \Delta\phi=
+\int_0^{2\pi}\frac{m\,dt}{1-(1-m^2)\sin^2t}=2\pi\,\operatorname{sgn}m.\]</p>
+<p class="en">The latitude and its velocity repeat. The azimuth is strictly monotone and winds exactly once, so the ray is simple and recovers its initial tangent. The equator (\(|m|=1\)) has circumference \(2\pi a\). A meridian (\(m=0\)) passes smoothly through both poles, with pole-to-pole length \(a\int_0^\pi F\,d\theta=\pi a\). Thus \(2\pi a\) is the primitive length for every geodesic. This is a geometrical-optics result; wave spectra and fabrication tolerances require additional models.</p>
+<p class="zh">此时纬度及其变化率均复原。方位角严格单调且恰绕一圈，故轨道为简单闭曲线，回到起点时切向也复原。赤道圆（\(|m|=1\)）周长为 \(2\pi a\)；子午线（\(m=0\)）光滑穿过两极，极到极的长度为 \(a\int_0^\pi F\,d\theta=\pi a\)。因此每条测地线的最短闭合光程都是 \(2\pi a\)。上述结论限于几何光学；波动谱与加工容差需要另建模型。</p>
+<h2><span class="en">Sources and numerical verification</span><span class="zh">文献与数值复核</span></h2>
+<ul>
+<li>H. Chen &amp; W. Xiao (2020). <a href="https://opg.optica.org/col/abstract.cfm?uri=col-18-6-062403">Morse lens</a>. <span class="en">The conformal Morse family and its Luneburg and Eaton limits.</span><span class="zh">Morse 共形透镜族及其 Luneburg、Eaton 特例。</span></li>
+<li>M. Šarbort &amp; T. Tyc (2012). <a href="https://doi.org/10.1088/2040-8978/14/7/075705">Spherical media and geodesic lenses in geometrical optics</a>. <span class="en">Optical metric correspondence and the two meridian branches.</span><span class="zh">光学度规的对应关系与两支子午线。</span></li>
+<li>O. Zoll (1903). <a href="https://geodesic.mathdoc.fr/item/MAN_1903__57_158089/">Über Flächen mit Scharen geschlossener geodätischer Linien</a>. <span class="en">Classical nonspherical examples. The smooth odd-function criterion is also stated in</span><span class="zh">非球形 Zoll 曲面的经典原文。光滑奇函数判据另见</span> <a href="https://www.numdam.org/item/10.1051/cocv/2017073.pdf">H. Zhu, Remark 1.9</a>.</li>
+<li>L. Xu et al. <a href="https://arxiv.org/abs/1801.10438">Light rays and waves on geodesic lenses</a>. <span class="en">Closed geodesic lenses in optical theory and experiment.</span><span class="zh">闭合测地线透镜的光学理论与实验背景。</span></li>
+</ul>
+<p class="en">The exact polar cap, its cutoff, and the embedding check specify the design used here. The proof covers the continuum of rays. The numerical check independently integrates the geodesic Hamiltonian for one optical period, recording the unwrapped azimuth and both components of the returning tangent. It also checks intermediate points against the animation, and tests the meridian and equator separately.</p>
+<p class="zh">精确极帽、截断函数及嵌入检验共同定义本页的设计。解析证明覆盖连续的所有方向。数值程序另行积分测地线哈密顿方程，记录一个光程周期后的累计方位角和两个切向分量，同时对照动画的中间轨迹，并单独检验子午线与赤道。</p>
+<p class="en">With equatorial radius \(a=1\), the six sampled surfaces and five signed nondegenerate launches per surface give a maximum return error below \(4.5\times10^{-8}\) rad in the angular coordinates. The largest coordinate-velocity error is below \(1.4\times10^{-8}\). The integration uses 7,200 fourth-order Runge–Kutta steps per orbit and never identifies the final point with the initial one.</p>
+<p class="zh">令赤道半径 \(a=1\)，在六组曲面参数上各取五组非退化发射条件，覆盖正负角动量。一个周期后，角坐标的最大返回误差小于 \(4.5\times10^{-8}\) 弧度，坐标速度的最大分量误差小于 \(1.4\times10^{-8}\)。每条轨道使用 7,200 步四阶 Runge–Kutta 积分，独立计算终点。</p>
+<p><a href="https://github.com/hello-zxs/qmentropy/blob/main/tools/check-morse-closed.mjs"><span class="en">Verification code</span><span class="zh">验证程序</span></a> · <code>node tools/check-morse-closed.mjs</code></p>
+</article></main><footer class="network"><a href="https://zhengxs.com/">Index</a><a href="/">Lab</a><a href="https://zhengxiangsheng.com/">Record</a></footer></body></html>
