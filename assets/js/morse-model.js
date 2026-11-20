@@ -28,7 +28,7 @@ export function orbit(B, b, energy) {
   const reciprocal = (w) => inversePower(w, D, 1, e);
   const sweep =
     kind === "returning" ? (2 * rate * Math.acos(-e)) / Math.sqrt(D) : Infinity;
-  let angle = Math.min(sweep, 4 * Math.PI);
+  let angle = kind === "returning" ? sweep : 8 * Math.PI;
   // Infinite branches spiral toward the origin. Stop the drawing when they
   // are below plot resolution; this does not change the analytic solution.
   if (kind !== "returning" && reciprocal(angle / rate) ** -B < 0.012) {
@@ -43,7 +43,11 @@ export function orbit(B, b, energy) {
   }
   function at(fraction) {
     const phi = angle * fraction;
-    const x = 1 / reciprocal(phi / rate);
+    // A returning orbit is symmetric about the turning point. Evaluating
+    // from the nearer rim avoids cancellation on long near-critical returns.
+    const localAngle =
+      kind === "returning" ? angle * Math.min(fraction, 1 - fraction) : phi;
+    const x = 1 / reciprocal(localAngle / rate);
     return {
       phi: b < 0 ? -phi : phi,
       x,
@@ -51,7 +55,17 @@ export function orbit(B, b, energy) {
       rho: Math.sqrt(Math.max(0, energy + x * (2 - x))),
     };
   }
-  return { ell, D, kind, sweep, angle, at };
+  function opticalDistance(f, point = at(f)) {
+    // x=1-e*cos(nu), with nu=-pi/2 at entry. Integral of h dphi/|ell|.
+    const c = Math.max(0, Math.min(1, (1 - point.x) / e));
+    const sign = kind === "returning" && f >= 0.5 ? 1 : -1;
+    const nu = sign * Math.acos(c);
+    return (
+      (energy * angle * f) / Math.abs(ell) +
+      B * (nu + Math.PI / 2 + e * (Math.sin(nu) + 1))
+    );
+  }
+  return { ell, D, kind, sweep, angle, at, opticalDistance };
 }
 
 export function surface(B, energy, steps = 640) {
@@ -115,9 +129,7 @@ export function surface(B, energy, steps = 640) {
 // The A,B,C meridian model. r(π/2)=R=1 fixes the radial scale and the
 // waist's optical radius is 1/C. The plotted branch has A>=0 and B>0.
 export function meridianModel(A, B, C, b, steps = 640) {
-  const half = Math.PI / 2,
-    turn = Math.asin(b),
-    leg = A * Math.acos(b) + B * half;
+  const half = Math.PI / 2;
   const radial = (t) => Math.sin(t) ** A * Math.tan(t / 2) ** B;
   const minTheta = A + B < 1 ? Math.acos(B / (1 - A)) : 0;
   const slope = (t) => {
@@ -139,6 +151,24 @@ export function meridianModel(A, B, C, b, steps = 640) {
       i = Math.min(steps - 1, Math.floor(pos));
     return profile[i].z + (pos - i) * (profile[i + 1].z - profile[i].z);
   }
+  // The meridian coordinate carried by each ray is theta.
+  return {
+    ray: meridianRay(A, B, C, b),
+    shape: {
+      profile,
+      height,
+      z,
+      end: minTheta === 0 ? "apex" : "boundary",
+      innerR: radial(minTheta),
+    },
+  };
+}
+
+export function meridianRay(A, B, C, b) {
+  const half = Math.PI / 2,
+    turn = Math.asin(b),
+    leg = A * Math.acos(b) + B * half;
+  const radial = (t) => Math.sin(t) ** A * Math.tan(t / 2) ** B;
   function at(f) {
     const t = turn + (half - turn) * Math.cos(Math.PI * f) ** 2;
     const sn = Math.sin(t),
@@ -147,15 +177,19 @@ export function meridianModel(A, B, C, b, steps = 640) {
       A * Math.acos(Math.min(1, b / sn)) + B * Math.atan2(q, b * Math.cos(t));
     return { phi: leg + (f <= 0.5 ? -F : F), r: radial(t), rho: sn / C, x: t };
   }
-  // Both models expose a local profile coordinate on the ray as x.
+  const e = Math.sqrt(1 - b * b);
+  function opticalDistance(f, point = at(f)) {
+    const t = point.x,
+      sn = Math.sin(t);
+    const q = Math.sqrt(Math.max(0, (sn - b) * (sn + b)));
+    const partial = A * q + B * Math.atan2(q, Math.cos(t));
+    return (A * e + B * half + (f <= 0.5 ? -partial : partial)) / C;
+  }
   return {
-    ray: { at, sweep: 2 * leg, angle: 2 * leg, kind: "returning" },
-    shape: {
-      profile,
-      height,
-      z,
-      end: minTheta === 0 ? "apex" : "boundary",
-      innerR: radial(minTheta),
-    },
+    at,
+    opticalDistance,
+    sweep: 2 * leg,
+    angle: 2 * leg,
+    kind: "returning",
   };
 }

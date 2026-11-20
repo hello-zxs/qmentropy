@@ -1,4 +1,5 @@
 // Run with Node 22+ from any directory: node tools/check-morse.mjs
+import { parallelBeam } from "../assets/js/morse-beam.js";
 import assert from "node:assert/strict";
 import {
   orbit,
@@ -13,7 +14,8 @@ function cartesianRay(B, b, energy, steps = 2400) {
   const ray = orbit(B, b, energy),
     k = 1 / B,
     L = b * Math.sqrt(1 + energy);
-  const angle = Math.sign(b) * ray.angle,
+  // Compare the same resolved integration interval across near-critical cases.
+  const angle = Math.sign(b) * Math.min(4 * Math.PI, ray.angle),
     dphi = angle / steps;
   let state = [1, 0, -Math.sqrt(1 + energy - L * L), L],
     maxError = 0;
@@ -34,7 +36,7 @@ function cartesianRay(B, b, energy, steps = 2400) {
     state = state.map(
       (v, j) => v + (dphi * (a[j] + 2 * c[j] + 2 * d[j] + f[j])) / 6,
     );
-    const ref = ray.at(i / steps);
+    const ref = ray.at(((i / steps) * Math.abs(angle)) / ray.angle);
     maxError = Math.max(
       maxError,
       Math.hypot(
@@ -191,4 +193,101 @@ for (const f of [0.17, 0.31, 0.62, 0.84]) {
 }
 console.log(
   "Off-waist and negative-exponent launches, independent A/B/C, sphere and Morse overlap: passed.",
+);
+
+// Regression coverage for a uniformly illuminated wavefront and synchronized clocks.
+for (const family of ["morse", "abc"]) {
+  for (const B of [0.5, 1]) {
+    const { rays, length } = parallelBeam({
+      family,
+      B,
+      A: B,
+      C: 1,
+      b: 0.82,
+      count: 12,
+    });
+    const ref = rays[0];
+    for (const [i, r] of rays.entries()) {
+      assert.ok(Math.abs(r.height - (-0.82 + (i * 1.64) / 11)) < 1e-12);
+      assert.ok(Math.abs(r.atLength(0).x + 1.6) < 1e-12);
+      assert.ok(Math.abs(r.atLength(0).y - r.height) < 1e-12);
+      assert.equal(r.end, r.atLength(length));
+      assert.ok(Math.abs(Math.hypot(r.end.x, r.end.y) - 1.65) < 1e-12);
+      const top = rays.at(-1 - i);
+      for (const f of [0.12, 0.43, 0.78]) {
+        const p = r.atLength(r.end.length * f),
+          q = top.atLength(top.end.length * f);
+        assert.ok(Math.abs(p.x - q.x) < 1e-9 && Math.abs(p.y + q.y) < 1e-9);
+      }
+      if (B === 0.5) {
+        assert.ok(Math.hypot(r.rimEnd.x - 1, r.rimEnd.y) < 1e-11);
+        assert.ok(Math.abs(r.rimEnd.length - ref.rimEnd.length) < 1e-10);
+      } else {
+        assert.ok(
+          r.end.x < r.rimEnd.x && Math.abs(r.end.y - r.rimEnd.y) < 1e-10,
+        );
+      }
+      for (const part of r.parts) {
+        for (let j = 1; j < part.length; j++)
+          assert.ok(part[j].length >= part[j - 1].length - 1e-9);
+      }
+    }
+  }
+}
+const mixed = parallelBeam({ B: 0.8, b: 0.8, energy: 0.5625, count: 24 });
+assert.ok(
+  mixed.rays.some((r) => r.model.kind === "open") &&
+    mixed.rays.some((r) => r.model.kind === "returning"),
+);
+for (const ray of mixed.rays) {
+  assert.equal(
+    ray.parts.length,
+    ray.model.kind === "returning" ? (ray.condensed ? 4 : 3) : 2,
+  );
+}
+const near = parallelBeam({
+  B: 0.8,
+  b: 0.6,
+  energy: 0.5625 - 1e-7,
+  count: 1,
+}).reference;
+assert.ok(near.condensed && near.parts.length === 4 && near.model.sweep > 1000);
+assert.ok(Math.abs(Math.hypot(near.rimEnd.x, near.rimEnd.y) - 1) < 1e-10);
+assert.ok(Number.isFinite(near.atLength(near.rimEnd.length * 0.48).x));
+const critical = parallelBeam({
+  B: 0.8,
+  b: 0.6,
+  energy: 0.5625,
+  count: 1,
+}).reference;
+assert.equal(critical.model.kind, "critical");
+for (const ray of [near, critical, ...mixed.rays]) {
+  for (const part of ray.parts)
+    for (const p of part) assert.ok(Number.isFinite(p.length));
+}
+// Independently integrate sampled optical length for both analytic clocks,
+// including a non-unit rim index. It must be in the same units as the exterior.
+for (const config of [
+  { B: 0.7, energy: 0.4 },
+  { B: 1.1, energy: -0.25 },
+  { B: 0.8, A: 0.34, C: 1.7, family: "abc" },
+]) {
+  for (const b of [0.33, 0.85]) {
+    const ray = parallelBeam({ ...config, b, count: 1 }).reference,
+      model = ray.model;
+    const L = b * (config.C ? 1 / config.C : Math.sqrt(1 + config.energy));
+    let prev = model.at(0),
+      sum = 0;
+    for (let i = 1; i <= 12000; i++) {
+      const curr = model.at(i / 12000);
+      sum +=
+        (Math.abs(curr.phi - prev.phi) * (prev.rho ** 2 + curr.rho ** 2)) /
+        (2 * L);
+      prev = curr;
+    }
+    assert.ok(Math.abs(sum - model.opticalDistance(1)) < 2e-6, { sum });
+  }
+}
+console.log(
+  "Parallel launch, common optical time, matched entry/exit, mixed and long-return bundles: passed.",
 );

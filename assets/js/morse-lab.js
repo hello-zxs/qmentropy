@@ -1,4 +1,4 @@
-import { orbit, surface, meridianModel } from "./morse-model.js";
+import { parallelBeam } from "./morse-beam.js";
 
 const byId = (id) => document.getElementById(id);
 const chinese = new URLSearchParams(location.search).get("lang") === "zh";
@@ -21,17 +21,17 @@ else window.addEventListener("load", typeset, { once: true });
 const fields = ["B", "b", "energy", "A", "C"].map(byId);
 const morsePresets = [
   [tr("Custom", "自定义"), null],
-  ["Luneburg", [0.5, 0.55, 0]],
-  ["Eaton", [1, 0.55, 0]],
-  [tr("Intermediate Morse", "中间 Morse 剖面"), [0.75, 0.55, 0]],
+  ["Luneburg", [0.5, 0.82, 0]],
+  ["Eaton", [1, 0.82, 0]],
+  [tr("Intermediate Morse", "中间 Morse 剖面"), [0.75, 0.82, 0]],
   [tr("Partial surface", "部分曲面"), [0.3, 0.35, 0]],
   [tr("Critical ray", "临界光线"), [0.8, 0.6, 0.5625]],
   [tr("Open ray", "开放光线"), [0.7, 0.3, 0.5]],
 ];
 const abcPresets = [
   [tr("Custom", "自定义"), null],
-  ["Luneburg", [0.5, 0.55, 0, 0.5, 1]],
-  ["Eaton", [1, 0.55, 0, 1, 1]],
+  ["Luneburg", [0.5, 0.82, 0, 0.5, 1]],
+  ["Eaton", [1, 0.82, 0, 1, 1]],
   [tr("Fish-eye hemisphere", "鱼眼半球"), [1, 0.55, 0, 0, 1]],
   [tr("Independent A and B", "独立的 A、B"), [1.2, 0.55, 0, 0.25, 0.8]],
 ];
@@ -46,198 +46,199 @@ function setFamily() {
   for (const [i, [label]] of currentPresets().entries())
     byId("preset").add(new Option(label, String(i)));
 }
-let model,
-  shape,
-  points,
-  opticalLengths,
+let beam,
+  geometry,
   mode = "",
+  tracing = false,
   progress = 0,
   last = 0,
   frame = 0,
   sweepDir = 1;
 const tau = 2 * Math.PI;
-const viewAngle = -0.52;
-function context(canvas) {
-  const rect = canvas.getBoundingClientRect(),
-    dpr = Math.min(devicePixelRatio || 1, 2);
-  const w = Math.round(rect.width * dpr),
-    h = Math.round(rect.height * dpr);
-  if (canvas.width !== w || canvas.height !== h) {
-    canvas.width = w;
-    canvas.height = h;
-  }
-  const ctx = canvas.getContext("2d");
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.clearRect(0, 0, rect.width, rect.height);
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
-  return { ctx, w: rect.width, h: rect.height };
-}
-function stroke(ctx, vertices, color, width = 1) {
-  ctx.beginPath();
-  let move = true;
-  for (const p of vertices) {
-    if (!p) {
-      move = true;
-      continue;
-    }
-    if (move) ctx.moveTo(p[0], p[1]);
-    else ctx.lineTo(p[0], p[1]);
-    move = false;
-  }
-  ctx.strokeStyle = color;
-  ctx.lineWidth = width;
-  ctx.stroke();
-}
-function dot(ctx, p, color, size) {
-  if (!p) return;
-  ctx.beginPath();
-  ctx.arc(p[0], p[1], size, 0, tau);
-  ctx.fillStyle = color;
-  ctx.fill();
-}
 const samples = (count, fn) =>
   Array.from({ length: count + 1 }, (_, i) => fn(i / count));
-function drawRay(ctx, project) {
-  stroke(ctx, points.map(project), "#ffbc77", 2.4);
-  dot(ctx, project(points[0]), "#fff", 4);
-  if (mode === "trace") {
-    const target = progress * opticalLengths.at(-1);
-    let low = 0,
-      high = opticalLengths.length - 1;
-    while (high - low > 1) {
-      const mid = (low + high) >> 1;
-      if (opticalLengths[mid] < target) low = mid;
-      else high = mid;
-    }
-    const fraction =
-      (target - opticalLengths[low]) /
-      (opticalLengths[high] - opticalLengths[low]);
-    dot(
-      ctx,
-      project(model.at((low + fraction) / (points.length - 1))),
-      "#ffe7c9",
-      6,
-    );
+function canvasView(id) {
+  const canvas = byId(id),
+    { width: w, height: h } = canvas.getBoundingClientRect();
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const background = document.createElement("canvas");
+  canvas.width = background.width = Math.round(w * dpr);
+  canvas.height = background.height = Math.round(h * dpr);
+  const ctx = canvas.getContext("2d"),
+    grid = background.getContext("2d");
+  for (const c of [ctx, grid]) {
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.lineJoin = "round";
+    c.lineCap = "round";
   }
+  return { w, h, ctx, grid, background };
 }
-function render() {
-  if (!points) return;
-  const p = context(byId("plane"));
-  const unit = 0.405 * Math.min(p.w, p.h),
-    cx = p.w / 2,
-    cy = p.h / 2;
-  const flat = (r, phi) => [
-    cx + unit * r * Math.cos(phi),
-    cy - unit * r * Math.sin(phi),
-  ];
-  stroke(
-    p.ctx,
-    [
-      [cx - 1.14 * unit, cy],
-      [cx + 1.14 * unit, cy],
-    ],
-    "#31484d",
-  );
-  stroke(
-    p.ctx,
-    [
-      [cx, cy - 1.12 * unit],
-      [cx, cy + 1.12 * unit],
-    ],
-    "#31484d",
-  );
-  for (const radius of [0.25, 0.5, 0.75, 1])
+function pathOf(points) {
+  const path = new Path2D();
+  let start = true;
+  for (const point of points) {
+    if (!point) {
+      start = true;
+      continue;
+    }
+    if (start) path.moveTo(point[0], point[1]);
+    else path.lineTo(point[0], point[1]);
+    start = false;
+  }
+  return path;
+}
+function stroke(ctx, path, color, width = 1) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = width;
+  ctx.stroke(path);
+}
+function dot(ctx, point, color, size) {
+  if (!point) return;
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(point[0], point[1], size, 0, tau);
+  ctx.fill();
+}
+function buildViews() {
+  const p = canvasView("plane"),
+    s = canvasView("surface");
+  const unit = Math.min(0.285 * p.w, 0.29 * p.h);
+  p.project = (pt) => [p.w / 2 + unit * pt.x, p.h / 2 - unit * pt.y];
+  const flat = (x, y) => p.project({ x, y });
+  stroke(p.grid, pathOf([flat(-1.7, 0), flat(1.7, 0)]), "#31484d");
+  stroke(p.grid, pathOf([flat(0, -1.4), flat(0, 1.4)]), "#31484d");
+  for (const r of [0.25, 0.5, 0.75, 1])
     stroke(
-      p.ctx,
-      samples(128, (t) => flat(radius, t * tau)),
-      radius === 1 ? "#7c9c9e" : "#2d4349",
+      p.grid,
+      pathOf(
+        samples(100, (t) => flat(r * Math.cos(t * tau), r * Math.sin(t * tau))),
+      ),
+      r === 1 ? "#79979a" : "#2e454a",
     );
-  drawRay(p.ctx, (pt) => flat(pt.r, pt.phi));
-  const s = context(byId("surface")),
-    tilt = 0.38,
-    profile = shape.profile;
-  const rim = profile[0].rho;
-  // Orthographic view in common units along all three spatial axes.
-  const low = -Math.sin(tilt) * rim,
-    high = shape.z * Math.cos(tilt) + Math.sin(tilt) * rim;
-  const scale = Math.min((0.46 * s.w) / rim, (0.84 * s.h) / (high - low));
-  const project = (radius, phi, z) => [
-    s.w / 2 + scale * radius * Math.cos(phi + viewAngle),
-    s.h / 2 -
-      scale *
-        (z * Math.cos(tilt) +
-          radius * Math.sin(phi + viewAngle) * Math.sin(tilt) -
-          (high + low) / 2),
-  ];
-  const ring = (level, color, width) =>
-    stroke(
-      s.ctx,
-      samples(100, (t) => project(level.rho, t * tau, level.z)),
-      color,
-      width,
-    );
+  const tilt = 0.38,
+    yaw = -0.52,
+    profile = beam.shape.profile,
+    rim = profile[0].rho;
+  const low = -1.85 * rim * Math.sin(tilt),
+    high = Math.max(-low, beam.shape.z * Math.cos(tilt) + rim * Math.sin(tilt));
+  const scale = Math.min((0.26 * s.w) / rim, (0.84 * s.h) / (high - low));
+  function project(u, v, z) {
+    return [
+      s.w / 2 + scale * (u * Math.cos(yaw) - v * Math.sin(yaw)),
+      s.h / 2 -
+        scale *
+          (z * Math.cos(tilt) +
+            (u * Math.sin(yaw) + v * Math.cos(yaw)) * Math.sin(tilt) -
+            (high + low) / 2),
+    ];
+  }
+  s.project = (pt) => (pt.z === null ? null : project(pt.u, pt.v, pt.z));
+  const polar = (l, phi) =>
+    project(l.rho * Math.cos(phi), l.rho * Math.sin(phi), l.z);
+  const ring = (l, color, width) =>
+    stroke(s.grid, pathOf(samples(96, (t) => polar(l, t * tau))), color, width);
   for (let i = 0; i <= 12; i++)
-    ring(profile[Math.round((i * (profile.length - 1)) / 12)], "#3a5b62", 0.9);
+    ring(profile[Math.round((i * (profile.length - 1)) / 12)], "#37565c", 0.9);
+  const meridian = profile.filter(
+    (_, i) => i % 8 === 0 || i === profile.length - 1,
+  );
   for (let i = 0; i < 24; i++)
     stroke(
-      s.ctx,
-      profile
-        .filter((_, j) => j % 8 === 0 || j === profile.length - 1)
-        .map((l) => project(l.rho, (i * tau) / 24, l.z)),
-      "#31545b",
+      s.grid,
+      pathOf(meridian.map((l) => polar(l, (i * tau) / 24))),
+      "#304a50",
     );
   ring(profile[0], "#79979a", 1.15);
-  if (shape.end === "boundary") {
-    s.ctx.setLineDash([4, 4]);
+  if (beam.shape.end === "boundary") {
+    s.grid.setLineDash([4, 4]);
     ring(profile.at(-1), "#80def0", 1.7);
-    s.ctx.setLineDash([]);
+    s.grid.setLineDash([]);
   }
-  const bar = 0.25 * scale;
   stroke(
-    s.ctx,
-    [
-      [12, s.h - 15],
-      [12 + bar, s.h - 15],
-    ],
-    "#b5c8c9",
-    1.5,
+    s.grid,
+    pathOf([
+      [12, s.h - 14],
+      [12 + 0.25 * scale, s.h - 14],
+    ]),
+    "#adc1c2",
+    1.3,
   );
-  s.ctx.font = "11px system-ui";
-  s.ctx.fillStyle = "#b5c8c9";
-  s.ctx.fillText("0.25", 12, s.h - 20);
-  drawRay(s.ctx, (pt) => {
-    const z = shape.height(pt.x);
-    return z === null ? null : project(pt.rho, pt.phi, z);
-  });
-}
-function refresh() {
-  const [B, b, energy, A, C] = fields.map((e) => e.valueAsNumber);
-  for (const field of fields)
-    byId(field.id + "-out").value =
-      field.id === "energy"
-        ? String(field.valueAsNumber)
-        : field.valueAsNumber.toFixed(2);
-  if (isABC()) {
-    const result = meridianModel(A, B, C, b);
-    model = result.ray;
-    shape = result.shape;
-  } else {
-    model = orbit(B, b, energy);
-    shape = surface(B, energy);
-    shape.innerR = shape.minimum ** (2 * B);
-  }
-  points = samples(540, model.at);
-  // ds/dphi = rho²/L. The constant |L| cancels in normalized optical time.
-  opticalLengths = [0];
-  for (let i = 1; i < points.length; i++) {
-    const p = points[i - 1],
-      q = points[i];
-    opticalLengths.push(
-      opticalLengths[i - 1] +
-        (Math.abs(q.phi - p.phi) * (p.rho * p.rho + q.rho * q.rho)) / 2,
+  s.grid.font = "11px system-ui";
+  s.grid.fillStyle = "#adc1c2";
+  s.grid.fillText("0.25", 12, s.h - 19);
+  for (const view of [p, s]) {
+    view.tracks = beam.rays.map((ray) =>
+      ray.parts.map((part) => {
+        const vertices = part.map(view.project);
+        return { vertices, path: pathOf(vertices), points: part };
+      }),
     );
   }
+  return [p, s];
+}
+function render() {
+  if (!beam) return;
+  geometry ??= buildViews();
+  const t = progress * beam.length;
+  const heads = tracing ? beam.rays.map((ray) => ray.atLength(t)) : [];
+  for (const view of geometry) {
+    const { ctx, w, h, tracks } = view;
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(view.background, 0, 0, w, h);
+    tracks.forEach((parts, i) => {
+      const ray = beam.rays[i],
+        reference = ray === beam.reference;
+      const color = reference ? "#ffc181" : "#80dce4",
+        width = reference ? 2.3 : 1.15;
+      for (const part of parts) {
+        stroke(
+          ctx,
+          part.path,
+          tracing ? (reference ? "#65503e" : "#30474c") : color,
+          width,
+        );
+        if (!tracing || t <= part.points[0].length) continue;
+        if (t >= part.points.at(-1).length) {
+          stroke(ctx, part.path, color, width);
+          continue;
+        }
+        const end = part.points.findIndex((pt) => pt.length >= t);
+        const drawn = part.vertices.slice(0, end);
+        drawn.push(view.project(heads[i]));
+        stroke(ctx, pathOf(drawn), color, width);
+      }
+      if (reference) dot(ctx, view.project(ray.entry), "#fff", 3.2);
+    });
+    if (tracing)
+      beam.rays.forEach((ray, i) => {
+        if (t <= ray.end.length + 1e-8)
+          dot(
+            ctx,
+            view.project(heads[i]),
+            ray === beam.reference ? "#fff1cc" : "#b1f4f6",
+            ray === beam.reference ? 4.8 : 3.2,
+          );
+      });
+  }
+}
+function refresh() {
+  const [B, b, energy, A, C] = fields.map((f) => f.valueAsNumber);
+  for (const f of fields)
+    byId(f.id + "-out").value =
+      f.id === "energy" ? String(f.valueAsNumber) : f.valueAsNumber.toFixed(2);
+  beam = parallelBeam({
+    family: byId("family").value,
+    B,
+    b,
+    energy,
+    A,
+    C,
+    count: Number(byId("count").value),
+  });
+  const {
+    shape,
+    reference: { model },
+  } = beam;
   const matched = currentPresets().findIndex(
     ([, v]) =>
       v &&
@@ -255,25 +256,30 @@ function refresh() {
     critical: tr("Critical ray", "临界光线"),
     open: tr("Open ray", "开放光线"),
   };
+  const returning = beam.rays.filter(
+    (r) => r.model.kind === "returning",
+  ).length;
   byId("readout").textContent =
+    tr("Reference: ", "参考光线：") +
     kind[model.kind] +
-    "  ·  " +
+    " · " +
     tr("Rim sweep ", "边缘间方位角 ") +
     angle +
-    "  ·  " +
+    " · " +
     tr("Launch angle ", "入射角 ") +
     ((Math.asin(b) * 180) / Math.PI).toFixed(1) +
-    "°" +
-    (isABC() ? "  ·  ρ(rim) = " + (1 / C).toFixed(3) : "");
+    "° · " +
+    tr("Returning ", "返回 ") +
+    returning +
+    "/" +
+    beam.rays.length +
+    (isABC() ? " · ρ(rim) = " + (1 / C).toFixed(3) : "");
   const apex = tr("Full inner sheet to the apex.", "内支可完整嵌入至极点。");
   const boundary =
     tr("Real sheet ends at", "真实曲面止于") +
     " r/R = " +
     shape.innerR.toPrecision(3) +
-    tr(
-      "; only the embeddable ray segment is lifted.",
-      "；只投影可嵌入的光线段。",
-    );
+    tr(". Only embeddable segments are lifted.", "；只显示可嵌入的曲面段。");
   const windowNote =
     tr("Infinite end cropped at", "无限端绘图截于") +
     " r/R = " +
@@ -281,75 +287,130 @@ function refresh() {
     ".";
   byId("extent").textContent =
     { apex, boundary, window: windowNote }[shape.end] +
-    (model.angle + 1e-9 < model.sweep
-      ? tr(" Ray shown over a finite window.", " 光线仅显示有限区间。")
+    (returning < beam.rays.length
+      ? tr(
+          " Open and critical paths end at the plotting limit.",
+          " 开放与临界光线显示至绘图边界。",
+        )
+      : "") +
+    (beam.rays.some((r) => r.condensed)
+      ? tr(
+          " Intervening high-winding strokes are omitted; their travel time is included.",
+          " 密集绕行段省略连线，保留传播时间。",
+        )
       : "");
+  geometry = null;
   render();
 }
-function stop() {
+function setProgress(value) {
+  progress = Math.max(0, Math.min(1, value));
+  byId("progress").value = Math.round(progress * 1000);
+  byId("percent").value = Math.round(progress * 100) + "%";
+  byId("progress").setAttribute("aria-valuetext", byId("percent").value);
+}
+function setButtons() {
+  for (const id of ["sweep", "trace"])
+    byId(id).setAttribute("aria-pressed", String(mode === id));
+  byId("trace").textContent =
+    mode === "trace"
+      ? tr("Pause beam", "暂停光束")
+      : progress >= 1
+        ? tr("Replay beam", "重播光束")
+        : tracing && progress > 0
+          ? tr("Resume beam", "继续播放")
+          : tr("Play beam", "播放光束");
+}
+function pause() {
   cancelAnimationFrame(frame);
   mode = "";
   last = 0;
-  progress = 0;
-  for (const id of ["sweep", "trace"])
-    byId(id).setAttribute("aria-pressed", "false");
+  setButtons();
+}
+function reset() {
+  pause();
+  tracing = false;
+  setProgress(0);
+  setButtons();
 }
 function tick(time) {
-  const dt = last ? Math.min(0.1, (time - last) / 1000) : 0;
+  const dt = last ? (time - last) / 1000 : 0;
   last = time;
   if (mode === "sweep") {
-    let B = Number(fields[0].dataset.sweepValue) + sweepDir * dt * 0.21;
+    let B =
+      Number(fields[0].dataset.sweepValue) +
+      sweepDir * Math.min(dt, 0.1) * 0.15;
     if (B >= 2 || B <= 0.25) {
       B = Math.max(0.25, Math.min(2, B));
       sweepDir *= -1;
     }
     fields[0].dataset.sweepValue = B;
-    fields[0].value = B.toFixed(2);
-    refresh();
+    if (fields[0].valueAsNumber !== Number(B.toFixed(2))) {
+      fields[0].value = B.toFixed(2);
+      refresh();
+    }
   } else if (mode === "trace") {
-    progress = (progress + dt / 6) % 1;
+    setProgress(progress + dt / Number(byId("duration").value));
     render();
+    if (progress >= 1) pause();
   }
   if (mode) frame = requestAnimationFrame(tick);
 }
-for (const id of ["sweep", "trace"])
-  byId(id).addEventListener("click", () => {
-    const start = mode !== id;
-    stop();
-    if (start) {
-      mode = id;
-      byId(id).setAttribute("aria-pressed", "true");
-      fields[0].dataset.sweepValue = fields[0].value;
-      sweepDir = fields[0].valueAsNumber === 2 ? -1 : 1;
-      frame = requestAnimationFrame(tick);
-    }
-    render();
-  });
-for (const f of fields)
+byId("trace").addEventListener("click", () => {
+  const active = mode === "trace";
+  pause();
+  if (active) return;
+  if (progress >= 1) setProgress(0);
+  tracing = true;
+  mode = "trace";
+  setButtons();
+  render();
+  frame = requestAnimationFrame(tick);
+});
+byId("sweep").addEventListener("click", () => {
+  const start = mode !== "sweep";
+  reset();
+  if (start) {
+    mode = "sweep";
+    fields[0].dataset.sweepValue = fields[0].value;
+    sweepDir = fields[0].valueAsNumber === 2 ? -1 : 1;
+    frame = requestAnimationFrame(tick);
+  }
+  setButtons();
+  render();
+});
+byId("progress").addEventListener("input", () => {
+  pause();
+  tracing = true;
+  setProgress(Number(byId("progress").value) / 1000);
+  setButtons();
+  render();
+});
+for (const f of [...fields, byId("count")])
   f.addEventListener("input", () => {
-    stop();
+    reset();
     refresh();
   });
 byId("preset").addEventListener("change", (event) => {
   const values = currentPresets()[Number(event.target.value)][1];
   if (!values) return;
-  stop();
-  values.forEach((value, i) => {
-    fields[i].value = value;
+  reset();
+  values.forEach((v, i) => {
+    fields[i].value = v;
   });
   refresh();
 });
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    stop();
-    render();
-  }
+  if (document.hidden) pause();
 });
 byId("family").addEventListener("change", () => {
-  stop();
+  reset();
   setFamily();
   refresh();
 });
 setFamily();
-new ResizeObserver(render).observe(byId("plane"));
+setButtons();
+new ResizeObserver(() => {
+  geometry = null;
+  render();
+}).observe(byId("plane"));
 refresh();
