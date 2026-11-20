@@ -36,6 +36,6 @@ ref: about
 
 - **Email**：[helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com)
 - **GitHub**：[github.com/hello-zxs](https://github.com/hello-zxs)
-- **CV**：[查看简历](/zh/cv/)
+- **简历**：[正式学术履历](https://zhengxiangsheng.com/#record) · [中文简历](/zh/cv/)
 
 关于讨论、合作、或者指出文中的错误，我都欢迎。

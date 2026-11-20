@@ -35,6 +35,6 @@ The writing principle is simple: **make it reproducible**. Equations state their
 
 - **Email**: [helloworld.3a@gmail.com](mailto:helloworld.3a@gmail.com)
 - **GitHub**: [github.com/hello-zxs](https://github.com/hello-zxs)
-- **CV**: [view my CV](/cv/)
+- **CV**: [Academic record](https://zhengxiangsheng.com/#record) · [Lab profile](/cv/)
 
 I am happy to hear about discussions, collaborations, or errors in what I have written.

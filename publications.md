@@ -9,6 +9,8 @@ lang: en
 ref: publications
 ---
 
+[View the full publication list on the academic record.](https://zhengxiangsheng.com/#publications)
+
 {% for pub in site.data.publications %}
 <article class="pub">
   <p class="pub__meta">{{ pub.type }} · {{ pub.year }}</p>

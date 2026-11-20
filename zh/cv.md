@@ -17,6 +17,8 @@ London, Ontario, Canada
 
 *最近更新：2026 年 10 月 · 成绩单与推荐人信息可邮件索取*
 
+[查看最新学术履历](https://zhengxiangsheng.com/#record) · [下载英文简历（PDF）](https://zhengxiangsheng.com/assets/cv.pdf)
+
 ## 教育背景
 
 ### Western University — MSc in Physics

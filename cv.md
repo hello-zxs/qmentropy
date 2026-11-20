@@ -16,6 +16,8 @@ London, Ontario, Canada
 
 *Last updated: October 2026 · transcripts and referees available on request*
 
+[Current academic record](https://zhengxiangsheng.com/#record) · [Download CV (PDF)](https://zhengxiangsheng.com/assets/cv.pdf)
+
 ## Education
 
 ### Western University — MSc in Physics

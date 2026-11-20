@@ -10,6 +10,8 @@ locale: zh-CN
 ref: publications
 ---
 
+[查看学术履历中的完整发表记录。](https://zhengxiangsheng.com/#publications)
+
 {% for pub in site.data.publications %}
 <article class="pub">
   <p class="pub__meta">{{ pub.year }} · {% case pub.type %}{% when "BSc (Hons) Thesis" %}学位论文{% when "Review Article" %}综述{% else %}{{ pub.type }}{% endcase %}</p>
